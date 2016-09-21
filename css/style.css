@@ -1,8 +1,4 @@
-@media all {html {font-size: 24px;}}
-@media all and (max-width:1000px){html {font-size: 24px;}}
-@media all and (max-width:960px){html {font-size: 23px;}}
-@media all and (max-width:920px){html {font-size: 22px;}}
-@media all and (max-width:880px){html {font-size: 21px;}}
+@media all {html {font-size: 20px;}}
 @media all and (max-width:840px){html {font-size: 20px;}}
 @media all and (max-width:800px){html {font-size: 19px;}}
 @media all and (max-width:760px){html {font-size: 18px;}}
