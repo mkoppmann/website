@@ -74,10 +74,6 @@ main {
     flex: 1;
 }
 
-main p {
-    text-align: justify;
-}
-
 section {
     padding: 0 2em;
     margin: 1em 0;
