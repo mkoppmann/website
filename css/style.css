@@ -117,6 +117,10 @@ p {
     hyphens: auto;
 }
 
+li {
+    margin: 0.8em 0;
+}
+
 .code-block {
     background-color: white;
 }
