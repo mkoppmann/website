@@ -23,10 +23,10 @@
 html {
     font-family: 'Vollkorn', 'Noto Serif', serif;
     color: #333;
-    /* For the browser that still do not support
+    /* For the browsers that still do not support
 	the official w3c syntax */
     font-feature-settings: "liga" 1, "calt" 1, "kern";
-    /* Now for the good browser */
+    /* Now for the good browsers */
     font-variant: common-ligatures contextual;
     font-kerning: normal;
 }
@@ -109,7 +109,7 @@ code {
     font-size: 85%;
     text-align: left;
     hyphens: none;
-    font-family: "Fira Mono", 'Source Code Pro', monospace;
+    font-family: monospace;
 }
 
 abbr {
