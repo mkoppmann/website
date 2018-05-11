@@ -111,10 +111,3 @@ code {
     hyphens: none;
     font-family: monospace;
 }
-
-abbr {
-    /* Again for the not so great browsers */
-    font-feature-settings: "smcp" 1;
-    /* Now for the good browsers */
-    font-variant-caps: small-caps;
-}
