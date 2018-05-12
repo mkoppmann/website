@@ -53,6 +53,7 @@ section {
 	margin: 1em 0;
 	background-color: #e2e2e2;
 	border-style: solid;
+	border-color: #aaa;
 	border-width: 1px 0;
 }
 
@@ -61,7 +62,6 @@ footer {
 	text-align: center;
 	color: white;
 	background-color: #111;
-	font-size: 80%;
 }
 
 @media (min-width: 576px) {
@@ -95,7 +95,6 @@ footer a:visited {
 
 code {
 	background-color: white;
-	font-size: 85%;
 	text-align: left;
 	hyphens: none;
 	font-family: monospace;
