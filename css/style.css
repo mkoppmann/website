@@ -1,113 +1,121 @@
-@media all {html {font-size: 20px;}}
-@media all and (max-width:840px){html {font-size: 20px;}}
-@media all and (max-width:800px){html {font-size: 19px;}}
-@media all and (max-width:760px){html {font-size: 18px;}}
-@media all and (max-width:720px){html {font-size: 17px;}}
-@media all and (max-width:680px){html {font-size: 16px;}}
-@media all and (max-width:520px){html{ font-size: 18px;}}
-
 @font-face {
-    font-family: 'Vollkorn';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Vollkorn'), local('Vollkorn-Regular'), url('../fonts/Vollkorn-Regular.woff2') format("woff2"), url('../fonts/Vollkorn-Regular.woff') format("woff");
+	font-family: 'Vollkorn';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Vollkorn'), local('Vollkorn-Regular'), url('../fonts/Vollkorn-Regular.woff2') format("woff2"), url('../fonts/Vollkorn-Regular.woff') format("woff");
 }
 
 @font-face {
-    font-family: 'Vollkorn';
-    font-style: italic;
-    font-weight: normal;
-    src: local('Vollkorn Italic'), local('Vollkorn-Italic'), url('../fonts/Vollkorn-Italic.woff2') format("woff2"), url('../fonts/Vollkorn-Italic.woff') format("woff");
+	font-family: 'Vollkorn';
+	font-style: italic;
+	font-weight: normal;
+	src: local('Vollkorn Italic'), local('Vollkorn-Italic'), url('../fonts/Vollkorn-Italic.woff2') format("woff2"), url('../fonts/Vollkorn-Italic.woff') format("woff");
 }
 
 html {
-    font-family: 'Vollkorn', 'Noto Serif', serif;
-    color: #333;
-    /* For the browsers that still do not support
+	height: 100%;
+	font-family: 'Vollkorn', 'Noto Serif', serif;
+	color: #333;
+	/* For the browsers that still do not support
 	the official w3c syntax */
-    font-feature-settings: "liga" 1, "calt" 1, "kern";
-    /* Now for the good browsers */
-    font-variant: common-ligatures contextual;
-    font-kerning: normal;
+	font-feature-settings: "liga" 1, "calt" 1, "kern";
+	/* Recommended way */
+	font-variant: common-ligatures contextual;
+	font-kerning: normal;
 }
 
 body {
-    background-color: #efefef;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+	background-color: #efefef;
+	padding: 0;
+	margin: 0;
+	min-height: 100%;
+	display: grid;
+	grid-template-areas: "header"
+											 "main"
+											 "footer";
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr auto;
 }
 
 header {
-    margin: 2em auto 0 auto;
-    width: 80%;
-    max-width: 34em;
+	grid-area: header;
+	margin: 2em auto 0 auto;
+	width: 90%;
 }
 
 main {
-    margin: 0 auto 2em auto;
-    width: 80%;
-    max-width: 38em;
-    flex: 1;
+	grid-area: main;
+	margin: 0 auto 2em auto;
 }
 
 section {
-    padding: 0 2em;
-    margin: 1em 0;
-    background-color: #e2e2e2;
-    border-style: solid;
-    border-color: #aaa;
-    border-width: 1px;
-    border-radius: 10px;
+	padding: 0 2em;
+	margin: 1em 0;
+	background-color: #e2e2e2;
+	border-style: solid;
+	border-width: 1px 0;
 }
 
 footer {
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    background-color: #111;
-    border-top: 1px solid #303030;
-    font-size: 80%;
+	grid-area: footer;
+	text-align: center;
+	color: white;
+	background-color: #111;
+	font-size: 80%;
+}
+
+@media (min-width: 576px) {
+	header {
+		width: 80%;
+		max-width: 34em;
+	}
+
+	main {
+		width: 80%;
+		max-width: 38em;
+	}
+
+	section {
+		border-width: 1px;
+		border-radius: 5px;
+	}
 }
 
 footer a {
-    color: #0582ff;
+	color: #0582ff;
 }
 
 footer a:visited {
-    color: #23527c;
-}
-
-h1, h2, h3 {
-    margin: 1.2em 0 0.55em 0;
-    font-family: 'Vollkorn', 'Noto Sans', sans-serif;
-    line-height: 1.1;
-}
-
-h1 {
-    margin-top: 0.5em;
-}
-
-p {
-    line-height: 1.3;
-    margin: 1.3em 0;
-    hyphens: auto;
-}
-
-li {
-    margin: 0.8em 0;
+	color: #23527c;
 }
 
 .code-block {
-    background-color: white;
+	background-color: white;
 }
 
 code {
-    background-color: white;
-    font-size: 85%;
-    text-align: left;
-    hyphens: none;
-    font-family: monospace;
+	background-color: white;
+	font-size: 85%;
+	text-align: left;
+	hyphens: none;
+	font-family: monospace;
+}
+
+h1, h2, h3 {
+	margin: 1.2em 0 0.55em 0;
+	line-height: 1.1;
+}
+
+h1 {
+	margin-top: 0.5em;
+}
+
+p {
+	line-height: 1.3;
+	margin: 1.3em 0;
+	hyphens: auto;
+}
+
+li {
+	margin: 0.8em 0;
 }
