@@ -15,6 +15,7 @@
 html {
 	height: 100%;
 	font-family: 'Vollkorn', 'Noto Serif', serif;
+    font-size: 120%;
 	color: #333;
 	/* For the browsers that still do not support
 	the official w3c syntax */
