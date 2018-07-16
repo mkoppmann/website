@@ -32,8 +32,8 @@ body {
 	min-height: 100%;
 	display: grid;
 	grid-template-areas: "header"
-											 "main"
-											 "footer";
+                       "main"
+                       "footer";
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr auto;
 }
