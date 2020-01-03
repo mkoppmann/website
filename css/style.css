@@ -112,3 +112,41 @@ p {
 li {
   margin: 0.8em 0;
 }
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color: #ddd;
+  }
+
+  body {
+    background-color: #000;
+  }
+
+  h1, h2, h3 {
+    color: #fff;
+  }
+
+  section {
+    background-color: #222;
+  }
+
+  footer {
+    background-color: #111;
+  }
+
+  body a {
+    color: #0582ff;
+  }
+
+  body a:visited {
+    color: #23527c;
+  }
+
+  .code-block {
+    background-color: #000;
+  }
+
+  code {
+    background-color: #000;
+  }
+}
