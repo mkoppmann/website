@@ -1,0 +1,103 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  metaType?: "website" | "article";
+  metaImage?: string;
+}
+
+const { title, description, metaType = "website", metaImage } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <meta property="og:type" content={metaType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:site_name" content={Astro.site} />
+    {metaImage && <meta property="og:image" content={metaImage} />}
+
+    <meta
+      name="twitter:card"
+      content={metaImage ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {metaImage && <meta name="twitter:image" content={metaImage} />}
+
+    <!-- JSON-LD -->
+    <slot name="head" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body>
+    <slot />
+    <SiteFooter />
+  </body>
+</html>
+
+<style is:global>
+  body {
+    background-color: var(--color-bg);
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    display: grid;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  header {
+    grid-area: header;
+    margin: 2em auto 0 auto;
+    width: 90%;
+  }
+
+  main {
+    grid-area: main;
+    margin: 0 auto 2em auto;
+  }
+
+  footer {
+    grid-area: footer;
+    text-align: center;
+    color: var(--color-footer-text);
+    background-color: var(--color-footer-bg);
+  }
+
+  footer p {
+    margin: 0;
+    padding: 1em;
+  }
+
+  @media (min-width: 576px) {
+    header {
+      width: 80%;
+      max-width: 34em;
+    }
+
+    main {
+      width: 80%;
+      max-width: 38em;
+    }
+  }
+</style>

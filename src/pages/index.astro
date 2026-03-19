@@ -1,0 +1,320 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "@mkoppmann – Michael Koppmann";
+const description =
+  "Home of @mkoppmann – Security Enthusiast. My name is Michael Koppmann and I am currently employed as Information Security Consultant at SBA Research.";
+---
+
+<BaseLayout title={title} description={description}>
+  <header>
+    <h1>
+      Home of <em>@mkoppmann</em> –<br />
+      Security Enthusiast
+    </h1>
+  </header>
+
+  <main id="main-content">
+    <section id="about-me">
+      <h2>About me</h2>
+      <p>
+        My name is Michael Koppmann and I am an Information Security Consultant
+        at <a href="https://www.sba-research.org">SBA Research</a>. I received a
+        master’s degree in “Software Engineering and Internet Computing” at the <a
+          href="https://www.tuwien.at/">TU Wien</a
+        >.
+      </p>
+      <p>
+        My main interests are secure software engineering, functional
+        programming, cryptography, privacy enhancing technologies,
+        cryptocurrencies, and everything open source. Besides technology, I am
+        also interested in environmental protection, Japan, health and fitness,
+        self-improvement, and human rights.
+      </p>
+    </section>
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <ul>
+        <li>
+          Offensive Security Certified Professional (<a
+            href="https://www.offensive-security.com/pwk-oscp/">OSCP</a
+          >)
+        </li>
+        <li>
+          Certified Information Systems Security Professional (<a
+            href="https://www.isc2.org/Certifications/CISSP">CISSP</a
+          >)
+        </li>
+        <li>
+          Certified Secure Software Lifecycle Professional (<a
+            href="https://www.isc2.org/Certifications/CSSLP">CSSLP</a
+          >)
+        </li>
+        <li>
+          GIAC Web Application Penetration Tester (<a
+            href="https://www.giac.org/certifications/web-application-penetration-tester-gwapt/"
+            >GWAPT</a
+          >)
+        </li>
+      </ul>
+    </section>
+    <section id="affiliations">
+      <h2>Affiliations</h2>
+      <ul>
+        <li>
+          Chapter leader of <a href="https://owasp.org/www-chapter-vienna/"
+            >OWASP Vienna Chapter</a
+          >
+        </li>
+        <li>
+          Member of <a href="https://owasp.org">OWASP</a>
+        </li>
+        <li>
+          Member of <a href="https://c3w.at">Chaos Computer Club Wien</a>
+        </li>
+        <li>
+          Member of <a href="https://applied-privacy.net">Applied Privacy</a>
+        </li>
+      </ul>
+    </section>
+    <section id="publications-and-talks">
+      <h2>Publications and talks</h2>
+      <p>Here is a list of my publications and public talks I gave:</p>
+      <h3>Publications</h3>
+      <ul>
+        <li>
+          “Mit Java funktional programmieren”. Article in <em>iX 2025/09</em>.
+          (2025-09, German, <a
+            href="https://www.heise.de/select/ix/2025/9/2420710214428883635"
+            >Link</a
+          >)
+        </li>
+        <li>
+          “KI-Assistenten und LLMs – was taugt der Code?”. Article in <em
+            >iX 2024/07</em
+          >. (2024-07, German, <a
+            href="https://www.heise.de/select/ix/2024/7/2412906011970426513"
+            >Link</a
+          >)
+        </li>
+        <li>
+          “Anwendungssicherheit durch einen sicheren
+          Softwareentwicklungslebenszyklus (SDLC)”. Article in <em
+            >USANCEN: TechGuard 00/23</em
+          >. (2023-11, German, <a
+            href="https://cybsec.lawthek.eu/publication-detail/66a8b155-7b82-4083-bd25-54ee718ccd89"
+            >Link</a
+          >, <a href="/media/publications/2023-11_USANCEN-TechGuard-2023-00.pdf"
+            >Download</a
+          >)
+        </li>
+        <li>
+          “Alternatives Autorisierungsmodell”. Article in <em
+            >OCG Journal 01/2023</em
+          >. (2023-04, German, <a href="https://www.ocg.at/publikationen"
+            >Link</a
+          >, <a
+            href="/media/publications/2023-04_OCG-Journal-01-2023_IT-Nachwuchsforschung-in-Oesterreich.pdf"
+            >Download</a
+          >)
+        </li>
+        <li>
+          “Utilizing Object Capabilities to Improve Web Application Security”.
+          Article in <em>ACIG Journal 2022, Volume 1</em>. (2022-11, English, <a
+            href="https://www.acigjournal.com/Utilizing-Object-Capabilities-to-Improve-Web-Application-Security,184282,0,2.html"
+            >Link</a
+          >, <a
+            href="/media/publications/2022-11_Utilizing-Capabilities-to-Improve-Web-Application-Security.pdf"
+            >Download</a
+          >)
+        </li>
+        <li>
+          “Object Capabilities and Their Benefits for Web Application Security”. <em
+            >Master thesis</em
+          >. (2021-10, English, <a
+            href="https://repositum.tuwien.at/handle/20.500.12708/18849">Link</a
+          >, <a
+            href="/media/publications/2021-10_Michael-Koppmann_Object-Capabilities-and-Their-Benefits-for-Web-Application-Security.pdf"
+            >Download</a
+          >)
+        </li>
+      </ul>
+      <h3>Talks</h3>
+      <ul>
+        <li>
+          “Illegal States Are My Favorite Security Vulnerabilities”. Tutorial at <em
+            >BOB Konferenz</em
+          >. (2026-03-13, English, <a
+            href="https://bobkonf.de/2026/koppmann.html">Link</a
+          >, <a
+            href="/media/talks/2026-03-13_Michael-Koppmann_Illegal-States-Are-My-Favorite-Security-Vulnerabilities.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “Got `Any` Excuses? Wie man sicheren TypeScript-Code erzwingen kann”.
+          Talk at <em>heise devSec()</em>. (2025-10-01, German, <a
+            href="https://www.heise-devsec.de/veranstaltung-83508-0-got-any-excuses-wie-man-sicheren-typescript-code-erzwingen-kann.html"
+            >Link</a
+          >, <a
+            href="/media/talks/2025-10-01_Michael-Koppmann_Got-Any-Excuses.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “Got `Any` Excuses? Writing secure TypeScript by design”. Talk at <em
+            >DevSecCon Netherlands</em
+          >. (2025-09-04, English, <a
+            href="https://www.meetup.com/devseccon-netherlands/events/308897324/?eventOrigin=group_past_events"
+            >Link</a
+          >, <a
+            href="/media/talks/2025-09-04_Michael-Koppmann_Got-Any-Excuses.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “The Era of Green Software”. Talk at <em>sec4dev Dialogues</em>.
+          (2024-06-26, German, <a
+            href="/media/talks/2024-06-26_Michael-Koppmann_The-Era-of-Green-Software.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “Typed Security: Preventing Vulnerabilities By Design”. Talk at <em
+            >WeAreDevelopers Security Day</em
+          >. (2024-05-08, English, <a
+            href="https://web.archive.org/web/20240501213105/https://www.wearedevelopers.com/event/security-day-may-2024"
+            >Link</a
+          >, <a
+            href="/media/talks/2024-05-08_Michael-Koppmann_Typed-Security.pdf"
+            >Slides</a
+          >, <a
+            href="https://www.wearedevelopers.com/en/videos/892/typed-security-preventing-vulnerabilities-by-design"
+            >Video</a
+          >)
+        </li>
+        <li>
+          “1.400 hours for the preparation of an ISO27001 certification within
+          15 minutes and the connex to an espresso”. Talk for <em>SaaS Club</em> group.
+          (2024-04-30, English, <a
+            href="https://www.meetup.com/saas-club-vienna/events/299894980/"
+            >Link</a
+          >, <a href="/media/talks/2024-04-30_SBA_ISMS-and-SSDLC.pdf">Slides</a
+          >)
+        </li>
+        <li>
+          “Secure Software Development – A Short Introduction of the OWASP
+          SAMM”. Talk at <em>B2B Software Days</em>. (2023-05-09, English, <a
+            href="https://2023.b2bsoftwaredays.com/page-1851">Link</a
+          >, <a
+            href="/media/talks/2023-05-09_Michael-Koppmann_Secure-Software-Development.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “The Era of Green Software”. Talk at <em>TEDxTUWien</em>. (2022-12-11,
+          English, <a
+            href="https://www.tedxtuwien.at/turning-points-speaker/michael-koppmann/"
+            >Link</a
+          >, <a
+            href="/media/talks/2022-12-11_Michael-Koppmann_The-Era-of-Green-Software.pdf"
+            >Slides</a
+          >, <a href="https://youtube.com/watch?v=xtQOxGtmhy4">Video</a>)
+        </li>
+        <li>
+          “Type-Driven Domain Design: Use the Types, Luke!”. Talk at <em
+            >heise devSec()</em
+          >. (2022-10-05, German, <a
+            href="https://www.heise-devsec.de/veranstaltung-15107-0-type-driven-domain-design-use-the-types-luke.html"
+            >Link</a
+          >, <a
+            href="/media/talks/2022-10-05_Michael-Koppmann_Type-Driven-Domain-Design.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “Object Capabilities and Their Benefits for Web Application Security”.
+          Lightning talk at <em>IKT-Sicherheitskonferenz</em>. (2022-09-15,
+          German, <a
+            href="https://web.archive.org/web/20220913184031/https://seminar.bundesheer.at/pdfs/ProgKonferenz.pdf"
+            >Link</a
+          >, <a
+            href="/media/talks/2022-09-15_Michael-Koppmann_Object-Capabilities-and-Their-Benefits-for-Web-Application-Security.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “Typed Security – Preventing Vulnerabilities By Design”. Talk at <em
+            >sec4dev Conference & Bootcamp</em
+          >. (2022-09-09, English, <a
+            href="https://sec4dev.io/sessions/typed-security-preventing-vulnerabilities-by-design"
+            >Link</a
+          >, <a
+            href="/media/talks/2022-09-09_Michael-Koppmann_Typed-Security.pdf"
+            >Slides</a
+          >, <a href="https://www.youtube.com/watch?v=TCc6gbTtK8o">Video</a>)
+        </li>
+        <li>
+          “Type-Driven Domain Design – Security in the Fabric of Your Code”.
+          Talk for <em>Domain-Driven Design Vienna</em> group. (2022-03-25, German,
+          <a href="https://www.meetup.com/ddd-vienna/events/284335665/">Link</a
+          >, <a
+            href="/media/talks/2022-03-25_Michael-Koppmann_Type-Driven-Domain-Design.pdf"
+            >Slides</a
+          >)
+        </li>
+        <li>
+          “Type-Driven Domain Design – Security in the Fabric of Your Code”.
+          Talk for <em>Security Meetup by SBA Research</em> group. (2022-01-26, English,
+          <a
+            href="https://www.meetup.com/security-meetup-by-sba-research/events/283315968/"
+            >Link</a
+          >, <a
+            href="/media/talks/2022-01-26_Michael-Koppmann_Type-Driven-Domain-Design.pdf"
+            >Slides</a
+          >, <a href="https://www.youtube.com/watch?v=lz1yiHRimwQ">Video</a>)
+        </li>
+      </ul>
+    </section>
+    <section id="for-verification">
+      <h2>For verification</h2>
+      <p>You can verify my identity with these services:</p>
+      <ul>
+        <li>
+          <a rel="me" href="https://github.com/mkoppmann">GitHub</a>
+        </li>
+        <li>
+          <a rel="me" href="https://gitlab.com/mkoppmann">GitLab</a>
+        </li>
+        <li>
+          <a rel="me" href="https://hackerone.com/mkoppmann">HackerOne</a>
+        </li>
+        <li>
+          <a rel="me" href="https://www.sba-research.org/team/michael-koppmann/"
+            >SBA Research</a
+          >
+        </li>
+        <li>
+          <a rel="me" href="https://orcid.org/0000-0001-5699-8226">ORCID ID</a>
+        </li>
+        <li>
+          <a
+            rel="me"
+            href="https://communicating.cypherpunk.observer/shibayashi"
+            >Fediverse</a
+          >
+        </li>
+      </ul>
+      <p>
+        My <abbr title="Pretty Good Privacy">PGP</abbr> fingerprint: <code
+          >E9B3 3326 8618 0E5E 498C 6C97 63CA B0C7 75EB 9C80</code
+        >
+      </p>
+      <p>
+        My Signal “safety numbers”: <code
+          >88630 72114 80083 44420 49604 09486</code
+        >
+      </p>
+    </section>
+  </main>
+</BaseLayout>
