@@ -5,7 +5,7 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://www.mkoppmann.at",
   output: "static",
-  trailingSlash: "ignore",
+  trailingSlash: "always",
   security: { csp: true },
   compressHTML: false,
 });

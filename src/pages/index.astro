@@ -7,12 +7,10 @@ const description =
 ---
 
 <BaseLayout title={title} description={description}>
-  <header>
-    <h1>
-      Home of <em>@mkoppmann</em> –<br />
-      Security Enthusiast
-    </h1>
-  </header>
+  <h1 slot="pageHeader">
+    Home of <em>@mkoppmann</em> –<br />
+    Security Enthusiast
+  </h1>
 
   <main id="main-content">
     <section id="about-me">
@@ -314,6 +312,9 @@ const description =
         My Signal “safety numbers”: <code
           >88630 72114 80083 44420 49604 09486</code
         >
+      </p>
+      <p>
+        The <a href="/contact/">contact</a> page lists ways to reach me.
       </p>
     </section>
   </main>
