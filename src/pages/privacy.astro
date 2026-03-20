@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Privacy – Michael Koppmann";
+const description = "Privacy policy for www.mkoppmann.at.";
+---
+
+<BaseLayout title={title} description={description}>
+  <h1 slot="pageHeader">Privacy policy</h1>
+  <main id="main-content">
+    <section>
+      <h2>Legal notice</h2>
+      <p>
+        This privacy policy applies to <strong>www.mkoppmann.at</strong> and is provided
+        in accordance with the <strong
+          >General Data Protection Regulation (GDPR)</strong
+        > and the <strong
+          >Austrian Data Protection Act (Datenschutzgesetz, DSG)</strong
+        >.
+      </p>
+    </section>
+    <section>
+      <h2>Responsible party (controller)</h2>
+      <p>
+        Michael Koppmann, Vienna, Austria<br />
+        Contact: <a href="/contact/">Contact page</a>
+      </p>
+    </section>
+    <section>
+      <h2>Data processing when visiting this site</h2>
+      <p>
+        This website is served as pre-built static files. It sets no cookies,
+        runs no client-side tracking scripts, and stores no analytics data.
+      </p>
+      <p>
+        No server-side access logs are retained by this site’s operator. Your IP
+        address is transiently processed by the web server only to transmit the
+        requested content to your browser and is not stored afterward.
+      </p>
+      <p>
+        The legal basis for this minimal, technically necessary processing is
+        <strong>Art. 6(1)(f) GDPR</strong> (legitimate interest in delivering the
+        requested content).
+      </p>
+    </section>
+    <section>
+      <h2>No third-party services</h2>
+      <p>
+        This site does not embed third-party scripts, fonts, or media from
+        external servers. All resources are self-hosted, so no data is
+        transmitted to third parties when you visit.
+      </p>
+    </section>
+    <section>
+      <h2>Your rights</h2>
+      <p>
+        Under the GDPR you have the right to access, rectification, erasure,
+        restriction of processing, data portability, and to object to processing
+        of your personal data. To exercise any of these rights, contact the
+        controller at the address above.
+      </p>
+      <p>
+        You also have the right to lodge a complaint with the Austrian
+        supervisory authority:
+      </p>
+      <ul>
+        <li>
+          <strong>Österreichische Datenschutzbehörde (DSB)</strong><br />
+          Wickenburggasse 8, 1080 Wien<br />
+          <a href="https://www.dsb.gv.at">www.dsb.gv.at</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+</BaseLayout>
