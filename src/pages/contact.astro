@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Contact – Michael Koppmann";
+const description = "Contact details for www.mkoppmann.at.";
+---
+
+<BaseLayout title={title} description={description}>
+  <h1 slot="pageHeader">Contact</h1>
+
+  <main id="main-content">
+    <section>
+      <h2>Get in touch</h2>
+      <p>You can reach me via the following channels:</p>
+      <ul>
+        <li>
+          E-mail: <a href="mailto:me+www@mkoppmann.at">me+www@mkoppmann.at</a>
+        </li>
+        <li>
+          Matrix: <a href="https://matrix.to/#/@shibayashi:ncrypt.at"
+            >@shibayashi:ncrypt.at</a
+          >
+        </li>
+      </ul>
+    </section>
+  </main>
+</BaseLayout>

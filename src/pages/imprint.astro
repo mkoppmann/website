@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Imprint – Michael Koppmann";
+const description = "Legal imprint for www.mkoppmann.at.";
+---
+
+<BaseLayout title={title} description={description}>
+  <h1 slot="pageHeader">Imprint</h1>
+
+  <main id="main-content">
+    <section>
+      <h2>Legal notice</h2>
+      <p>
+        Pursuant to <strong>§ 25 Austrian Media Act (Mediengesetz)</strong>, the
+        following information is disclosed:
+      </p>
+      <ul>
+        <li>Media owner and publisher: Michael Koppmann</li>
+        <li>Address: Vienna, Austria</li>
+        <li>
+          Contact: <a href="/contact/">Contact page</a>
+        </li>
+      </ul>
+      <p>
+        This is a private, non-commercial website. It provides publicly
+        accessible information about the media owner and their professional
+        activities, and hosts a personal blog covering topics including software
+        development, security, sustainability, fitness, health, and beyond.
+        There is no commercial intent.
+      </p>
+    </section>
+    <section>
+      <h2 id="copyright-and-licensing">Copyright and licensing</h2>
+      <p>
+        Website content is provided under <a
+          href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a
+        > unless noted otherwise. Third-party trademarks and linked content remain
+        the property of their respective owners.
+      </p>
+      <p>
+        If you identify a copyright issue, please contact the operator so the
+        material can be reviewed.
+      </p>
+    </section>
+    <section>
+      <h2>Liability notice</h2>
+      <p>
+        External links are provided for convenience. Their operators are solely
+        responsible for their content. No warranty is made for the availability,
+        completeness, or accuracy of third-party websites.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
