@@ -1,9 +1,10 @@
 ---
 const currentPath = Astro.url.pathname;
+const siteName = "@mkoppmann’s mneme";
 ---
 
 <nav>
-  <a href="/" class="nav-brand">@mkoppmann</a>
+  <a href="/" class="nav-brand">{siteName}</a>
   <div class="nav-links">
     <a href="/" class:list={[{ active: currentPath === "/" }]}>Home</a>
     <a href="/contact/" class:list={[{ active: currentPath === "/contact/" }]}
