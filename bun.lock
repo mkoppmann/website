@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "astro-website",
+      "name": "@mkoppmann’s mneme",
       "dependencies": {
         "astro": "^6.0.8",
       },
