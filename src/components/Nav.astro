@@ -10,6 +10,19 @@ const siteName = "@mkoppmann’s mneme";
     <a href="/contact/" class:list={[{ active: currentPath === "/contact/" }]}
       >Contact</a
     >
+    <a
+      href="/search/"
+      class="nav-search"
+      class:list={[{ active: currentPath === "/search/" }]}
+      aria-label="Search"
+      title="Search"
+    >
+      <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+        <path
+          d="M11 3a8 8 0 1 0 4.9 14.33l4.88 4.88a1 1 0 0 0 1.42-1.42l-4.88-4.88A8 8 0 0 0 11 3zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"
+          fill="currentColor"></path>
+      </svg>
+    </a>
   </div>
 
   <style>
@@ -58,6 +71,18 @@ const siteName = "@mkoppmann’s mneme";
 
     :where(.nav-links a:focus:not(:focus-visible)) {
       background-size: 0 2px;
+    }
+
+    .nav-search {
+      padding-inline: var(--space-2xs);
+    }
+
+    .nav-search svg {
+      display: block;
+      width: 0.9em;
+      height: 0.9em;
+      transform: translateY(0.08em);
+      pointer-events: none;
     }
 
     @media (max-width: 480px) {

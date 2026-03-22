@@ -6,8 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "bun run dev:search && astro dev",
+    "dev:search": "astro build && pagefind --site dist --output-path public/pagefind",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -15,6 +16,7 @@
     "astro": "^6.0.7"
   },
   "devDependencies": {
+    "pagefind": "^1.4.0",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1"
   }
