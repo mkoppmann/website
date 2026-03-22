@@ -1,14 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import JsonLd from "../components/JsonLd.astro";
 
 const title = "Search";
 const description = "Search across pages on www.mkoppmann.at.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const searchResultsPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SearchResultsPage",
+  name: title,
+  description,
+  url: canonicalURL,
+};
 ---
 
 <BaseLayout title={title} description={description}>
   <h1 slot="pageHeader">Search</h1>
 
   <Fragment slot="head">
+    <JsonLd schema={searchResultsPageJsonLd} />
     <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
     <script type="module" src="/scripts/pagefind-init.js" is:inline></script>
   </Fragment>

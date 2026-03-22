@@ -5,11 +5,17 @@ if (searchElement) {
     await import("/pagefind/pagefind-ui.js");
 
     if (window.PagefindUI) {
-      new window.PagefindUI({
+      const pagefindUi = new window.PagefindUI({
         element: "#search",
         showImages: false,
         showSubResults: true,
       });
+
+      const initialQuery = new URLSearchParams(window.location.search).get("q");
+
+      if (initialQuery) {
+        pagefindUi.triggerSearch(initialQuery);
+      }
     }
   };
 

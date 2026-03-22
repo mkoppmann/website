@@ -1,11 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import JsonLd from "../components/JsonLd.astro";
 
 const title = "Contact";
 const description = "Contact details for www.mkoppmann.at.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const contactPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: title,
+  description,
+  url: canonicalURL,
+};
 ---
 
 <BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <JsonLd schema={contactPageJsonLd} />
+  </Fragment>
+
   <h1 slot="pageHeader">Contact</h1>
 
   <main id="main-content" data-pagefind-body>

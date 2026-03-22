@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import JsonLd from "../components/JsonLd.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import "../styles/prism-theme.css";
 
@@ -36,6 +37,26 @@ const hasToc = headings.some((h) => h.depth >= 2 && h.depth <= 3);
 const metaImageUrl = metaImage
   ? new URL(metaImage, Astro.site).href
   : undefined;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const blogPostingJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonicalURL,
+  },
+  url: canonicalURL,
+  datePublished: createdDate.toISOString(),
+  dateModified: (lastUpdated ?? createdDate).toISOString(),
+  author: {
+    "@type": "Person",
+    name: "Michael Koppmann",
+    url: Astro.site?.href,
+  },
+  ...(metaImageUrl ? { image: metaImageUrl } : {}),
+};
 ---
 
 <BaseLayout
@@ -45,6 +66,10 @@ const metaImageUrl = metaImage
   metaImage={metaImageUrl}
   metaImageAlt={metaImageAlt}
 >
+  <Fragment slot="head">
+    <JsonLd schema={blogPostingJsonLd} />
+  </Fragment>
+
   <main
     id="main-content"
     data-pagefind-body

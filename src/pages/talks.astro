@@ -1,6 +1,7 @@
 ---
 import StructuredEntriesList from "../components/StructuredEntriesList.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import JsonLd from "../components/JsonLd.astro";
 import { talks } from "../data/talks";
 
 const title = "Talks";
@@ -9,9 +10,21 @@ const description = "Talks and tutorials by Michael Koppmann.";
 const sortedTalks = [...talks].sort((left, right) =>
   right.date.localeCompare(left.date),
 );
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const collectionPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: title,
+  description,
+  url: canonicalURL,
+};
 ---
 
 <BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <JsonLd schema={collectionPageJsonLd} />
+  </Fragment>
+
   <h1 slot="pageHeader">Talks</h1>
 
   <main id="main-content" data-pagefind-body>
