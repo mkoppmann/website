@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPathsOptions, Page } from "astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import JsonLd from "../../components/JsonLd.astro";
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const posts = await getCollection("blog");
@@ -17,6 +18,14 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const collectionPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Blog",
+  description: "Articles, thoughts, and notes by Michael Koppmann.",
+  url: canonicalURL,
+};
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString("en-US", {
@@ -32,6 +41,10 @@ function formatDate(date: Date): string {
   title="Blog"
   description="Articles, thoughts, and notes by Michael Koppmann."
 >
+  <Fragment slot="head">
+    <JsonLd schema={collectionPageJsonLd} />
+  </Fragment>
+
   <h1 slot="pageHeader">Blog</h1>
 
   <main id="main-content" data-pagefind-body>

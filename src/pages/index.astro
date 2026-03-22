@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import JsonLd from "../components/JsonLd.astro";
 import StructuredEntriesList from "../components/StructuredEntriesList.astro";
 import { publications } from "../data/publications";
 import { talks } from "../data/talks";
@@ -14,9 +15,43 @@ const latestFourPublications = [...publications]
 const latestFourTalks = [...talks]
   .sort((left, right) => right.date.localeCompare(left.date))
   .slice(0, 4);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const profilePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  name: title,
+  description,
+  url: canonicalURL,
+  mainEntity: {
+    "@type": "Person",
+    name: "Michael Koppmann",
+    jobTitle: "Information Security Consultant",
+    worksFor: {
+      "@type": "Organization",
+      name: "SBA Research",
+      url: "https://www.sba-research.org",
+    },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "TU Wien",
+      url: "https://www.tuwien.at/",
+    },
+    url: Astro.site?.href,
+    sameAs: [
+      "https://github.com/mkoppmann",
+      "https://www.sba-research.org/team/michael-koppmann/",
+      "https://orcid.org/0000-0001-5699-8226",
+      "https://communicating.cypherpunk.observer/shibayashi",
+    ],
+  },
+};
 ---
 
 <BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <JsonLd schema={profilePageJsonLd} />
+  </Fragment>
+
   <h1 slot="pageHeader">
     Home of <em>@mkoppmann</em> –<br />
     Security Consultant, Writer, Speaker
