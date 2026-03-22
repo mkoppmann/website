@@ -7,6 +7,14 @@ const siteName = "@mkoppmann’s mneme";
   <a href="/" class="nav-brand">{siteName}</a>
   <div class="nav-links">
     <a href="/" class:list={[{ active: currentPath === "/" }]}>Home</a>
+    <a
+      href="/publications/"
+      class:list={[{ active: currentPath === "/publications/" }]}
+      >Publications</a
+    >
+    <a href="/talks/" class:list={[{ active: currentPath === "/talks/" }]}
+      >Talks</a
+    >
     <a href="/contact/" class:list={[{ active: currentPath === "/contact/" }]}
       >Contact</a
     >
