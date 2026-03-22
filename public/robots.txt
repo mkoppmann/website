@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.mkoppmann.at/sitemap-index.xml
+Feed: https://www.mkoppmann.at/rss.xml

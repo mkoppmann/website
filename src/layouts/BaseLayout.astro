@@ -47,6 +47,12 @@ const webSiteJsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL.href} />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      href="/rss.xml"
+      title={siteName}
+    />
 
     <meta property="og:type" content={metaType} />
     <meta property="og:title" content={title} />
