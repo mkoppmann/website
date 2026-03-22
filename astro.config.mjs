@@ -3,6 +3,8 @@ import { defineConfig } from "astro/config";
 
 import sitemap from "@astrojs/sitemap";
 
+import mdx from "@astrojs/mdx";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.mkoppmann.at",
@@ -10,5 +12,8 @@ export default defineConfig({
   trailingSlash: "always",
   security: { csp: true },
   compressHTML: false,
-  integrations: [sitemap()],
+  integrations: [sitemap(), mdx()],
+  markdown: {
+    syntaxHighlight: "prism",
+  },
 });

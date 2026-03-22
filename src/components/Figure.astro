@@ -1,0 +1,64 @@
+---
+import { Image, Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+  sizes?: string;
+  maxWidth?:
+    | number
+    | `${number}px`
+    | `${number}rem`
+    | `${number}%`
+    | `${number}vw`;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  sizes = "(min-width: 58rem) 38rem, (min-width: 40rem) calc(100vw - 6rem), calc(100vw - 2rem)",
+  maxWidth,
+} = Astro.props;
+
+const style = maxWidth
+  ? {
+      "--figure-max-width":
+        typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth,
+    }
+  : undefined;
+
+const isVector = src.format === "svg";
+const computedWidths = isVector
+  ? undefined
+  : [480, 720, 960, 1200]
+      .filter((width) => width < src.width)
+      .concat(src.width)
+      .filter((width, index, widths) => widths.indexOf(width) === index);
+---
+
+<figure style={style}>
+  {
+    isVector ? (
+      <Image src={src} alt={alt} sizes={sizes} />
+    ) : (
+      <Picture
+        src={src}
+        alt={alt}
+        formats={["avif", "webp"]}
+        sizes={sizes}
+        widths={computedWidths}
+      />
+    )
+  }
+  {caption && <figcaption set:html={caption} />}
+</figure>
+
+<style>
+  figure {
+    max-inline-size: var(--figure-max-width, none);
+    margin-inline: auto;
+  }
+</style>

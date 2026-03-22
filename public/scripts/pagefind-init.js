@@ -7,6 +7,7 @@ if (searchElement) {
     if (window.PagefindUI) {
       new window.PagefindUI({
         element: "#search",
+        showImages: false,
         showSubResults: true,
       });
     }

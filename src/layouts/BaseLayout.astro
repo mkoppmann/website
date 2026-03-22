@@ -8,9 +8,16 @@ interface Props {
   description: string;
   metaType?: "website" | "article";
   metaImage?: string;
+  metaImageAlt?: string;
 }
 
-const { title, description, metaType = "website", metaImage } = Astro.props;
+const {
+  title,
+  description,
+  metaType = "website",
+  metaImage,
+  metaImageAlt,
+} = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteName = "@mkoppmann’s mneme";
@@ -32,6 +39,11 @@ const documentTitle = `${title} | ${siteName}`;
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:site_name" content={siteName} />
     {metaImage && <meta property="og:image" content={metaImage} />}
+    {
+      metaImage && metaImageAlt && (
+        <meta property="og:image:alt" content={metaImageAlt} />
+      )
+    }
 
     <meta
       name="twitter:card"
@@ -40,6 +52,11 @@ const documentTitle = `${title} | ${siteName}`;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {metaImage && <meta name="twitter:image" content={metaImage} />}
+    {
+      metaImage && metaImageAlt && (
+        <meta name="twitter:image:alt" content={metaImageAlt} />
+      )
+    }
 
     <!-- JSON-LD -->
     <slot name="head" />

@@ -1,0 +1,274 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import TableOfContents from "../components/TableOfContents.astro";
+import "../styles/prism-theme.css";
+
+interface Props {
+  title: string;
+  description: string;
+  createdDate: Date;
+  lastUpdated?: Date;
+  metaImage?: string;
+  metaImageAlt?: string;
+  headings: { depth: number; slug: string; text: string }[];
+}
+
+const {
+  title,
+  description,
+  createdDate,
+  lastUpdated,
+  metaImage,
+  metaImageAlt,
+  headings,
+} = Astro.props;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+const hasToc = headings.some((h) => h.depth >= 2 && h.depth <= 3);
+const metaImageUrl = metaImage
+  ? new URL(metaImage, Astro.site).href
+  : undefined;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  metaType="article"
+  metaImage={metaImageUrl}
+  metaImageAlt={metaImageAlt}
+>
+  <main
+    id="main-content"
+    data-pagefind-body
+    class:list={[{ "has-toc": hasToc }]}
+  >
+    <div class="post-header">
+      <h1>{title}</h1>
+      <div class="post-meta">
+        <time datetime={createdDate.toISOString().slice(0, 10)}>
+          Published: {formatDate(createdDate)}
+        </time>
+        {
+          lastUpdated && (
+            <time datetime={lastUpdated.toISOString().slice(0, 10)}>
+              Last updated: {formatDate(lastUpdated)}
+            </time>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="post-layout">
+      {
+        hasToc && (
+          <aside class="post-toc" data-pagefind-ignore>
+            <TableOfContents headings={headings} />
+          </aside>
+        )
+      }
+
+      <article class="post-content">
+        <slot />
+      </article>
+    </div>
+
+    <div class="post-back">
+      <a href="/blog/">← Back to overview</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .post-header,
+  .post-layout,
+  .post-back {
+    padding-inline: var(--space-md);
+  }
+
+  .post-header {
+    margin-block-end: var(--space-xl);
+  }
+
+  .post-header h1 {
+    margin-block: 0 var(--space-xs);
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    font-size: 0.875rem;
+    color: var(--color-text);
+    opacity: 0.75;
+  }
+
+  .post-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .post-content {
+    min-inline-size: 0;
+  }
+
+  .post-back {
+    margin-block-start: var(--space-2xl);
+    padding-block-start: var(--space-md);
+    border-top: 1px solid var(--color-border);
+  }
+</style>
+
+<style is:global>
+  /* Wide layout: two-column with sticky TOC sidebar */
+  @media (min-width: 58rem) {
+    main.has-toc {
+      --layout-content-max-width: 60rem;
+    }
+
+    main.has-toc .post-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 13rem;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /* Aside is first in DOM (above article on mobile); on desktop place it explicitly in col 2 */
+    main.has-toc .post-toc {
+      grid-column: 2;
+      grid-row: 1;
+      position: sticky;
+      top: var(--space-lg);
+    }
+
+    main.has-toc .post-content {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+
+  /* Prose styles for slot content inside .post-content */
+  .post-content h2,
+  .post-content h3 {
+    margin-block-start: var(--space-2xl);
+    scroll-margin-top: var(--space-md);
+  }
+
+  .post-content h2 {
+    font-size: 1.35em;
+    border-bottom: 1px solid var(--color-border);
+    padding-block-end: var(--space-xs);
+  }
+
+  .post-content h3 {
+    font-size: 1.1em;
+  }
+
+  .post-content p,
+  .post-content ul,
+  .post-content ol {
+    max-width: 68ch;
+  }
+
+  .post-content a,
+  .post-content code,
+  .post-content pre,
+  .post-content td,
+  .post-content th,
+  .post-content figcaption {
+    overflow-wrap: anywhere;
+  }
+
+  /* Inline code */
+  .post-content :not(pre) > code {
+    font-family:
+      ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    border-radius: var(--radius-md);
+    background-color: #edf0f2;
+    color: #24292e;
+    border: 1px solid #d0d7de;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .post-content :not(pre) > code {
+      background-color: #1f2937;
+      color: #c9d1d9;
+      border-color: #30363d;
+    }
+  }
+
+  /* Tables */
+  .post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    margin-block: var(--space-lg);
+    overflow-x: auto;
+    display: block;
+  }
+
+  .post-content th,
+  .post-content td {
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  .post-content th {
+    background-color: var(--color-surface);
+    font-weight: 600;
+    color: var(--color-heading);
+  }
+
+  .post-content tr:nth-child(even) td {
+    background-color: var(--color-surface);
+  }
+
+  /* Images */
+  .post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    display: block;
+    margin-block: var(--space-lg);
+    margin-inline: auto;
+  }
+
+  /* Figures with captions */
+  .post-content figure {
+    margin-inline: auto;
+    margin-block: var(--space-lg);
+  }
+
+  .post-content figure img {
+    margin-block: 0;
+  }
+
+  .post-content figcaption {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    opacity: 0.7;
+    margin-block-start: var(--space-xs);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* Blockquotes */
+  .post-content blockquote {
+    margin-inline: 0;
+    padding-inline-start: var(--space-md);
+    border-inline-start: 3px solid var(--color-border);
+    color: var(--color-text);
+    opacity: 0.8;
+  }
+</style>
