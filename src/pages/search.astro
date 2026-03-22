@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Search";
+const description = "Search across pages on www.mkoppmann.at.";
+---
+
+<BaseLayout title={title} description={description}>
+  <h1 slot="pageHeader">Search</h1>
+
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+    <script type="module" src="/scripts/pagefind-init.js" is:inline></script>
+  </Fragment>
+
+  <main id="main-content" data-pagefind-ignore>
+    <section class="search-section">
+      <p class="search-intro">Find content across this website.</p>
+      <div id="search" class="search-root" aria-label="Website search"></div>
+    </section>
+  </main>
+</BaseLayout>

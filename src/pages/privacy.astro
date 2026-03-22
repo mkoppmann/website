@@ -7,7 +7,7 @@ const description = "Privacy policy for www.mkoppmann.at.";
 
 <BaseLayout title={title} description={description}>
   <h1 slot="pageHeader">Privacy policy</h1>
-  <main id="main-content">
+  <main id="main-content" data-pagefind-body>
     <section>
       <h2>Legal notice</h2>
       <p>
@@ -30,7 +30,10 @@ const description = "Privacy policy for www.mkoppmann.at.";
       <h2>Data processing when visiting this site</h2>
       <p>
         This website is served as pre-built static files. It sets no cookies,
-        runs no client-side tracking scripts, and stores no analytics data.
+        runs no client-side tracking scripts, and stores no analytics data. The
+        dedicated search page loads a self-hosted JavaScript search UI (<a
+          href="https://pagefind.app/">Pagefind</a
+        >) in your browser to query a static on-site index.
       </p>
       <p>
         No server-side access logs are retained by this site’s operator. Your IP
