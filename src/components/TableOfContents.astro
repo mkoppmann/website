@@ -15,22 +15,9 @@ const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
 {
   toc.length > 0 && (
-    <>
-      <details class="toc-mobile">
-        <summary class="toc-summary">On this page</summary>
-        <nav aria-label="Table of contents">
-          <ol>
-            {toc.map((heading) => (
-              <li class:list={[{ "toc-h3": heading.depth === 3 }]}>
-                <a href={`#${heading.slug}`}>{heading.text}</a>
-              </li>
-            ))}
-          </ol>
-        </nav>
-      </details>
-
-      <nav class="toc-desktop" aria-label="Table of contents">
-        <p class="toc-label">On this page</p>
+    <details class="toc">
+      <summary class="toc-summary">On this page</summary>
+      <nav aria-label="Table of contents">
         <ol>
           {toc.map((heading) => (
             <li class:list={[{ "toc-h3": heading.depth === 3 }]}>
@@ -39,30 +26,17 @@ const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
           ))}
         </ol>
       </nav>
-    </>
+    </details>
   )
 }
 
 <style>
-  .toc-mobile {
+  .toc {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-xs) var(--space-md);
     margin-block: var(--space-md);
-  }
-
-  .toc-desktop {
-    display: none;
     font-size: 0.8125rem;
-  }
-
-  .toc-label {
-    margin: 0 0 var(--space-xs);
-    font-weight: 600;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-heading);
   }
 
   .toc-summary {
@@ -90,12 +64,11 @@ const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
     opacity: 0.5;
   }
 
-  .toc-mobile[open] > .toc-summary::after {
+  .toc[open] > .toc-summary::after {
     content: "−";
   }
 
   nav {
-    font-size: 0.8125rem;
     padding-block-start: var(--space-xs);
   }
 
@@ -138,12 +111,37 @@ const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
   }
 
   @media (min-width: 58rem) {
-    .toc-mobile {
-      display: none;
+    .toc {
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-block: 0;
     }
 
-    .toc-desktop {
-      display: block;
+    @supports selector(::details-content) {
+      .toc::details-content {
+        display: block;
+        content-visibility: visible;
+      }
+
+      .toc-summary {
+        display: none;
+      }
+
+      .toc > nav {
+        padding-block-start: 0;
+      }
+
+      .toc::before {
+        content: "On this page";
+        display: block;
+        margin: 0 0 var(--space-xs);
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-heading);
+      }
     }
   }
 </style>

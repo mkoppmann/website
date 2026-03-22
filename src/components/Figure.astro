@@ -7,12 +7,7 @@ interface Props {
   alt: string;
   caption?: string;
   sizes?: string;
-  maxWidth?:
-    | number
-    | `${number}px`
-    | `${number}rem`
-    | `${number}%`
-    | `${number}vw`;
+  maxWidth?: number | `${number}px`;
 }
 
 const {
@@ -23,26 +18,30 @@ const {
   maxWidth,
 } = Astro.props;
 
-const style = maxWidth
-  ? {
-      "--figure-max-width":
-        typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth,
-    }
-  : undefined;
+const maxWidthPx =
+  typeof maxWidth === "number"
+    ? maxWidth
+    : maxWidth
+      ? Number.parseFloat(maxWidth)
+      : undefined;
 
 const isVector = src.format === "svg";
+const targetMaxWidth = maxWidthPx
+  ? Math.min(Math.floor(maxWidthPx), src.width)
+  : undefined;
+
 const computedWidths = isVector
   ? undefined
   : [480, 720, 960, 1200]
-      .filter((width) => width < src.width)
-      .concat(src.width)
+      .filter((width) => width < (targetMaxWidth ?? src.width))
+      .concat(targetMaxWidth ?? src.width)
       .filter((width, index, widths) => widths.indexOf(width) === index);
 ---
 
-<figure style={style}>
+<figure>
   {
     isVector ? (
-      <Image src={src} alt={alt} sizes={sizes} />
+      <Image src={src} alt={alt} width={targetMaxWidth} />
     ) : (
       <Picture
         src={src}
@@ -50,6 +49,7 @@ const computedWidths = isVector
         formats={["avif", "webp"]}
         sizes={sizes}
         widths={computedWidths}
+        width={targetMaxWidth}
       />
     )
   }
@@ -58,7 +58,6 @@ const computedWidths = isVector
 
 <style>
   figure {
-    max-inline-size: var(--figure-max-width, none);
     margin-inline: auto;
   }
 </style>

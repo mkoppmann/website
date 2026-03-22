@@ -7,7 +7,7 @@ import { getCollection, render } from "astro:content";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 
-const feedTitle = "@mkoppmann’s mneme blog";
+const feedTitle = "mkoppmann’s blog";
 const feedDescription = "My thoughts and understandings on our world.";
 
 export async function GET(context: APIContext) {
@@ -87,7 +87,7 @@ export async function GET(context: APIContext) {
     feedItems.push({
       title: post.data.title,
       description: post.data.description,
-      pubDate: post.data.lastUpdated ?? post.data.createdDate,
+      pubDate: post.data.createdDate,
       link: `/blog/${post.id}/`,
       content,
     });

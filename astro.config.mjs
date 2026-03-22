@@ -11,7 +11,6 @@ export default defineConfig({
   output: "static",
   trailingSlash: "always",
   security: { csp: true },
-  compressHTML: false,
   integrations: [sitemap(), mdx()],
   markdown: {
     syntaxHighlight: "prism",
