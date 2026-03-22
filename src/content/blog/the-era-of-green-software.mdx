@@ -22,7 +22,7 @@ import LanguageEnergyImage from "../../assets/language_energy_comparison.png";
 import RightToRepairImage from "../../assets/right_to_repair_logo.png";
 import Figure from "../../components/Figure.astro";
 
-export const width = 480;
+export const imageWidth = 480;
 
 This is a transcript of my talk at TEDxTUWien from December 2022. The talk is about the loss of control in modern software development and its environmental impact. You can watch the video of the talk on [YouTube](https://youtube.com/watch?v=xtQOxGtmhy4).
 
@@ -42,7 +42,7 @@ But have you ever wondered why the performance of your devices degrade over time
   src={RobotImage}
   alt="A white robot with a friendly face looking at the camera, holding a tablet."
   caption='Photo by <a href="https://unsplash.com/ja/@agk42">Alex Knight</a>'
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 IT companies like to present their products like these perfectly designed tools. They await your commands and execute them flawlessly.
@@ -51,7 +51,7 @@ IT companies like to present their products like these perfectly designed tools.
   src={PotemkinVillageImage}
   alt="Buildings with nice painting in the front, but they look broken and bad from the back."
   caption="© -jkb-, CC BY-SA 3.0"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 But in reality, they are more like Potemkin villages. They look nice from the front, but they are only hiding their bad state.
@@ -72,7 +72,7 @@ If I would ask you: “What is the first thing that comes to your mind when I sa
   src={ElectronicWasteImage}
   alt="A large pile of electronic waste, including old computer boards, and other computer parts."
   caption="© Muntaka Chasant, CC BY-SA 4.0"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 Large landfills of electronic waste? Low recycling rates?
@@ -81,7 +81,7 @@ Large landfills of electronic waste? Low recycling rates?
   src={MineImage}
   alt="A large open pit mine with several excavators standing around."
   caption="© Peter Chou Kee Liu, CC BY-SA 4.0"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 Maybe even the use of rare-earth elements and where and how they are mined? We only think about the hardware, not the software. These things are of course also important and need to be dealt with. But it is not enough to tackle the sustainability problem just from the physical side.
@@ -94,7 +94,7 @@ So, what are the problems that we are facing in software engineering?
   src={MargaretHamiltonImage}
   alt="Margaret Hamilton standing next to a stack of paper with the source code for the Apollo Guidance Computer."
   caption="Public Domain"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 One of them is an increasing level of complexity. This is Margaret Hamilton. She was director of software engineering for the Apollo 11 project. Next to her is a stack of paper with the source code of the Apollo Guidance Computer. About 150,000 lines of code. 150,000 lines to bring someone to the moon and back.
@@ -103,7 +103,7 @@ One of them is an increasing level of complexity. This is Margaret Hamilton. She
   src={FordF150Image}
   alt="A Ford F150 pickup truck."
   caption='Photo by <a href="https://unsplash.com/@caleb_white">Caleb White</a>'
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 This is the Ford F150 pickup. It runs on 150 million lines of code. But bigger does not mean that it is better. Bigger means an increase in complexity and a decrease in reliability. We are losing control over the software and don’t fully understand anymore what is going on in our machines.
@@ -120,7 +120,7 @@ All this also effectively locks out people who cannot afford the equipment or in
   src={SmartphoneImage}
   alt="A modern smartphone with a large white screen."
   caption='Photo by <a href="https://unsplash.com/@vojtechbruzek">Vojtech Bruzek</a>'
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 A modern operating system for a smartphone takes up more than 10 GB of space.
@@ -129,7 +129,7 @@ A modern operating system for a smartphone takes up more than 10 GB of space.
   src={SnakePhoneImage}
   alt="A Nokia 3310 phone with the game Snakes on the screen."
   caption="© Toteemipaalu, CC BY-SA 4.0"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 The Nokia 3310 had 1 KB of built-in memory. And you could play Snakes on that thing.
@@ -140,7 +140,7 @@ You all have probably also heard that you should unplug unused devices because t
   src={ZombieServerImage}
   alt="A room filled with servers."
   caption="© Florian Hirzinger, CC BY-SA 3.0"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 Let me tell you something about zombie servers. A report from 2015 looked at over 16,000 servers in data centers. And their finding was that 25% of them were zombies. Machines that showed no signs of activities in six months or more. Another 25% to 50%, depending on the location, were idle. They were active less than 5% of the time. It would make sense to turn these servers and services off and only start them on demand, right? But we can’t. Many enterprise software projects have a slow startup phase and starting a service can take up to several seconds, even minutes, until they can handle new requests.
@@ -159,7 +159,7 @@ We need to work together. Programmers, managers, politicians, citizens. We have 
   src={SolarPoweredBlogImage}
   alt="A laptop displaying a solar-powered blog with some machinery sitting next to it."
   caption="© Low-tech Magazine"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 Luckily, in the world of software, small changes can already have an impact. To give you one example: A solar-powered blog noticed that less than 1% of the visitors were causing 60% of the network traffic. 6.6 TB out of 11. The software the people used to consume the blog’s content had an error in its code, causing it to revisit the blog every couple of minutes. The change was a fix in three lines of code, eliminating terabytes of data that were no longer needed to be sent. This lowered the power use of the blog which could then stay up for 2.5 hours longer per day.
@@ -168,7 +168,7 @@ Luckily, in the world of software, small changes can already have an impact. To 
   src={BlueAngelImage}
   alt="The Blue Angel eco-certification logo."
   caption="© Publicgarden GmbH, CC BY-SA 4.0"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 We need more of that. The Blue Angel eco-certification from the German Environment Agency is a start. They began to evaluate the power efficiency of desktop software and plan to extend the program to other kinds of applications. This makes it possible to test against certain criteria and compare between different products. When I buy a product, I want to be able to do an informed decision. Labels help in that process. Our buying behavior can show that the demand for more sustainable solutions is there.
@@ -179,7 +179,7 @@ The ecological footprint of software needs to be a relevant key metric during th
   src={LanguageEnergyImage}
   alt="A comparison of energy consumption between different programming languages."
   caption='<a href="https://greenlab.di.uminho.pt/wp-content/uploads/2017/09/paperSLE.pdf">Source</a>'
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 Right at the start of a project, choosing the right programming language can already make a huge difference. When we look at the difference in energy consumption between Java and Python, two popular languages, we can see that Java is requiring two times the energy compared to the baseline, and that Python requires 75 times more energy.
@@ -190,10 +190,12 @@ New non-profit foundations and projects like the FOSS Energy Efficiency Project 
   src={RightToRepairImage}
   alt="The logo of the right to repair movement, showing a crossed wrench and hammer."
   caption="© EFF Photos, CC BY 2.0"
-  maxWidth={width}
+  maxWidth={imageWidth}
 />
 
 New laws like the right to repair are not only a good way to reduce electronic waste. Together with forcing manufacturers to provide software updates for at least a couple of years, also make sure that the software needs to be usable on older devices. If we don’t have to throw away working hardware, that’s more sustainable.
+
+We also need to invest more in education. In my day job, I see that developers are still lacking in knowledge about security vulnerabilities that have been known for decades. We cannot afford to repeat the same mistakes when it comes to teaching about more sustainable and environmentally-friendly programming.
 
 We also need to invest more in education. In my day job, I see that developers are still lacking in knowledge about security vulnerabilities that have been known for decades. We cannot afford to repeat the same mistakes when it comes to teaching about more sustainable and environmentally-friendly programming.
 
