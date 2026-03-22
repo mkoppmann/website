@@ -34,6 +34,10 @@
     --color-link-hover: #074ba5;
     --color-focus: #005fcc;
 
+    --color-code-bg: #edf0f2;
+    --color-code-text: #24292e;
+    --color-code-border: #d0d7de;
+
     --color-footer-bg: #15171a;
     --color-footer-text: #f5f7fa;
     --color-footer-link: #6eb6ff;
@@ -53,6 +57,10 @@
       --color-link-visited: #bcadff;
       --color-link-hover: #a6d1ff;
       --color-focus: #91c7ff;
+
+      --color-code-bg: #1f2937;
+      --color-code-text: #c9d1d9;
+      --color-code-border: #30363d;
 
       --color-footer-bg: #0b0e13;
       --color-footer-text: #e7ecf2;
@@ -151,11 +159,6 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
-    transition: box-shadow 180ms ease;
-  }
-
-  section:hover {
-    box-shadow: var(--shadow-md);
   }
 
   @media (min-width: 36rem) {
