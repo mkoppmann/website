@@ -20,3 +20,18 @@ const description = "Search across pages on www.mkoppmann.at.";
     </section>
   </main>
 </BaseLayout>
+
+<style>
+  .search-root {
+    --pagefind-ui-text: var(--color-text);
+    --pagefind-ui-primary: var(--color-link);
+    --pagefind-ui-background: var(--color-surface);
+    --pagefind-ui-border: var(--color-border);
+    --pagefind-ui-tag: var(--color-page-bg);
+  }
+
+  .search-root :global(.pagefind-ui__search-input::placeholder) {
+    color: var(--color-text);
+    opacity: 0.65;
+  }
+</style>

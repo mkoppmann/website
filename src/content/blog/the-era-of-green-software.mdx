@@ -1,0 +1,200 @@
+---
+title: "The Era of Green Software"
+description: "A transcript of my TEDxTUWien 2022 talk on the environmental impact of modern software development."
+createdDate: 2026-03-22
+metaImage: "/media/blog/the-era-of-green-software-cover.jpg"
+metaImageAlt: "Michael Koppmann on stage at TEDxTUWien giving his talk on the era of green software."
+---
+
+import StageImage from "../../assets/tedxtuwien-michael_koppmann-the_era_of_green_software.jpg";
+import RobotImage from "../../assets/robot.jpg";
+import PotemkinVillageImage from "../../assets/potemkin_village.jpg";
+import ElectronicWasteImage from "../../assets/electronic_waste.jpg";
+import MineImage from "../../assets/mine.jpg";
+import MargaretHamiltonImage from "../../assets/margaret_hamilton.jpg";
+import FordF150Image from "../../assets/ford_f150.jpg";
+import SmartphoneImage from "../../assets/smartphone.jpg";
+import SnakePhoneImage from "../../assets/snake_phone.jpg";
+import ZombieServerImage from "../../assets/servers.jpg";
+import SolarPoweredBlogImage from "../../assets/solar_powered_blog.jpg";
+import BlueAngelImage from "../../assets/blue_angel_logo.png";
+import LanguageEnergyImage from "../../assets/language_energy_comparison.png";
+import RightToRepairImage from "../../assets/right_to_repair_logo.png";
+import Figure from "../../components/Figure.astro";
+
+export const width = 480;
+
+This is a transcript of my talk at TEDxTUWien from December 2022. The talk is about the loss of control in modern software development and its environmental impact. You can watch the video of the talk on [YouTube](https://youtube.com/watch?v=xtQOxGtmhy4).
+
+<Figure
+  src={StageImage}
+  alt="Michael Koppmann on stage at TEDxTUWien giving his talk on the era of green software."
+  caption="Me on stage at TEDxTUWien 2022 giving my talk on the era of green software. © Oana Ianovici"
+/>
+
+## Sustainable software development … what’s that?
+
+Computers and software have taken over the world. There are more processors in this room than humans. The internet of things is growing, and now my watch can speak with my coffee machine. I wonder if they are talking about me when I’m not in the room.
+
+But have you ever wondered why the performance of your devices degrade over time? Why your phone that was snappy 4 years ago is now barely usable anymore? It’s not because hardware gets older and slower. Software does not expire and goes bad. No, the reason is that modern software development is just awful.
+
+<Figure
+  src={RobotImage}
+  alt="A white robot with a friendly face looking at the camera, holding a tablet."
+  caption='Photo by <a href="https://unsplash.com/ja/@agk42">Alex Knight</a>'
+  maxWidth={width}
+/>
+
+IT companies like to present their products like these perfectly designed tools. They await your commands and execute them flawlessly.
+
+<Figure
+  src={PotemkinVillageImage}
+  alt="Buildings with nice painting in the front, but they look broken and bad from the back."
+  caption="© -jkb-, CC BY-SA 3.0"
+  maxWidth={width}
+/>
+
+But in reality, they are more like Potemkin villages. They look nice from the front, but they are only hiding their bad state.
+
+I’m a penetration tester. I get paid to hack into computer systems and find security holes. And trust me, in my career I have seen a lot of code of questionable quality. But over the years I noticed something. Something that is missing. And I don’t mean proper secure code. That’s missing too, but that is getting fixed … most of the time.
+
+No, what I mean is the absence of some deeper understanding. That our decisions have consequences. The digital and the physical world are not two separate entities. They are the two sides of the same coin. Actions in the digital world have an impact on the physical.
+
+When I write a piece of software, that is performing very ineffectively, that is generating way too much network traffic, that is consuming more resources than necessary, that is just using a lot of power, then I created something bad. Sure, maybe it does its job, maybe it’s useful to some people. But at what costs?
+
+Other engineering disciplines don’t do that. Car engines are incredibly optimized. Buildings use just enough material to be safe and fulfill their function. Planes and trains they all basically look the same. Only in software engineering it’s fine that a program runs with 1% or even less of their possible performance. We are wasting resources at a large scale.
+
+In the last couple of months, colleagues and friends came up to me and asked: “What’s the topic of your talk?”, and I usually responded with something like “Sustainable software development.” Their reaction? “That’s a thing?” Everybody speaks about digitization; everybody speaks about sustainability. But somehow these two topics are not seen as related to each other.
+
+If I would ask you: “What is the first thing that comes to your mind when I say computers and their lack of sustainability?” What would you say? Old, inefficient hardware?
+
+<Figure
+  src={ElectronicWasteImage}
+  alt="A large pile of electronic waste, including old computer boards, and other computer parts."
+  caption="© Muntaka Chasant, CC BY-SA 4.0"
+  maxWidth={width}
+/>
+
+Large landfills of electronic waste? Low recycling rates?
+
+<Figure
+  src={MineImage}
+  alt="A large open pit mine with several excavators standing around."
+  caption="© Peter Chou Kee Liu, CC BY-SA 4.0"
+  maxWidth={width}
+/>
+
+Maybe even the use of rare-earth elements and where and how they are mined? We only think about the hardware, not the software. These things are of course also important and need to be dealt with. But it is not enough to tackle the sustainability problem just from the physical side.
+
+## The problems in software engineering
+
+So, what are the problems that we are facing in software engineering?
+
+<Figure
+  src={MargaretHamiltonImage}
+  alt="Margaret Hamilton standing next to a stack of paper with the source code for the Apollo Guidance Computer."
+  caption="Public Domain"
+  maxWidth={width}
+/>
+
+One of them is an increasing level of complexity. This is Margaret Hamilton. She was director of software engineering for the Apollo 11 project. Next to her is a stack of paper with the source code of the Apollo Guidance Computer. About 150,000 lines of code. 150,000 lines to bring someone to the moon and back.
+
+<Figure
+  src={FordF150Image}
+  alt="A Ford F150 pickup truck."
+  caption='Photo by <a href="https://unsplash.com/@caleb_white">Caleb White</a>'
+  maxWidth={width}
+/>
+
+This is the Ford F150 pickup. It runs on 150 million lines of code. But bigger does not mean that it is better. Bigger means an increase in complexity and a decrease in reliability. We are losing control over the software and don’t fully understand anymore what is going on in our machines.
+
+Another problem that we face is that developers often do not optimize their software anymore. Hardware has become “fast” enough. Memory and storage are abundant. But programs they don’t run in isolation. Running a couple of these unoptimized apps together then leads to problems due to resource exhaustion. For comparison, the operating system Windows 95 required about 50 MB of disk space. Nowadays, the mail application Outlook requires 4 GB alone, which is 82 times as big. But is it 82 times as good?
+
+It’s actually even worse. My laptop is literally more than 100,000 times faster than the computer in the Apollo 11, but somehow it is acceptable that starting the program and opening up a single mail can take up to 15 seconds. Sometimes it is so slow that after finishing writing a sentence, I can still see the individual letters popping up one after another.
+
+Video games can calculate millions of pixels in 16 milliseconds, but I can’t scroll on a web page in my browser without the image being jittery and lagging. Have you ever asked yourself why your expensive phone needs 30 seconds to start but a pocket calculator with a fraction of the processing power starts up instantly? It doesn’t have to be like this. There are no physical limitations that prevent this from happening.
+
+All this also effectively locks out people who cannot afford the equipment or internet speed to run and load these oversized applications and web pages. Or they are forced to buy newer equipment, leading to more electronic waste.
+
+<Figure
+  src={SmartphoneImage}
+  alt="A modern smartphone with a large white screen."
+  caption='Photo by <a href="https://unsplash.com/@vojtechbruzek">Vojtech Bruzek</a>'
+  maxWidth={width}
+/>
+
+A modern operating system for a smartphone takes up more than 10 GB of space.
+
+<Figure
+  src={SnakePhoneImage}
+  alt="A Nokia 3310 phone with the game Snakes on the screen."
+  caption="© Toteemipaalu, CC BY-SA 4.0"
+  maxWidth={width}
+/>
+
+The Nokia 3310 had 1 KB of built-in memory. And you could play Snakes on that thing.
+
+You all have probably also heard that you should unplug unused devices because they still consume power in standby. You know what doesn’t get unplugged?
+
+<Figure
+  src={ZombieServerImage}
+  alt="A room filled with servers."
+  caption="© Florian Hirzinger, CC BY-SA 3.0"
+  maxWidth={width}
+/>
+
+Let me tell you something about zombie servers. A report from 2015 looked at over 16,000 servers in data centers. And their finding was that 25% of them were zombies. Machines that showed no signs of activities in six months or more. Another 25% to 50%, depending on the location, were idle. They were active less than 5% of the time. It would make sense to turn these servers and services off and only start them on demand, right? But we can’t. Many enterprise software projects have a slow startup phase and starting a service can take up to several seconds, even minutes, until they can handle new requests.
+
+But some servers are never turned off because people are afraid to do so. No one in the team is fully understanding the software anymore and turning off that server could lead to problems. They have lost control. The army of zombies is rising and they are on their way to eat more and more brains … uhm I mean energy.
+
+The problems in the world of software engineering are not unlike the problems we face with climate change. We deal with complex systems that are hard to predict. We knew for decades that change should have happened, but we waited for too long. Now we have to pay back debts that have exponentially grown.
+
+## A green future
+
+Now, what can we do about that?
+
+We need to work together. Programmers, managers, politicians, citizens. We have to demand that the industry finally raises the bar for what is considered acceptable quality in software. We need standards that enforce a certain level of awareness in sustainability and resource consumption.
+
+<Figure
+  src={SolarPoweredBlogImage}
+  alt="A laptop displaying a solar-powered blog with some machinery sitting next to it."
+  caption="© Low-tech Magazine"
+  maxWidth={width}
+/>
+
+Luckily, in the world of software, small changes can already have an impact. To give you one example: A solar-powered blog noticed that less than 1% of the visitors were causing 60% of the network traffic. 6.6 TB out of 11. The software the people used to consume the blog’s content had an error in its code, causing it to revisit the blog every couple of minutes. The change was a fix in three lines of code, eliminating terabytes of data that were no longer needed to be sent. This lowered the power use of the blog which could then stay up for 2.5 hours longer per day.
+
+<Figure
+  src={BlueAngelImage}
+  alt="The Blue Angel eco-certification logo."
+  caption="© Publicgarden GmbH, CC BY-SA 4.0"
+  maxWidth={width}
+/>
+
+We need more of that. The Blue Angel eco-certification from the German Environment Agency is a start. They began to evaluate the power efficiency of desktop software and plan to extend the program to other kinds of applications. This makes it possible to test against certain criteria and compare between different products. When I buy a product, I want to be able to do an informed decision. Labels help in that process. Our buying behavior can show that the demand for more sustainable solutions is there.
+
+The ecological footprint of software needs to be a relevant key metric during the development and operation of software projects. This means considering the long-term energy needs of our software and making choices that minimize their energy consumption.
+
+<Figure
+  src={LanguageEnergyImage}
+  alt="A comparison of energy consumption between different programming languages."
+  caption='<a href="https://greenlab.di.uminho.pt/wp-content/uploads/2017/09/paperSLE.pdf">Source</a>'
+  maxWidth={width}
+/>
+
+Right at the start of a project, choosing the right programming language can already make a huge difference. When we look at the difference in energy consumption between Java and Python, two popular languages, we can see that Java is requiring two times the energy compared to the baseline, and that Python requires 75 times more energy.
+
+New non-profit foundations and projects like the FOSS Energy Efficiency Project or the Green Software Foundation are working with industry leading partners to create standards, tooling, and best practices for reducing greenhouse gases emissions.
+
+<Figure
+  src={RightToRepairImage}
+  alt="The logo of the right to repair movement, showing a crossed wrench and hammer."
+  caption="© EFF Photos, CC BY 2.0"
+  maxWidth={width}
+/>
+
+New laws like the right to repair are not only a good way to reduce electronic waste. Together with forcing manufacturers to provide software updates for at least a couple of years, also make sure that the software needs to be usable on older devices. If we don’t have to throw away working hardware, that’s more sustainable.
+
+We also need to invest more in education. In my day job, I see that developers are still lacking in knowledge about security vulnerabilities that have been known for decades. We cannot afford to repeat the same mistakes when it comes to teaching about more sustainable and environmentally-friendly programming.
+
+Software is eating the world. It’s time to take back control. It’s time for the era of green software. Thank you very much and hack the planet!

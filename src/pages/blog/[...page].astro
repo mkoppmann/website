@@ -1,0 +1,191 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPathsOptions, Page } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog");
+  const sorted = posts.sort(
+    (a, b) => b.data.createdDate.valueOf() - a.data.createdDate.valueOf(),
+  );
+  return paginate(sorted, { pageSize: 10 });
+}
+
+interface Props {
+  page: Page<CollectionEntry<"blog">>;
+}
+
+const { page } = Astro.props;
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articles, thoughts, and notes by Michael Koppmann."
+>
+  <h1 slot="pageHeader">Blog</h1>
+
+  <main id="main-content" data-pagefind-body>
+    {
+      page.data.length === 0 ? (
+        <p>No posts yet. Check back soon!</p>
+      ) : (
+        <ol class="post-list">
+          {page.data.map((post) => {
+            return (
+              <li class="post-card">
+                <div class="post-date">
+                  <time
+                    datetime={post.data.createdDate.toISOString().slice(0, 10)}
+                  >
+                    {formatDate(post.data.createdDate)}
+                  </time>
+                </div>
+                <h2 class="post-title">
+                  <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                </h2>
+                <p class="post-description">{post.data.description}</p>
+              </li>
+            );
+          })}
+        </ol>
+      )
+    }
+
+    {
+      (page.url.prev || page.url.next) && (
+        <nav class="pagination" aria-label="Pagination">
+          {page.url.prev ? (
+            <a href={page.url.prev} class="pagination-link" rel="prev">
+              ← Newer posts
+            </a>
+          ) : (
+            <span class="pagination-placeholder" />
+          )}
+          <span class="pagination-info">
+            Page {page.currentPage} of {page.lastPage}
+          </span>
+          {page.url.next ? (
+            <a href={page.url.next} class="pagination-link" rel="next">
+              Older posts →
+            </a>
+          ) : (
+            <span class="pagination-placeholder" />
+          )}
+        </nav>
+      )
+    }
+  </main>
+</BaseLayout>
+
+<style>
+  .pagination,
+  main > p {
+    padding-inline: var(--space-md);
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-card {
+    margin: 0;
+    padding: var(--space-xl) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-card:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post-date {
+    font-size: 0.8125rem;
+    color: var(--color-text);
+    opacity: 0.65;
+    margin-block-end: var(--space-2xs);
+  }
+
+  .post-title {
+    margin: 0 0 var(--space-xs);
+    font-size: 1.2em;
+    line-height: var(--line-height-heading);
+  }
+
+  .post-title a {
+    text-decoration: none;
+    color: var(--color-heading);
+  }
+
+  .post-title a:hover {
+    color: var(--color-link);
+    text-decoration: underline;
+  }
+
+  .post-description {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: var(--line-height-body);
+    color: var(--color-text);
+    opacity: 0.8;
+    max-width: 60ch;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-start: var(--space-2xl);
+    padding-block-start: var(--space-md);
+    gap: var(--space-md);
+    font-size: 0.875rem;
+  }
+
+  .pagination-link {
+    text-decoration: none;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-link);
+  }
+
+  .pagination-link:hover {
+    border-color: var(--color-link);
+    color: var(--color-link-hover);
+  }
+
+  .pagination-placeholder {
+    min-inline-size: 7rem;
+  }
+
+  .pagination-info {
+    color: var(--color-text);
+    opacity: 0.65;
+  }
+
+  @media (max-width: 36rem) {
+    .pagination {
+      flex-wrap: wrap;
+    }
+
+    .pagination-info {
+      order: -1;
+      width: 100%;
+      text-align: center;
+    }
+
+    .pagination-placeholder {
+      display: none;
+    }
+  }
+</style>
