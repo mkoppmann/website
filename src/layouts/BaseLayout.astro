@@ -138,6 +138,13 @@ const webSiteJsonLd = {
     padding-inline: var(--space-md);
   }
 
+  header > :where(p.subtitle) {
+    margin: calc(var(--space-md) * -0.5) 0 var(--space-md) 0;
+    padding-inline: var(--space-md);
+    font-size: 0.95em;
+    opacity: 0.85;
+  }
+
   main {
     grid-area: main;
     margin: 0 auto var(--layout-main-bottom-space);
@@ -167,6 +174,10 @@ const webSiteJsonLd = {
     }
 
     header > :where(h1) {
+      padding-inline: 0;
+    }
+
+    header > :where(p.subtitle) {
       padding-inline: 0;
     }
   }

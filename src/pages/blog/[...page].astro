@@ -19,11 +19,12 @@ interface Props {
 
 const { page } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const blogDescription = "My thoughts and understandings on our world.";
 const collectionPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "Blog",
-  description: "Articles, thoughts, and notes by Michael Koppmann.",
+  description: blogDescription,
   url: canonicalURL,
 };
 
@@ -37,15 +38,15 @@ function formatDate(date: Date): string {
 }
 ---
 
-<BaseLayout
-  title="Blog"
-  description="Articles, thoughts, and notes by Michael Koppmann."
->
+<BaseLayout title="Blog" description={blogDescription}>
   <Fragment slot="head">
     <JsonLd schema={collectionPageJsonLd} />
   </Fragment>
 
   <h1 slot="pageHeader">Blog</h1>
+  <p class="subtitle" slot="pageHeader">
+    {blogDescription}
+  </p>
 
   <main id="main-content" data-pagefind-body>
     {
