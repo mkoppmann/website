@@ -1,11 +1,12 @@
+import { rssSchema } from "@astrojs/rss";
 import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 
 const blog = defineCollection({
   loader: glob({ pattern: "*.{md,mdx}", base: "./src/content/blog" }),
-  schema: z
-    .object({
+  schema: rssSchema
+    .extend({
       title: z.string(),
       description: z.string(),
       createdDate: z.coerce.date(),
