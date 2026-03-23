@@ -33,6 +33,7 @@
     --color-link-visited: #6140b0;
     --color-link-hover: #074ba5;
     --color-focus: #005fcc;
+    --color-caption: #616163;
 
     --color-code-bg: #edf0f2;
     --color-code-text: #24292e;
@@ -57,6 +58,7 @@
       --color-link-visited: #bcadff;
       --color-link-hover: #a6d1ff;
       --color-focus: #91c7ff;
+      --color-caption: #a6aab0;
 
       --color-code-bg: #1f2937;
       --color-code-text: #c9d1d9;
@@ -103,6 +105,18 @@
     line-height: var(--line-height-heading);
     color: var(--color-heading);
     text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.5rem);
+  }
+
+  h3 {
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
   }
 
   p {
@@ -159,6 +173,40 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+  }
+
+  section figure {
+    margin: 0;
+    inline-size: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  section figure :where(picture, img) {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  section :where(figure img, > img) {
+    border-radius: var(--radius-md);
+  }
+
+  :where(figure figcaption, table caption) {
+    font-size: 0.875rem;
+    color: var(--color-caption);
+    text-align: center;
+    font-style: italic;
+  }
+
+  figure figcaption {
+    margin-block-start: var(--space-xs);
+  }
+
+  table caption {
+    caption-side: bottom;
+    padding-block-start: var(--space-xs);
+    font-style: normal;
   }
 
   @media (min-width: 36rem) {

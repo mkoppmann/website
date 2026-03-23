@@ -4,6 +4,8 @@ import JsonLd from "../components/JsonLd.astro";
 import StructuredEntriesList from "../components/StructuredEntriesList.astro";
 import { publications } from "../data/publications";
 import { talks } from "../data/talks";
+import Figure from "../components/Figure.astro";
+import SpeakerImage from "../assets/devsec2025_speaker.jpg";
 
 const title = "Home of Michael Koppmann";
 const description =
@@ -68,6 +70,11 @@ const profilePageJsonLd = {
         I hold a master’s degree in “Software Engineering and Internet
         Computing” from <a href="https://www.tuwien.at/">TU Wien</a>.
       </p>
+      <Figure
+        src={SpeakerImage}
+        alt="Me speaking at Heise devSec 2025. I’m holding a microphone and looking at the audience."
+        caption="© dpunkt.verlag"
+      />
       <p>
         My core interests include secure and sustainable software engineering,
         functional programming, privacy-enhancing technologies, and open source.

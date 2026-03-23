@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import JsonLd from "../components/JsonLd.astro";
+import Figure from "../components/Figure.astro";
+import ListeningImage from "../assets/listening_portrait.jpg";
 
 const title = "Contact";
 const description = "Contact details for www.mkoppmann.at.";
@@ -24,6 +26,11 @@ const contactPageJsonLd = {
   <main id="main-content" data-pagefind-body>
     <section>
       <h2>Get in touch</h2>
+      <Figure
+        src={ListeningImage}
+        alt="Portrait of me listening attentively, looking slightly to the right."
+        caption="© Niklas Schnaubelt"
+      />
       <p>You can reach me via the following channels:</p>
       <ul>
         <li>
