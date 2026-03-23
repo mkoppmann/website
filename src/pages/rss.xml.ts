@@ -12,6 +12,7 @@ import sanitize from "ultrahtml/transformers/sanitize";
 const feedAuthor = "Michael Koppmann";
 const feedTitle = "mkoppmann’s mneme";
 const feedDescription = "My thoughts and understandings on our world.";
+const feedStylesheetPath = "/pretty-feed-v3.xsl";
 
 const parseFeedDate = (dateValue: string): Date =>
   new Date(`${dateValue}T00:00:00Z`);
@@ -131,6 +132,7 @@ export async function GET(context: APIContext) {
     title: feedTitle,
     description: feedDescription,
     site: context.site ?? new URL(context.url.origin),
+    stylesheet: feedStylesheetPath,
     items: combinedItems,
   });
 }
