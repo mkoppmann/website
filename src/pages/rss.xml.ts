@@ -9,7 +9,7 @@ import { talks } from "../data/talks";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 
-const feedAuthor = "Michael Koppmann";
+const feedAuthor = "me+www@mkoppmann.at";
 const feedTitle = "mkoppmann’s mneme";
 const feedDescription = "My thoughts and understandings on our world.";
 const feedStylesheetPath = "/pretty-feed-v3.xsl";
@@ -133,6 +133,10 @@ export async function GET(context: APIContext) {
     description: feedDescription,
     site: context.site ?? new URL(context.url.origin),
     stylesheet: feedStylesheetPath,
+    xmlns: {
+      atom: "http://www.w3.org/2005/Atom",
+    },
+    customData: `<atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml" />`,
     items: combinedItems,
   });
 }
