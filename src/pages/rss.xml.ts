@@ -7,6 +7,7 @@ import { getCollection, render } from "astro:content";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 
+const feedAuthor = "Michael Koppmann";
 const feedTitle = "mkoppmann’s blog";
 const feedDescription = "My thoughts and understandings on our world.";
 
@@ -88,6 +89,7 @@ export async function GET(context: APIContext) {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.createdDate,
+      author: feedAuthor,
       link: `/blog/${post.id}/`,
       content,
     });
