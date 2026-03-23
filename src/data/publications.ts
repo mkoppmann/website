@@ -15,7 +15,7 @@ export const publications: Publication[] = [
     title: "Mit Java funktional programmieren",
     type: "Article",
     venue: "iX 2025/09",
-    date: "2025-09",
+    date: "2025-08-22",
     language: "German",
     links: [
       {
@@ -28,7 +28,7 @@ export const publications: Publication[] = [
     title: "KI-Assistenten und LLMs – was taugt der Code?",
     type: "Article",
     venue: "iX 2024/07",
-    date: "2024-07",
+    date: "2024-06-28",
     language: "German",
     links: [
       {
@@ -42,7 +42,7 @@ export const publications: Publication[] = [
       "Anwendungssicherheit durch einen sicheren Softwareentwicklungslebenszyklus (SDLC)",
     type: "Article",
     venue: "USANCEN: TechGuard 00/23",
-    date: "2023-11",
+    date: "2023-12-19",
     language: "German",
     links: [
       {
@@ -59,7 +59,7 @@ export const publications: Publication[] = [
     title: "Alternatives Autorisierungsmodell",
     type: "Article",
     venue: "OCG Journal 01/2023",
-    date: "2023-04",
+    date: "2023-04-28",
     language: "German",
     links: [
       {
@@ -76,7 +76,7 @@ export const publications: Publication[] = [
     title: "Utilizing Object Capabilities to Improve Web Application Security",
     type: "Paper",
     venue: "ACIG Journal 2022, Volume 1",
-    date: "2022-11",
+    date: "2022-11-16",
     language: "English",
     links: [
       {
@@ -94,7 +94,7 @@ export const publications: Publication[] = [
       "Object Capabilities and Their Benefits for Web Application Security",
     type: "Thesis",
     venue: "Master thesis",
-    date: "2021-10",
+    date: "2021-11-22",
     language: "English",
     links: [
       {

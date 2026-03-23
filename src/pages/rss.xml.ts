@@ -4,12 +4,22 @@ import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
 import { getCollection, render } from "astro:content";
+import { publications } from "../data/publications";
+import { talks } from "../data/talks";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 
 const feedAuthor = "Michael Koppmann";
-const feedTitle = "mkoppmann’s blog";
+const feedTitle = "mkoppmann’s mneme";
 const feedDescription = "My thoughts and understandings on our world.";
+
+const parseFeedDate = (dateValue: string): Date =>
+  new Date(`${dateValue}T00:00:00Z`);
+
+const toTimestamp = (pubDate: RSSFeedItem["pubDate"]): number => {
+  if (!pubDate) return 0;
+  return (pubDate instanceof Date ? pubDate : new Date(pubDate)).valueOf();
+};
 
 export async function GET(context: APIContext) {
   // Get the base URL for converting relative links
@@ -95,10 +105,32 @@ export async function GET(context: APIContext) {
     });
   }
 
+  const talkItems: RSSFeedItem[] = talks.map((talk) => {
+    return {
+      title: `New talk: ${talk.title}`,
+      pubDate: parseFeedDate(talk.date),
+      author: feedAuthor,
+      link: "/talks/",
+    };
+  });
+
+  const publicationItems: RSSFeedItem[] = publications.map((publication) => {
+    return {
+      title: `New publication: ${publication.title}`,
+      pubDate: parseFeedDate(publication.date),
+      author: feedAuthor,
+      link: "/publications/",
+    };
+  });
+
+  const combinedItems = [...feedItems, ...talkItems, ...publicationItems].sort(
+    (a, b) => toTimestamp(b.pubDate) - toTimestamp(a.pubDate),
+  );
+
   return rss({
     title: feedTitle,
     description: feedDescription,
     site: context.site ?? new URL(context.url.origin),
-    items: feedItems,
+    items: combinedItems,
   });
 }
