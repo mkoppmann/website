@@ -2,6 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import JsonLd from "../components/JsonLd.astro";
 
+Astro.csp?.insertScriptResource("'self'");
+Astro.csp?.insertScriptResource("'wasm-unsafe-eval'");
+
 const title = "Search";
 const description = "Search across pages on www.mkoppmann.at.";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
