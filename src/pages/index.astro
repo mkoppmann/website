@@ -2,21 +2,25 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import JsonLd from "../components/JsonLd.astro";
 import StructuredEntriesList from "../components/StructuredEntriesList.astro";
-import { publications } from "../data/publications";
-import { talks } from "../data/talks";
+import { getCollection } from "astro:content";
 import Figure from "../components/Figure.astro";
 import SpeakerImage from "../assets/devsec2025_speaker.jpg";
 
 const title = "Home of Michael Koppmann";
 const description =
-  "@mkoppmann’s mneme – Home of Michael Koppmann, a security consultant, writer, and speaker. Trying to make everything a tiny bit better.";
+  "@mkoppmann's mneme – Home of Michael Koppmann, a security consultant, writer, and speaker. Trying to make everything a tiny bit better.";
 
-const latestFourPublications = [...publications]
-  .sort((left, right) => right.date.localeCompare(left.date))
-  .slice(0, 4);
-const latestFourTalks = [...talks]
-  .sort((left, right) => right.date.localeCompare(left.date))
-  .slice(0, 4);
+const allPublications = await getCollection("publications");
+const latestFourPublications = allPublications
+  .sort((left, right) => right.data.date.localeCompare(left.data.date))
+  .slice(0, 4)
+  .map((pub) => ({ ...pub.data, href: `/publications/${pub.id}/` }));
+const allTalks = await getCollection("talks");
+const latestFourTalks = allTalks
+  .sort((left, right) => right.data.date.localeCompare(left.data.date))
+  .slice(0, 4)
+  .map((talk) => ({ ...talk.data, href: `/talks/${talk.id}/` }));
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 const profilePageJsonLd = {
   "@context": "https://schema.org",

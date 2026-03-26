@@ -48,56 +48,44 @@ function formatDate(date: Date): string {
     {blogDescription}
   </p>
 
-  <main id="main-content" data-pagefind-body>
-    {
-      page.data.length === 0 ? (
-        <p>No posts yet. Check back soon!</p>
-      ) : (
-        <ol class="post-list">
-          {page.data.map((post) => {
-            return (
-              <li class="post-card">
-                <div class="post-date">
-                  <time
-                    datetime={post.data.createdDate.toISOString().slice(0, 10)}
-                  >
-                    {formatDate(post.data.createdDate)}
-                  </time>
-                </div>
-                <h2 class="post-title">
-                  <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-                </h2>
-                <p class="post-description">{post.data.description}</p>
-              </li>
-            );
-          })}
-        </ol>
-      )
-    }
+  <main id="main-content">
+    <section>
+      <h2>All posts</h2>
+      {
+        page.data.length === 0 ? (
+          <p>No posts yet. Check back soon!</p>
+        ) : (
+          <ol class="post-list">
+            {page.data.map((post) => {
+              return (
+                <li class="post-card">
+                  <div class="post-date">
+                    <time
+                      datetime={post.data.createdDate
+                        .toISOString()
+                        .slice(0, 10)}
+                    >
+                      {formatDate(post.data.createdDate)}
+                    </time>
+                  </div>
+                  <h3 class="post-title">
+                    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                  </h3>
+                  <p class="post-description">{post.data.description}</p>
+                </li>
+              );
+            })}
+          </ol>
+        )
+      }
+    </section>
 
-    {
-      (page.url.prev || page.url.next) && (
-        <nav class="pagination" aria-label="Pagination">
-          {page.url.prev ? (
-            <a href={page.url.prev} class="pagination-link" rel="prev">
-              ← Newer posts
-            </a>
-          ) : (
-            <span class="pagination-placeholder" />
-          )}
-          <span class="pagination-info">
-            Page {page.currentPage} of {page.lastPage}
-          </span>
-          {page.url.next ? (
-            <a href={page.url.next} class="pagination-link" rel="next">
-              Older posts →
-            </a>
-          ) : (
-            <span class="pagination-placeholder" />
-          )}
-        </nav>
-      )
-    }
+    <Pagination
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+    />
   </main>
 </BaseLayout>
 
@@ -153,19 +141,6 @@ function formatDate(date: Date): string {
     padding-block-start: var(--space-md);
     gap: var(--space-md);
     font-size: 0.875rem;
-  }
-
-  .pagination-link {
-    text-decoration: none;
-    padding: var(--space-xs) var(--space-sm);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    color: var(--color-link);
-  }
-
-  .pagination-link:hover {
-    border-color: var(--color-link);
-    color: var(--color-link-hover);
   }
 
   .pagination-placeholder {

@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EntryDetail from "../../components/EntryDetail.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allPublications = await getCollection("publications");
+  return allPublications.map((publication) => ({
+    params: { id: publication.id },
+    props: { publication },
+  }));
+}
+
+const { publication } = Astro.props;
+const { title, type, venue, date, language, links } = publication.data;
+
+const description = `${type}: “${title}” published in ${venue}.`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+function formatDate(value: string): string {
+  const dateValue = new Date(`${value}T00:00:00`);
+
+  if (Number.isNaN(dateValue.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(dateValue);
+}
+
+const formattedDate = formatDate(date);
+
+const creativeWorkJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: title,
+  description,
+  url: canonicalURL,
+  datePublished: date,
+  publisher: { "@type": "Organization", name: venue },
+  author: {
+    "@type": "Person",
+    name: "Michael Koppmann",
+    url: Astro.site?.href,
+  },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <JsonLd schema={creativeWorkJsonLd} />
+  </Fragment>
+
+  <h1 slot="pageHeader">{title}</h1>
+
+  <main id="main-content" data-pagefind-body>
+    <EntryDetail
+      kicker="Publication"
+      headingId="publication-overview-heading"
+      type={type}
+      venue={venue}
+      date={date}
+      formattedDate={formattedDate}
+      language={language}
+      links={links}
+      overviewHref="/publications/"
+      overviewLabel="All publications"
+    >
+      <Fragment slot="summary">
+        {type} published in <strong>{venue}</strong> on <time datetime={date}
+          >{formattedDate}</time
+        >.
+      </Fragment>
+    </EntryDetail>
+  </main>
+</BaseLayout>

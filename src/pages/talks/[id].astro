@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EntryDetail from "../../components/EntryDetail.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allTalks = await getCollection("talks");
+  return allTalks.map((talk) => ({
+    params: { id: talk.id },
+    props: { talk },
+  }));
+}
+
+const { talk } = Astro.props;
+const { title, type, venue, date, language, links } = talk.data;
+
+const description = `${type}: “${title}” at ${venue}.`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+function formatDate(value: string): string {
+  const dateValue = new Date(`${value}T00:00:00`);
+
+  if (Number.isNaN(dateValue.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(dateValue);
+}
+
+const formattedDate = formatDate(date);
+
+const eventJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: title,
+  description,
+  url: canonicalURL,
+  startDate: date,
+  location: { "@type": "Place", name: venue },
+  performer: {
+    "@type": "Person",
+    name: "Michael Koppmann",
+    url: Astro.site?.href,
+  },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head">
+    <JsonLd schema={eventJsonLd} />
+  </Fragment>
+
+  <h1 slot="pageHeader">{title}</h1>
+
+  <main id="main-content" data-pagefind-body>
+    <EntryDetail
+      kicker="Talk"
+      headingId="talk-overview-heading"
+      type={type}
+      venue={venue}
+      date={date}
+      formattedDate={formattedDate}
+      language={language}
+      links={links}
+      overviewHref="/talks/"
+      overviewLabel="All talks"
+    >
+      <Fragment slot="summary">
+        {type} presented at <strong>{venue}</strong> on <time datetime={date}
+          >{formattedDate}</time
+        >.
+      </Fragment>
+    </EntryDetail>
+  </main>
+</BaseLayout>

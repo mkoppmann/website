@@ -1,7 +1,7 @@
 import { rssSchema } from "@astrojs/rss";
 import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 
 const blog = defineCollection({
   loader: glob({ pattern: "*.{md,mdx}", base: "./src/content/blog" }),
@@ -25,4 +25,29 @@ const blog = defineCollection({
     }),
 });
 
-export const collections = { blog };
+const entryLinkSchema = z.object({
+  label: z.string(),
+  href: z.string(),
+});
+
+const entrySchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  type: z.string(),
+  venue: z.string(),
+  date: z.string(),
+  language: z.string(),
+  links: z.array(entryLinkSchema),
+});
+
+const talks = defineCollection({
+  loader: file("./src/content/talks.json"),
+  schema: entrySchema,
+});
+
+const publications = defineCollection({
+  loader: file("./src/content/publications.json"),
+  schema: entrySchema,
+});
+
+export const collections = { blog, talks, publications };

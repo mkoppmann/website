@@ -6,6 +6,7 @@ interface EntryLink {
 
 export interface StructuredEntry {
   title: string;
+  href?: string;
   type: string;
   venue: string;
   date: string;
@@ -30,28 +31,41 @@ function formatDate(value: string): string {
     items.map((item) => (
       <li>
         <article class="entry-card">
-          <h3 class="entry-title">{item.title}</h3>
-          <p class="entry-venue">
-            <em>{item.venue}</em>
-          </p>
-          <div class="entry-meta">
-            <span class="entry-type">{item.type}</span>
-            <time class="entry-date" datetime={item.date}>
-              {formatDate(item.date)}
-            </time>
-            <span class="entry-language">{item.language}</span>
+          <div class="entry-main">
+            <p class="entry-kicker">{item.type}</p>
+            <h3 class="entry-title">
+              {item.href ? <a href={item.href}>{item.title}</a> : item.title}
+            </h3>
+            <p class="entry-venue">
+              <em>{item.venue}</em>
+            </p>
           </div>
-          <ul
-            class="entry-links"
-            role="list"
-            aria-label={`Links for ${item.title}`}
-          >
-            {item.links.map((link) => (
-              <li>
-                <a href={link.href}>{link.label}</a>
-              </li>
-            ))}
-          </ul>
+          <div class="entry-support">
+            <div class="entry-meta">
+              <time class="entry-chip" datetime={item.date}>
+                {formatDate(item.date)}
+              </time>
+              <span class="entry-chip">{item.language}</span>
+            </div>
+            {item.links.length > 0 && (
+              <ul
+                class="entry-links"
+                role="list"
+                aria-label={`Links for ${item.title}`}
+              >
+                {item.links.map((link) => (
+                  <li>
+                    <a class="entry-link" href={link.href}>
+                      <span class="entry-link-label">{link.label}</span>
+                      <span class="entry-link-arrow" aria-hidden="true">
+                        ↗
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </article>
       </li>
     ))
@@ -72,14 +86,32 @@ function formatDate(value: string): string {
   }
 
   .entry-card {
+    position: relative;
+    overflow: hidden;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background-color: var(--color-page-bg);
     padding: var(--space-sm);
   }
 
-  .entry-title {
+  .entry-main {
+    min-inline-size: 0;
+  }
+
+  .entry-support {
+    margin-top: var(--space-2xs);
+  }
+
+  .entry-kicker {
     margin: 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .entry-title {
+    margin: var(--space-2xs) 0 0;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.28;
@@ -88,7 +120,6 @@ function formatDate(value: string): string {
   .entry-venue {
     margin: var(--space-2xs) 0 0;
     font-size: 0.9rem;
-    font-style: italic;
   }
 
   .entry-meta {
@@ -96,18 +127,17 @@ function formatDate(value: string): string {
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2xs);
-    margin: var(--space-2xs) 0 0;
-    font-size: 0.8rem;
+    margin: 0;
   }
 
-  .entry-type,
-  .entry-date,
-  .entry-language {
-    display: inline-block;
+  .entry-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
     border: 1px solid var(--color-border);
-    border-radius: 999px;
-    padding: 0.05rem var(--space-xs);
-    font-size: 0.76rem;
+    border-radius: var(--radius-md);
+    padding: 0.15rem var(--space-xs);
+    font-size: 0.8rem;
     line-height: 1.3;
     background-color: var(--color-surface);
   }
@@ -116,7 +146,7 @@ function formatDate(value: string): string {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2xs);
-    margin: var(--space-xs) 0 0;
+    margin: var(--space-2xs) 0 0;
     padding: 0;
     list-style: none;
   }
@@ -125,24 +155,78 @@ function formatDate(value: string): string {
     margin: 0;
   }
 
-  .entry-links a {
-    display: inline-block;
+  .entry-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
     border: 1px solid var(--color-border);
-    border-radius: 999px;
-    padding: 0.08rem var(--space-xs);
+    border-radius: var(--radius-md);
+    padding: 0.15rem var(--space-xs);
     text-decoration: none;
     font-size: 0.8rem;
+    line-height: 1.3;
     background-color: var(--color-surface);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease;
   }
 
-  .entry-links a:hover {
-    text-decoration: underline;
+  .entry-link-arrow {
+    font-size: 0.85rem;
+    color: var(--color-link);
+  }
+
+  .entry-link:visited .entry-link-arrow {
+    color: var(--color-link-visited);
+  }
+
+  .entry-link:hover {
+    border-color: var(--color-link);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .entry-link:visited:hover {
+    border-color: var(--color-link-visited);
+  }
+
+  .entry-link:hover .entry-link-arrow {
+    color: var(--color-link);
+  }
+
+  .entry-link:visited:hover .entry-link-arrow {
+    color: var(--color-link-visited);
   }
 
   @media (min-width: 52rem) {
     .entries-cards {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-md);
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-sm);
+    }
+
+    .entry-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-xs) var(--space-md);
+      align-items: start;
+      padding: var(--space-sm);
+    }
+
+    .entry-support {
+      display: grid;
+      justify-items: end;
+      align-content: start;
+      gap: var(--space-2xs);
+      margin-top: 0;
+      text-align: end;
+    }
+
+    .entry-meta {
+      justify-content: flex-end;
+    }
+
+    .entry-links {
+      justify-content: flex-end;
+      margin-top: 0;
     }
   }
 </style>

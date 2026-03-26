@@ -1,0 +1,264 @@
+---
+interface EntryLink {
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  kicker: string;
+  headingId: string;
+  type: string;
+  venue: string;
+  date: string;
+  formattedDate: string;
+  language: string;
+  links: EntryLink[];
+  overviewHref: string;
+  overviewLabel: string;
+}
+
+const {
+  kicker,
+  headingId,
+  type,
+  venue,
+  date,
+  formattedDate,
+  language,
+  links,
+  overviewHref,
+  overviewLabel,
+} = Astro.props;
+
+const detailDate = /^\d{4}-\d{2}-\d{2}/.test(date)
+  ? date.slice(0, 10)
+  : formattedDate;
+
+function formatHost(value: string): string {
+  try {
+    return new URL(value).host.replace(/^www\./, "");
+  } catch {
+    return value;
+  }
+}
+---
+
+<section aria-labelledby={headingId} class="entry-panel">
+  <p class="entry-kicker">{kicker}</p>
+  <h2 id={headingId}>At a glance</h2>
+  <p class="entry-summary">
+    <slot name="summary" />
+  </p>
+
+  <dl class="detail-grid">
+    <div class="detail-row">
+      <dt>Type</dt>
+      <dd>{type}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>Venue</dt>
+      <dd>{venue}</dd>
+    </div>
+    <div class="detail-row">
+      <dt>Date</dt>
+      <dd><time datetime={date}>{detailDate}</time></dd>
+    </div>
+    <div class="detail-row">
+      <dt>Language</dt>
+      <dd>{language}</dd>
+    </div>
+  </dl>
+
+  {
+    links.length > 0 && (
+      <div class="resources-block">
+        <h3>Resources</h3>
+        <ul role="list" class="resource-list">
+          {links.map((link, index) => (
+            <li>
+              <a class="resource-link" href={link.href}>
+                <span class="resource-index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span class="resource-copy">
+                  <span class="resource-label">{link.label}</span>
+                  <span class="resource-host">{formatHost(link.href)}</span>
+                </span>
+                <span class="resource-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</section>
+
+<nav class="entry-overview-nav" aria-label="Back to overview">
+  <a href={overviewHref} class="section-nav-link">← {overviewLabel}</a>
+</nav>
+
+<style>
+  .entry-panel {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .entry-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    block-size: 0.4rem;
+    background: linear-gradient(90deg, var(--color-link), var(--color-focus));
+  }
+
+  .entry-kicker {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-link);
+  }
+
+  .entry-summary {
+    margin: 0 0 var(--space-lg);
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+
+  .detail-grid {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+  }
+
+  .detail-row {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: var(--color-page-bg);
+  }
+
+  .detail-row dt {
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-caption);
+  }
+
+  .detail-row dd {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .resources-block {
+    margin-top: var(--space-xl);
+  }
+
+  .resources-block h3 {
+    margin-bottom: var(--space-sm);
+  }
+
+  .resource-list {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .resource-list li {
+    margin: 0;
+  }
+
+  .resource-link {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    text-decoration: none;
+    background-color: var(--color-page-bg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .resource-index {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: 2.2rem;
+    min-block-size: 2.2rem;
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-caption);
+  }
+
+  .resource-copy {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .resource-label {
+    font-weight: 600;
+  }
+
+  .resource-host {
+    font-size: 0.85rem;
+    color: var(--color-caption);
+    word-break: break-word;
+  }
+
+  .resource-arrow {
+    font-size: 1.15rem;
+    color: var(--color-link);
+  }
+
+  .resource-link:visited .resource-arrow {
+    color: var(--color-link-visited);
+  }
+
+  .resource-link:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+    border-color: var(--color-link);
+    box-shadow: var(--shadow-md);
+  }
+
+  .resource-link:visited:hover {
+    border-color: var(--color-link-visited);
+  }
+
+  .resource-link:hover .resource-arrow {
+    color: var(--color-link);
+  }
+
+  .resource-link:visited:hover .resource-arrow {
+    color: var(--color-link-visited);
+  }
+
+  .entry-overview-nav {
+    margin-block-start: var(--space-lg);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 36rem) {
+    .detail-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--space-lg);
+    }
+  }
+</style>
