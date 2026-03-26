@@ -9,7 +9,7 @@ import { talks } from "../data/talks";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 
-const feedAuthor = "me+www@mkoppmann.at";
+const feedAuthor = "me+www@mkoppmann.at (Michael Koppmann)";
 const feedTitle = "mkoppmann’s mneme";
 const feedDescription = "My thoughts and understandings on our world.";
 const feedStylesheetPath = "/pretty-feed-v3.xsl";
