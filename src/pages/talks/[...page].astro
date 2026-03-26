@@ -2,6 +2,7 @@
 import StructuredEntriesList from "../../components/StructuredEntriesList.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import JsonLd from "../../components/JsonLd.astro";
+import Pagination from "../../components/Pagination.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPathsOptions, Page } from "astro";
@@ -43,57 +44,21 @@ const items = page.data.map((talk) => ({
   </Fragment>
 
   <h1 slot="pageHeader">Talks</h1>
+  <p class="subtitle" slot="pageHeader">
+    Public talks, tutorials, and recorded sessions.
+  </p>
 
   <main id="main-content">
     <section>
       <h2>All talks</h2>
-      <p>Public talks, tutorials, and recorded sessions.</p>
       <StructuredEntriesList items={items} />
     </section>
 
-    {
-      (page.url.prev || page.url.next) && (
-        <nav class="pagination" aria-label="Pagination">
-          {page.url.prev ? (
-            <a href={page.url.prev} class="section-nav-link" rel="prev">
-              ← Newer
-            </a>
-          ) : (
-            <span class="pagination-placeholder" />
-          )}
-          <span class="pagination-info">
-            Page {page.currentPage} of {page.lastPage}
-          </span>
-          {page.url.next ? (
-            <a href={page.url.next} class="section-nav-link" rel="next">
-              Older →
-            </a>
-          ) : (
-            <span class="pagination-placeholder" />
-          )}
-        </nav>
-      )
-    }
+    <Pagination
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+    />
   </main>
 </BaseLayout>
-
-<style>
-  .pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-block-start: var(--space-2xl);
-    padding-block-start: var(--space-md);
-    gap: var(--space-md);
-    font-size: 0.875rem;
-  }
-
-  .pagination-placeholder {
-    min-width: 6rem;
-  }
-
-  .pagination-info {
-    font-size: 0.8rem;
-    opacity: 0.7;
-  }
-</style>

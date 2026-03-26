@@ -1,0 +1,72 @@
+---
+interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+  currentPage: number;
+  lastPage: number;
+}
+
+const { prevUrl, nextUrl, currentPage, lastPage } = Astro.props;
+---
+
+{
+  (prevUrl || nextUrl) && (
+    <nav class="pagination" aria-label="Pagination">
+      {prevUrl ? (
+        <a href={prevUrl} class="section-nav-link" rel="prev">
+          ← Newer
+        </a>
+      ) : (
+        <span class="pagination-placeholder" />
+      )}
+      <span class="pagination-info">
+        Page {currentPage} of {lastPage}
+      </span>
+      {nextUrl ? (
+        <a href={nextUrl} class="section-nav-link" rel="next">
+          Older →
+        </a>
+      ) : (
+        <span class="pagination-placeholder" />
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-start: var(--space-2xl);
+    padding-block-start: var(--space-md);
+    padding-inline: var(--space-md);
+    gap: var(--space-md);
+    font-size: 0.875rem;
+  }
+
+  .pagination-placeholder {
+    min-inline-size: 7rem;
+  }
+
+  .pagination-info {
+    color: var(--color-text);
+    opacity: 0.65;
+  }
+
+  @media (max-width: 36rem) {
+    .pagination {
+      flex-wrap: wrap;
+    }
+
+    .pagination-info {
+      order: -1;
+      width: 100%;
+      text-align: center;
+    }
+
+    .pagination-placeholder {
+      display: none;
+    }
+  }
+</style>

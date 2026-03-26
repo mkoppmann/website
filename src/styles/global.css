@@ -143,6 +143,18 @@
     padding: var(--space-xs) var(--space-sm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .section-nav-link:hover {
+    border-color: var(--color-link);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-nav-link:visited:hover {
+    border-color: var(--color-link-visited);
   }
 
   :where(a, button, input, select, textarea):focus-visible {
