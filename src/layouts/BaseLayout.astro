@@ -21,6 +21,8 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage =
+  metaImage ?? new URL("/android-chrome-512x512.png", Astro.site).href;
 const siteName = "@mkoppmann’s mneme";
 const feedTitle = "@mkoppmann’s mneme RSS feed";
 const documentTitle = `${title} | ${siteName}`;
@@ -60,7 +62,7 @@ const webSiteJsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:site_name" content={siteName} />
-    {metaImage && <meta property="og:image" content={metaImage} />}
+    <meta property="og:image" content={ogImage} />
     {
       metaImage && metaImageAlt && (
         <meta property="og:image:alt" content={metaImageAlt} />
@@ -73,7 +75,7 @@ const webSiteJsonLd = {
     />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {metaImage && <meta name="twitter:image" content={metaImage} />}
+    <meta name="twitter:image" content={ogImage} />
     {
       metaImage && metaImageAlt && (
         <meta name="twitter:image:alt" content={metaImageAlt} />
