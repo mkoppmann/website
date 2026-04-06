@@ -121,6 +121,7 @@
 
   p {
     line-height: var(--line-height-body);
+    text-wrap-style: pretty;
     hyphens: auto;
   }
 
