@@ -8,6 +8,7 @@ interface Props {
   caption?: string;
   sizes?: string;
   maxWidth?: number | `${number}px`;
+  borderless?: boolean;
 }
 
 const {
@@ -16,6 +17,7 @@ const {
   caption,
   sizes = "(min-width: 58rem) 38rem, (min-width: 40rem) calc(100vw - 6rem), calc(100vw - 2rem)",
   maxWidth,
+  borderless = false,
 } = Astro.props;
 
 const maxWidthPx =
@@ -41,7 +43,12 @@ const computedWidths = isVector
 <figure>
   {
     isVector ? (
-      <Image src={src} alt={alt} width={targetMaxWidth} />
+      <Image
+        src={src}
+        alt={alt}
+        width={targetMaxWidth}
+        class={borderless ? "" : "border-overlay"}
+      />
     ) : (
       <Picture
         src={src}
@@ -50,8 +57,16 @@ const computedWidths = isVector
         sizes={sizes}
         widths={computedWidths}
         width={targetMaxWidth}
+        class={borderless ? "" : "border-overlay"}
       />
     )
   }
   {caption && <figcaption set:html={caption} />}
 </figure>
+
+<style>
+  .border-overlay {
+    outline: 1px solid rgb(var(--color-border-overlay-rgb) / 10%);
+    outline-offset: -1px;
+  }
+</style>

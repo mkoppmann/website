@@ -29,6 +29,7 @@
     --color-text: #202124;
     --color-heading: #111216;
     --color-border: #d9d8d3;
+    --color-border-overlay-rgb: 0 0 0;
     --color-link: #0a5fd1;
     --color-link-visited: #6140b0;
     --color-link-hover: #074ba5;
@@ -63,6 +64,7 @@
       --color-code-bg: #1f2937;
       --color-code-text: #c9d1d9;
       --color-code-border: #30363d;
+      --color-border-overlay-rgb: 255 255 255;
 
       --color-footer-bg: #0b0e13;
       --color-footer-text: #e7ecf2;
