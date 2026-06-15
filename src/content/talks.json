@@ -1,5 +1,19 @@
 [
   {
+    "title": "Wer ESG sagt, muss auch SCI sagen",
+    "type": "Talk",
+    "venue": "sec4dev Dialogues",
+    "date": "2026-06-18",
+    "language": "German",
+    "links": [
+      {
+        "label": "Slides",
+        "href": "/media/talks/2026-06-18_Michael-Koppmann_Wer-ESG-sagt-muss-auch-SCI-sagen.pdf"
+      }
+    ],
+    "id": "2026-06-18-wer-esg-sagt-muss-auch-sci-sagen"
+  },
+  {
     "title": "Illegal States Are My Favorite Security Vulnerabilities",
     "type": "Tutorial",
     "venue": "BOB Konferenz",
