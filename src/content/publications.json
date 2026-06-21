@@ -1,5 +1,19 @@
 [
   {
+    "title": "Sind wir irgendwann falsch abgebogen?",
+    "type": "Article",
+    "venue": "OCG Journal 02/26 Nachhaltigkeit und Informatik",
+    "date": "2026-06-12",
+    "language": "German",
+    "links": [
+      {
+        "label": "Publisher page",
+        "href": "https://www.yumpu.com/de/document/view/71134865/ocg-journal-02-26-nachhaltigkeit-und-informatik-potential-von-ki-fur-okologie-und-klima"
+      }
+    ],
+    "id": "2026-06-12-sind-wir-irgendwann-falsch-abgebogen"
+  },
+  {
     "title": "Mit Java funktional programmieren",
     "type": "Article",
     "venue": "iX 2025/09",
