@@ -1,5 +1,23 @@
 [
   {
+    "title": "Illegal States Are My Favorite Security Vulnerabilities",
+    "type": "Talk",
+    "venue": "OWASP Global AppSec EU 2026",
+    "date": "2026-06-25",
+    "language": "English",
+    "links": [
+      {
+        "label": "Program page",
+        "href": "https://owaspglobalappseceuvienna20.sched.com/event/2JRDx/illegal-states-are-my-favorite-security-vulnerabilities"
+      },
+      {
+        "label": "Slides",
+        "href": "/media/talks/2026-06-25_Michael-Koppmann_Illegal-States-Are-My-Favorite-Security-Vulnerabilities.pdf"
+      }
+    ],
+    "id": "2026-06-25-illegal-states-are-my-favorite-security-vulnerabilities"
+  },
+  {
     "title": "Wer ESG sagt, muss auch SCI sagen",
     "type": "Talk",
     "venue": "sec4dev Dialogues",
