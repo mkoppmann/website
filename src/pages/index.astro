@@ -7,7 +7,7 @@ import SpeakerImage from "../assets/devsec2025_speaker.jpg";
 
 const title = "Home of Michael Koppmann";
 const description =
-  "@mkoppmann's mneme – Home of Michael Koppmann, a security consultant, writer, and speaker. Trying to make everything a tiny bit better.";
+  "Michael Koppmann is a security consultant, writer, and speaker working on systems and patterns for secure, resilient, and sustainable software.";
 
 const selectedTalk = (await getCollection("talks")).find(
   (talk) =>
@@ -107,23 +107,21 @@ const profilePageJsonLd = {
     <section id="about-me">
       <h2>About me</h2>
       <p>
-        I am Michael Koppmann, an Information Security Consultant at <a
+        I’m Michael Koppmann, an information security consultant at <a
           href="https://www.sba-research.org">SBA Research</a
-        >. My mission is to make the world a tiny bit better by promoting
-        systems and patterns that are inherently resilient and less error-prone.
-        I hold a master’s degree in “Software Engineering and Internet
+        >. I hold a master’s degree in “Software Engineering and Internet
         Computing” from <a href="https://www.tuwien.at/">TU Wien</a>.
       </p>
       <Figure
         src={SpeakerImage}
         alt="Me speaking at Heise devSec 2025. I’m holding a microphone and looking at the audience."
-        caption="© dpunkt.verlag"
+        caption="Speaking at heise devSec() 2025 · © dpunkt.verlag"
       />
       <p>
-        My core interests include secure and sustainable software engineering,
-        functional programming, privacy-enhancing technologies, and open source.
-        Beyond code, I care deeply about environmental protection, health and
-        fitness, human rights, and continuous self-improvement.
+        I’m interested in functional programming, privacy-enhancing
+        technologies, and open source. Beyond code, I care deeply about
+        environmental protection, health and fitness, human rights, and
+        continuous self-improvement.
       </p>
     </section>
     <section id="selected-work">
@@ -184,7 +182,7 @@ const profilePageJsonLd = {
       <ul>
         <li>
           Chapter leader of <a href="https://owasp.org/www-chapter-vienna/"
-            >OWASP Vienna Chapter</a
+            >OWASP Vienna</a
           >
         </li>
         <li>
@@ -230,9 +228,6 @@ const profilePageJsonLd = {
         My Signal “safety numbers”: <code
           >88630 72114 80083 44420 49604 09486</code
         >
-      </p>
-      <p>
-        The <a href="/contact/">contact</a> page lists ways to reach me.
       </p>
     </section>
   </main>
