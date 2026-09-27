@@ -221,7 +221,7 @@ const profilePageJsonLd = {
     <section id="for-verification">
       <h2>For verification</h2>
       <p>You can verify my identity with these services:</p>
-      <ul>
+      <ul class="verification-sites">
         <li>
           <a rel="me" href="https://github.com/mkoppmann">GitHub</a>
         </li>
@@ -241,16 +241,27 @@ const profilePageJsonLd = {
           >
         </li>
       </ul>
-      <p>
-        My <abbr title="Pretty Good Privacy">PGP</abbr> fingerprint: <code
-          >E9B3 3326 8618 0E5E 498C 6C97 63CA B0C7 75EB 9C80</code
-        >
-      </p>
-      <p>
-        My Signal “safety numbers”: <code
-          >88630 72114 80083 44420 49604 09486</code
-        >
-      </p>
+      <dl class="verification-details">
+        <div>
+          <dt><abbr title="Pretty Good Privacy">PGP</abbr> fingerprint</dt>
+          <dd>
+            <code
+              ><span>E9B3 3326 8618 0E5E 498C</span>{" "}<span
+                >6C97 63CA B0C7 75EB 9C80</span
+              ></code
+            >
+          </dd>
+        </div>
+        <div>
+          <dt>Signal safety numbers</dt>
+          <dd>
+            <code
+              ><span>88630 72114 80083</span>{" "}<span>44420 49604 09486</span
+              ></code
+            >
+          </dd>
+        </div>
+      </dl>
     </section>
   </main>
 </BaseLayout>
@@ -355,5 +366,76 @@ const profilePageJsonLd = {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+  }
+
+  #for-verification {
+    container: verification / inline-size;
+  }
+
+  .verification-sites {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-md);
+    margin: 0;
+    padding-inline-start: var(--space-lg);
+    list-style: disc;
+  }
+
+  .verification-sites li {
+    margin: 0;
+    padding-block: var(--space-2xs);
+  }
+
+  .verification-sites a {
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+  }
+
+  @container verification (max-width: 16rem) {
+    .verification-sites {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .verification-details {
+    display: grid;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0 0;
+  }
+
+  .verification-details div,
+  .verification-details dd {
+    min-inline-size: 0;
+  }
+
+  .verification-details dt {
+    color: var(--color-caption);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .verification-details dd {
+    margin: var(--space-2xs) 0 0;
+  }
+
+  .verification-details code {
+    display: block;
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--color-code-bg);
+    border-color: var(--color-code-border);
+    color: var(--color-code-text);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    white-space: normal;
+  }
+
+  .verification-details code span {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 16rem) {
+    .verification-details code span {
+      white-space: normal;
+    }
   }
 </style>
