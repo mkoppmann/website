@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import JsonLd from "../components/JsonLd.astro";
-import StructuredEntriesList from "../components/StructuredEntriesList.astro";
 import { getCollection } from "astro:content";
 import Figure from "../components/Figure.astro";
 import SpeakerImage from "../assets/devsec2025_speaker.jpg";
@@ -10,16 +9,48 @@ const title = "Home of Michael Koppmann";
 const description =
   "@mkoppmann's mneme – Home of Michael Koppmann, a security consultant, writer, and speaker. Trying to make everything a tiny bit better.";
 
-const allPublications = await getCollection("publications");
-const latestFourPublications = allPublications
-  .sort((left, right) => right.data.date.localeCompare(left.data.date))
-  .slice(0, 4)
-  .map((pub) => ({ ...pub.data, href: `/publications/${pub.id}/` }));
-const allTalks = await getCollection("talks");
-const latestFourTalks = allTalks
-  .sort((left, right) => right.data.date.localeCompare(left.data.date))
-  .slice(0, 4)
-  .map((talk) => ({ ...talk.data, href: `/talks/${talk.id}/` }));
+const selectedTalk = (await getCollection("talks")).find(
+  (talk) =>
+    talk.id ===
+    "2026-06-25-illegal-states-are-my-favorite-security-vulnerabilities",
+);
+const selectedPublication = (await getCollection("publications")).find(
+  (publication) =>
+    publication.id === "2025-08-22-mit-java-funktional-programmieren",
+);
+const selectedPost = (await getCollection("blog")).find(
+  (post) => post.id === "the-era-of-green-software",
+);
+
+if (!selectedTalk || !selectedPublication || !selectedPost) {
+  throw new Error(
+    "A selected work entry is missing from the content collections.",
+  );
+}
+
+const selectedWork = [
+  {
+    label: `Talk · ${selectedTalk.data.venue}`,
+    title: selectedTalk.data.title,
+    description:
+      "In this talk, I look at how types can help prevent security mistakes.",
+    href: `/talks/${selectedTalk.id}/`,
+  },
+  {
+    label: `Article · ${selectedPublication.data.venue}`,
+    title: selectedPublication.data.title,
+    description:
+      "I explore functional programming techniques for everyday Java development.",
+    href: `/publications/${selectedPublication.id}/`,
+  },
+  {
+    label: "Talk transcript · TEDxTUWien",
+    title: selectedPost.data.title,
+    description:
+      "The transcript of my talk about the environmental cost of modern software.",
+    href: `/blog/${selectedPost.id}/`,
+  },
+];
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 const profilePageJsonLd = {
@@ -86,6 +117,33 @@ const profilePageJsonLd = {
         fitness, human rights, and continuous self-improvement.
       </p>
     </section>
+    <section id="selected-work">
+      <h2>Selected work</h2>
+      <p>A few things I have written or spoken about:</p>
+      <ol class="selected-list">
+        {
+          selectedWork.map((item) => (
+            <li>
+              <p class="selected-meta">{item.label}</p>
+              <h3>
+                <a href={item.href}>{item.title}</a>
+              </h3>
+              <p>{item.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="more-work">
+        <h3>More work</h3>
+        <div class="archive-links">
+          <a class="section-nav-link" href="/blog/">All blog posts →</a>
+          <a class="section-nav-link" href="/publications/"
+            >All publications →</a
+          >
+          <a class="section-nav-link" href="/talks/">All talks →</a>
+        </div>
+      </div>
+    </section>
     <section id="certifications">
       <h2>Certifications</h2>
       <ul>
@@ -131,18 +189,6 @@ const profilePageJsonLd = {
         </li>
       </ul>
     </section>
-    <section id="recent-publications-and-talks">
-      <h2>Recent publications and talks</h2>
-      <p>
-        Here are my recent publications and public talks. Visit the <a
-          href="/publications/">publications</a
-        > and <a href="/talks/">talks</a> pages for more.
-      </p>
-      <h3>Publications</h3>
-      <StructuredEntriesList items={latestFourPublications} />
-      <h3>Talks</h3>
-      <StructuredEntriesList items={latestFourTalks} />
-    </section>
     <section id="for-verification">
       <h2>For verification</h2>
       <p>You can verify my identity with these services:</p>
@@ -182,3 +228,51 @@ const profilePageJsonLd = {
     </section>
   </main>
 </BaseLayout>
+
+<style>
+  .selected-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .selected-list li {
+    margin: 0;
+    padding-block: var(--space-lg);
+  }
+
+  .selected-list li + li {
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .selected-meta {
+    margin: 0;
+    color: var(--color-caption);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .selected-list h3 {
+    margin-block: var(--space-xs);
+    font-size: 1.1rem;
+  }
+
+  .selected-list li > p:last-child {
+    margin: 0;
+  }
+
+  .more-work {
+    border-block-start: 1px solid var(--color-border);
+    padding-block-start: var(--space-md);
+  }
+
+  .more-work h3 {
+    margin-block-end: var(--space-sm);
+  }
+
+  .archive-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+</style>
