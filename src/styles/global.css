@@ -46,6 +46,8 @@
     --color-footer-text: #f5f7fa;
     --color-footer-link: #9de3d0;
     --color-footer-link-visited: #cec2ef;
+
+    --color-pixel-tree: #659b7f;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -74,6 +76,8 @@
       --color-footer-text: #e7ecf2;
       --color-footer-link: #9de3d0;
       --color-footer-link-visited: #c9b7f0;
+
+      --color-pixel-tree: #87bba0;
     }
   }
 }
