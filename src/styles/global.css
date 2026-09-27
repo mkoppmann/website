@@ -27,49 +27,49 @@
     --color-page-bg: #f7f7f5;
     --color-surface: #ffffff;
     --color-text: #202124;
-    --color-heading: #111216;
-    --color-border: #d9d8d3;
+    --color-heading: #142c27;
+    --color-border: #d4ddd5;
     --color-border-overlay-rgb: 0 0 0;
-    --color-link: #0a5fd1;
-    --color-link-visited: #6140b0;
-    --color-link-hover: #074ba5;
-    --color-focus: #005fcc;
-    --color-caption: #616163;
+    --color-link: #086454;
+    --color-link-visited: #594d78;
+    --color-link-hover: #064b40;
+    --color-focus: #087765;
+    --color-caption: #596761;
 
     --color-code-bg: #edf0f2;
     --color-code-text: #24292e;
     --color-code-border: #d0d7de;
 
-    --color-footer-bg: #15171a;
+    --color-footer-bg: #142c27;
     --color-footer-text: #f5f7fa;
-    --color-footer-link: #6eb6ff;
-    --color-footer-link-visited: #9e93db;
+    --color-footer-link: #9de3d0;
+    --color-footer-link-visited: #cec2ef;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
       --shadow-color: 0 0 0;
 
-      --color-page-bg: #0e1116;
-      --color-surface: #1a212b;
+      --color-page-bg: #101b19;
+      --color-surface: #182925;
       --color-text: #e7ecf2;
       --color-heading: #f8fafc;
-      --color-border: #2d3745;
-      --color-link: #7ab8ff;
-      --color-link-visited: #bcadff;
-      --color-link-hover: #a6d1ff;
-      --color-focus: #91c7ff;
-      --color-caption: #a6aab0;
+      --color-border: #375047;
+      --color-link: #93dec7;
+      --color-link-visited: #c9b7f0;
+      --color-link-hover: #b8eedc;
+      --color-focus: #9cebd3;
+      --color-caption: #afc2b7;
 
       --color-code-bg: #1f2937;
       --color-code-text: #c9d1d9;
       --color-code-border: #30363d;
       --color-border-overlay-rgb: 255 255 255;
 
-      --color-footer-bg: #0b0e13;
+      --color-footer-bg: #0a1512;
       --color-footer-text: #e7ecf2;
-      --color-footer-link: #7ab8ff;
-      --color-footer-link-visited: #bcadff;
+      --color-footer-link: #9de3d0;
+      --color-footer-link-visited: #c9b7f0;
     }
   }
 }
