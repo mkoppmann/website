@@ -31,6 +31,7 @@ if (!selectedTalk || !selectedPublication || !selectedPost) {
 const selectedWork = [
   {
     label: `Talk · ${selectedTalk.data.venue}`,
+    language: selectedTalk.data.language,
     title: selectedTalk.data.title,
     description:
       "In this talk, I look at how types can help prevent security mistakes.",
@@ -38,6 +39,7 @@ const selectedWork = [
   },
   {
     label: `Article · ${selectedPublication.data.venue}`,
+    language: selectedPublication.data.language,
     title: selectedPublication.data.title,
     description:
       "I explore functional programming techniques for everyday Java development.",
@@ -45,6 +47,7 @@ const selectedWork = [
   },
   {
     label: "Talk transcript · TEDxTUWien",
+    language: "English",
     title: selectedPost.data.title,
     description:
       "The transcript of my talk about the environmental cost of modern software.",
@@ -131,7 +134,9 @@ const profilePageJsonLd = {
         {
           selectedWork.map((item) => (
             <li>
-              <p class="selected-meta">{item.label}</p>
+              <p class="selected-meta">
+                {item.label} · {item.language}
+              </p>
               <h3>
                 <a href={item.href}>{item.title}</a>
               </h3>
