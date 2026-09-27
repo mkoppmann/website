@@ -35,15 +35,77 @@ const siteName = "@mkoppmann’s mneme";
       </svg>
     </a>
   </div>
+  <svg
+    class="nav-vine"
+    viewBox="0 0 544 40"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <g id="nav-vine-leaf">
+        <path d="M0 7h2V5h2V3h2V1h6v2h-2v2H8v2H5v2H2V8H0z"></path>
+      </g>
+    </defs>
+    <path
+      class="vine-stem"
+      d="M0 20C39 20 52 17 78 17S116 23 145 23S184 17 213 17S249 24 277 23S316 17 344 17S381 23 409 23S448 17 477 17S517 21 544 20"
+    ></path>
+    <path
+      class="leaf-stems"
+      d="M57 17v-4m75 10v4m65-10v-4m69 10v4m64-10v-4m68 10v4m65-10v-4m48 6v4"
+    ></path>
+    <g class="vine-leaves">
+      <use href="#nav-vine-leaf" x="50" y="4"></use>
+      <use href="#nav-vine-leaf" transform="translate(126 36) scale(1 -1)"
+      ></use>
+      <use href="#nav-vine-leaf" x="190" y="4"></use>
+      <use href="#nav-vine-leaf" transform="translate(260 36) scale(1 -1)"
+      ></use>
+      <use href="#nav-vine-leaf" x="323" y="4"></use>
+      <use href="#nav-vine-leaf" transform="translate(392 36) scale(1 -1)"
+      ></use>
+      <use href="#nav-vine-leaf" x="456" y="4"></use>
+      <use href="#nav-vine-leaf" transform="translate(504 36) scale(1 -1)"
+      ></use>
+    </g>
+  </svg>
 
   <style>
     nav {
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding: var(--space-lg) 0;
+      padding: var(--space-lg) 0 calc(var(--space-lg) + var(--space-2xs));
       border-bottom: 1px solid var(--color-border);
-      margin-bottom: var(--space-md);
+      margin-bottom: calc(var(--space-md) + var(--space-2xs));
+    }
+
+    .nav-vine {
+      position: absolute;
+      inset-inline-start: 0;
+      bottom: -20px;
+      display: block;
+      width: 100%;
+      height: 40px;
+      overflow: visible;
+      color: var(--color-pixel-tree);
+      pointer-events: none;
+    }
+
+    .vine-stem,
+    .leaf-stems {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .vine-leaves {
+      fill: currentColor;
+      shape-rendering: crispEdges;
     }
 
     .nav-brand {
@@ -100,7 +162,7 @@ const siteName = "@mkoppmann’s mneme";
       nav {
         flex-direction: column;
         align-items: flex-start;
-        padding: var(--space-md) 0;
+        padding: var(--space-md) 0 calc(var(--space-md) + var(--space-2xs));
         gap: var(--space-sm);
       }
 
@@ -115,7 +177,7 @@ const siteName = "@mkoppmann’s mneme";
 
     @media (max-width: 320px) {
       nav {
-        padding: var(--space-sm) 0;
+        padding: var(--space-sm) 0 calc(var(--space-sm) + var(--space-2xs));
         gap: var(--space-xs);
       }
 
