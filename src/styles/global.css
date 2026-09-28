@@ -64,6 +64,28 @@
 }
 
 @layer base {
+  .theme-face-asleep {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-face-awake {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-face-asleep {
+    display: initial;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-face-awake {
+      display: none;
+    }
+
+    :root:not([data-theme="light"]) .theme-face-asleep {
+      display: initial;
+    }
+  }
+
   html {
     min-block-size: 100%;
     font-family: var(--font-sans);

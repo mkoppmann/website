@@ -96,23 +96,52 @@ const profilePageJsonLd = {
     <h1>Michael Koppmann</h1>
     <p class="subtitle">Security consultant, writer, and speaker</p>
     <div class="home-intro">
-      <svg
-        class="intro-sprout"
-        width="32"
-        height="24"
-        viewBox="0 0 16 12"
-        shape-rendering="crispEdges"
-        aria-hidden="true"
-        focusable="false"
+      <button
+        class="intro-sprout-button"
+        type="button"
+        aria-label="Disturb the little sprout"
+        data-intro-sprout
       >
-        <path
-          fill="currentColor"
-          d="M8 5h2v7H8zM3 5h5v1H3zM1 6h7v1H1zM0 7h8v1H0zM2 8h6v1H2zM4 9h4v1H4zM11 1h3v1h-3zM9 2h6v1H9zM9 3h7v1H9zM9 4h6v1H9zM9 5h4v1H9z"
-        ></path>
-        <path
-          fill="var(--color-intro-bg)"
-          d="M10 3h1v1h-1zM13 3h1v1h-1zM11 4h2v1h-2z"></path>
-      </svg>
+        <svg
+          class="intro-sprout"
+          width="32"
+          height="24"
+          viewBox="0 0 16 12"
+          shape-rendering="crispEdges"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g class="theme-face-asleep sprout-head-asleep">
+            <path fill="currentColor" d="M8 5h2v4H8z"></path>
+            <path
+              fill="currentColor"
+              d="M10 2h4v1h-4zM10 3h5v1h-5zM9 4h7v1H9zM9 5h7v1H9zM10 6h6v1h-6z"
+            ></path>
+            <path
+              class="sprout-closed-eyes"
+              fill="var(--color-intro-bg)"
+              d="M10 5h2v1h-2zM13 5h2v1h-2z"></path>
+            <path
+              class="sprout-open-eyes"
+              fill="var(--color-intro-bg)"
+              d="M10 4h1v1h-1zM13 4h1v1h-1z"></path>
+            <path fill="var(--color-intro-bg)" d="M11 6h2v1h-2z"></path>
+          </g>
+          <path
+            fill="currentColor"
+            d="M8 5h2v7H8zM3 5h5v1H3zM1 6h7v1H1zM0 7h8v1H0zM2 8h6v1H2zM4 9h4v1H4z"
+          ></path>
+          <g class="theme-face-awake sprout-head-awake">
+            <path
+              fill="currentColor"
+              d="M11 1h3v1h-3zM9 2h6v1H9zM9 3h7v1H9zM9 4h6v1H9zM9 5h4v1H9z"
+            ></path>
+            <path
+              fill="var(--color-intro-bg)"
+              d="M10 3h1v1h-1zM13 3h1v1h-1zM11 4h2v1h-2z"></path>
+          </g>
+        </svg>
+      </button>
       <p class="home-intro-lead">Secure by design. Sustainable in practice.</p>
       <p>
         I work on systems and patterns that make software more resilient and
@@ -286,12 +315,132 @@ const profilePageJsonLd = {
     margin-block-end: 0;
   }
 
-  .intro-sprout {
+  .intro-sprout-button {
     position: absolute;
-    inset-inline-end: 0;
-    inset-block-start: -24px;
-    display: block;
+    inset-inline-end: -6px;
+    inset-block-start: -34px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
     color: var(--color-pixel-tree);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .intro-sprout {
+    display: block;
+    overflow: visible;
+  }
+
+  .sprout-head-awake,
+  .sprout-head-asleep {
+    transform-box: view-box;
+    transform-origin: 9px 5px;
+  }
+
+  .sprout-open-eyes {
+    opacity: 0;
+  }
+
+  .intro-sprout-button.is-startled .sprout-head-awake {
+    animation: sprout-startle 540ms steps(1, end);
+  }
+
+  .intro-sprout-button.is-waking .sprout-head-asleep {
+    animation: sprout-wake 1500ms ease-in-out;
+  }
+
+  .intro-sprout-button.is-waking .sprout-closed-eyes {
+    animation: sprout-close-eyes 1500ms linear;
+  }
+
+  .intro-sprout-button.is-waking .sprout-open-eyes {
+    animation: sprout-open-eyes 1500ms linear;
+  }
+
+  @keyframes sprout-startle {
+    0% {
+      transform: none;
+    }
+    20% {
+      transform: translateY(1px);
+    }
+    40% {
+      transform: translateX(-1px);
+    }
+    60% {
+      transform: translateX(1px);
+    }
+    80%,
+    100% {
+      transform: none;
+    }
+  }
+
+  @keyframes sprout-wake {
+    0% {
+      transform: none;
+    }
+    17.6%,
+    76% {
+      transform: translateY(-1px) rotate(-8deg);
+    }
+    87.2% {
+      transform: rotate(3deg);
+    }
+    100% {
+      transform: none;
+    }
+  }
+
+  @keyframes sprout-close-eyes {
+    0%,
+    23.9% {
+      opacity: 1;
+    }
+    24%,
+    39.9% {
+      opacity: 0;
+    }
+    40%,
+    46.3% {
+      opacity: 1;
+    }
+    46.4%,
+    80.7% {
+      opacity: 0;
+    }
+    80.8%,
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes sprout-open-eyes {
+    0%,
+    23.9% {
+      opacity: 0;
+    }
+    24%,
+    39.9% {
+      opacity: 1;
+    }
+    40%,
+    46.3% {
+      opacity: 0;
+    }
+    46.4%,
+    80.7% {
+      opacity: 1;
+    }
+    80.8%,
+    100% {
+      opacity: 0;
+    }
   }
 
   .home-intro-lead {
@@ -317,8 +466,8 @@ const profilePageJsonLd = {
       border-radius: 0;
     }
 
-    .intro-sprout {
-      inset-inline-end: var(--space-xs);
+    .intro-sprout-button {
+      inset-inline-end: calc(var(--space-xs) - 6px);
     }
   }
 
@@ -439,3 +588,71 @@ const profilePageJsonLd = {
     }
   }
 </style>
+
+<script>
+  const sproutButton = document.querySelector("[data-intro-sprout]");
+  const sleepingHead = sproutButton?.querySelector(".sprout-head-asleep");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (sproutButton && sleepingHead) {
+    let resetTimer: number | undefined;
+    let idleTimer: number | undefined;
+    let isInView = false;
+
+    const playAnimation = () => {
+      if (reducedMotion.matches) return;
+
+      const isAsleep = getComputedStyle(sleepingHead).display !== "none";
+      const motion = isAsleep ? "is-waking" : "is-startled";
+      const isRestart = sproutButton.classList.contains(motion);
+
+      window.clearTimeout(resetTimer);
+      sproutButton.classList.remove("is-waking", "is-startled");
+      // Only a repeat click during the animation needs a layout read to restart it.
+      if (isRestart) sproutButton.getBoundingClientRect();
+      sproutButton.classList.add(motion);
+
+      resetTimer = window.setTimeout(
+        () => {
+          sproutButton.classList.remove(motion);
+        },
+        isAsleep ? 1500 : 540,
+      );
+    };
+
+    const scheduleIdleAnimation = (delay: number) => {
+      window.clearTimeout(idleTimer);
+      if (!isInView || document.hidden || reducedMotion.matches) return;
+
+      idleTimer = window.setTimeout(() => {
+        playAnimation();
+        scheduleIdleAnimation(30_000 + Math.random() * 30_000);
+      }, delay);
+    };
+
+    sproutButton.addEventListener("click", () => {
+      playAnimation();
+      scheduleIdleAnimation(30_000 + Math.random() * 30_000);
+    });
+
+    new IntersectionObserver(
+      ([entry]) => {
+        isInView = entry.intersectionRatio >= 0.5;
+        scheduleIdleAnimation(12_000);
+      },
+      { threshold: 0.5 },
+    ).observe(sproutButton);
+
+    document.addEventListener("visibilitychange", () => {
+      scheduleIdleAnimation(12_000);
+    });
+
+    reducedMotion.addEventListener("change", () => {
+      if (reducedMotion.matches) {
+        window.clearTimeout(resetTimer);
+        sproutButton.classList.remove("is-waking", "is-startled");
+      }
+      scheduleIdleAnimation(12_000);
+    });
+  }
+</script>
