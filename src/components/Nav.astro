@@ -21,19 +21,66 @@ const siteName = "@mkoppmann’s mneme";
     <a href="/contact/" class:list={[{ active: currentPath === "/contact/" }]}
       >Contact</a
     >
-    <a
-      href="/search/"
-      class="nav-search"
-      class:list={[{ active: currentPath === "/search/" }]}
-      aria-label="Search"
-      title="Search"
-    >
-      <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
-        <path
-          d="M11 3a8 8 0 1 0 4.9 14.33l4.88 4.88a1 1 0 0 0 1.42-1.42l-4.88-4.88A8 8 0 0 0 11 3zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"
-          fill="currentColor"></path>
-      </svg>
-    </a>
+    <div class="nav-actions">
+      <a
+        href="/search/"
+        class="nav-search"
+        class:list={[{ active: currentPath === "/search/" }]}
+        aria-label="Search"
+        title="Search"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M11 3a8 8 0 1 0 4.9 14.33l4.88 4.88a1 1 0 0 0 1.42-1.42l-4.88-4.88A8 8 0 0 0 11 3zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"
+            fill="currentColor"></path>
+        </svg>
+      </a>
+      <button
+        type="button"
+        class="nav-theme"
+        data-theme-toggle
+        aria-label="Theme: system. Switch to light."
+        title="Theme: system. Switch to light."
+      >
+        <svg
+          class="theme-icon theme-icon-system"
+          viewBox="0 0 17 17"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M2 2h13v1H2zM1 3h1v9H1zM15 3h1v9h-1zM8 4h1v7H8zM2 12h13v1H2zM8 13h1v2H8zM5 15h7v1H5z"
+          ></path>
+          <path
+            fill="var(--color-theme-sun)"
+            d="M5 5h1v1H5zM4 6h3v1H4zM3 7h5v1H3zM4 8h3v1H4zM5 9h1v1H5z"></path>
+          <path
+            fill="var(--color-theme-moon)"
+            d="M11 5h1v1h-1zM10 6h2v1h-2zM9 7h5v1H9zM10 8h3v1h-3zM11 9h1v1h-1z"
+          ></path>
+        </svg>
+        <svg
+          class="theme-icon theme-icon-light"
+          viewBox="0 0 17 17"
+          aria-hidden="true"
+        >
+          <path
+            fill="var(--color-theme-sun)"
+            d="M8 0h1v3H8zM2 2h1v1H2zM14 2h1v1h-1zM3 3h1v1H3zM13 3h1v1h-1zM7 4h3v1H7zM5 5h7v2H5zM4 7h9v3H4zM0 8h3v1H0zM14 8h3v1h-3zM5 10h7v2H5zM7 12h3v1H7zM3 13h1v1H3zM13 13h1v1h-1zM2 14h1v1H2zM8 14h1v3H8zM14 14h1v1h-1z"
+          ></path>
+        </svg>
+        <svg
+          class="theme-icon theme-icon-dark"
+          viewBox="0 0 17 17"
+          aria-hidden="true"
+        >
+          <path
+            fill="var(--color-theme-moon)"
+            d="M8 2h1v1H8zM5 3h6v1H5zM4 4h4v1H4zM3 5h4v3H3zM2 8h4v1H2zM3 9h4v3H3zM4 12h4v1H4zM5 13h6v1H5zM8 14h1v1H8z"
+          ></path>
+        </svg>
+      </button>
+    </div>
   </div>
   <svg
     class="nav-vine"
@@ -75,8 +122,11 @@ const siteName = "@mkoppmann’s mneme";
     nav {
       position: relative;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
+      column-gap: var(--space-xl);
+      row-gap: var(--space-md);
       padding: var(--space-lg) 0 calc(var(--space-lg) + var(--space-2xs));
       border-bottom: 1px solid var(--color-border);
       margin-bottom: calc(var(--space-md) + var(--space-2xs));
@@ -114,11 +164,21 @@ const siteName = "@mkoppmann’s mneme";
       letter-spacing: -0.01em;
       text-decoration: none;
       color: var(--color-heading);
+      white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
-      gap: var(--space-lg);
+      flex: none;
+      flex-wrap: wrap;
+      max-width: 100%;
+      gap: var(--space-xs) var(--space-md);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
     }
 
     :where(.nav-links a) {
@@ -146,16 +206,52 @@ const siteName = "@mkoppmann’s mneme";
       background-size: 0 2px;
     }
 
-    .nav-search {
+    .nav-search,
+    .nav-theme {
       padding-inline: var(--space-2xs);
     }
 
     .nav-search svg {
       display: block;
-      width: 0.9em;
-      height: 0.9em;
-      transform: translateY(0.08em);
+      width: 17px;
+      height: 17px;
       pointer-events: none;
+    }
+
+    .nav-theme {
+      align-self: flex-start;
+      padding-block: 0 var(--space-2xs);
+      border: 0;
+      background: none;
+      color: var(--color-link);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .nav-theme:hover {
+      color: var(--color-link-hover);
+    }
+
+    .theme-icon {
+      display: none;
+      width: 17px;
+      height: 17px;
+      shape-rendering: crispEdges;
+      pointer-events: none;
+    }
+
+    .theme-icon-system {
+      display: block;
+    }
+
+    :global(html[data-theme="light"]) .theme-icon-system,
+    :global(html[data-theme="dark"]) .theme-icon-system {
+      display: none;
+    }
+
+    :global(html[data-theme="light"]) .theme-icon-light,
+    :global(html[data-theme="dark"]) .theme-icon-dark {
+      display: block;
     }
 
     @media (max-width: 480px) {
@@ -163,27 +259,16 @@ const siteName = "@mkoppmann’s mneme";
         flex-direction: column;
         align-items: flex-start;
         padding: var(--space-md) 0 calc(var(--space-md) + var(--space-2xs));
-        gap: var(--space-sm);
-      }
-
-      .nav-brand {
-        margin-bottom: var(--space-2xs);
-      }
-
-      .nav-links {
-        gap: var(--space-md);
       }
     }
 
     @media (max-width: 320px) {
       nav {
         padding: var(--space-sm) 0 calc(var(--space-sm) + var(--space-2xs));
-        gap: var(--space-xs);
       }
 
       .nav-brand {
         font-size: 0.75rem;
-        margin-bottom: var(--space-2xs);
       }
 
       .nav-links {
