@@ -5,22 +5,25 @@ const siteName = "@mkoppmann’s mneme";
 
 <nav>
   <a href="/" class="nav-brand">{siteName}</a>
-  <div class="nav-links">
-    <a href="/" class:list={[{ active: currentPath === "/" }]}>Home</a>
-    <a href="/blog/" class:list={[{ active: currentPath.startsWith("/blog/") }]}
-      >Blog</a
-    >
-    <a
-      href="/publications/"
-      class:list={[{ active: currentPath === "/publications/" }]}
-      >Publications</a
-    >
-    <a href="/talks/" class:list={[{ active: currentPath === "/talks/" }]}
-      >Talks</a
-    >
-    <a href="/contact/" class:list={[{ active: currentPath === "/contact/" }]}
-      >Contact</a
-    >
+  <div class="nav-menu">
+    <div class="nav-links">
+      <a href="/" class:list={[{ active: currentPath === "/" }]}>Home</a>
+      <a
+        href="/blog/"
+        class:list={[{ active: currentPath.startsWith("/blog/") }]}>Blog</a
+      >
+      <a
+        href="/publications/"
+        class:list={[{ active: currentPath === "/publications/" }]}
+        >Publications</a
+      >
+      <a href="/talks/" class:list={[{ active: currentPath === "/talks/" }]}
+        >Talks</a
+      >
+      <a href="/contact/" class:list={[{ active: currentPath === "/contact/" }]}
+        >Contact</a
+      >
+    </div>
     <div class="nav-actions">
       <a
         href="/search/"
@@ -260,6 +263,7 @@ const siteName = "@mkoppmann’s mneme";
       white-space: nowrap;
     }
 
+    .nav-menu,
     .nav-links {
       display: flex;
       flex: none;
@@ -268,13 +272,17 @@ const siteName = "@mkoppmann’s mneme";
       gap: var(--space-xs) var(--space-md);
     }
 
+    .nav-menu {
+      align-items: flex-start;
+    }
+
     .nav-actions {
       display: flex;
       align-items: center;
       gap: var(--space-2xs);
     }
 
-    :where(.nav-links a) {
+    :where(.nav-links a, .nav-search) {
       display: inline-block;
       font-size: 0.8125rem;
       text-decoration: none;
@@ -286,16 +294,19 @@ const siteName = "@mkoppmann’s mneme";
       transition: background-size 180ms ease;
     }
 
-    :where(.nav-links a:hover),
-    :where(.nav-links a.active) {
+    :where(.nav-links a:hover, .nav-search:hover),
+    :where(.nav-links a.active, .nav-search.active) {
       background-size: 100% 2px;
     }
 
-    :where(.nav-links a:focus-visible) {
+    :where(.nav-links a:focus-visible, .nav-search:focus-visible) {
       background-size: 100% 2px;
     }
 
-    :where(.nav-links a:focus:not(:focus-visible)) {
+    :where(
+      .nav-links a:focus:not(:focus-visible),
+      .nav-search:focus:not(:focus-visible)
+    ) {
       background-size: 0 2px;
     }
 
@@ -349,9 +360,48 @@ const siteName = "@mkoppmann’s mneme";
 
     @media (max-width: 480px) {
       nav {
-        flex-direction: column;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+          "brand actions"
+          "links links";
+        align-items: center;
+        gap: var(--space-xs) var(--space-2xs);
         padding: var(--space-md) 0 calc(var(--space-md) + var(--space-2xs));
+      }
+
+      .nav-brand {
+        grid-area: brand;
+        display: flex;
+        align-items: center;
+        min-width: 44px;
+        min-height: 44px;
+      }
+
+      .nav-menu {
+        display: contents;
+      }
+
+      .nav-links {
+        grid-area: links;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: var(--space-xs);
+      }
+
+      .nav-actions {
+        grid-area: actions;
+      }
+
+      .nav-links a,
+      .nav-search,
+      .nav-theme {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0;
       }
     }
 
@@ -365,7 +415,7 @@ const siteName = "@mkoppmann’s mneme";
       }
 
       .nav-links {
-        gap: var(--space-sm);
+        gap: var(--space-2xs);
       }
 
       .nav-links a {
