@@ -1,5 +1,19 @@
 [
   {
+    "title": "Why Passing a Penetration Test Doesn’t Mean You’re Secure",
+    "type": "Podcast",
+    "venue": "Cyber Answered",
+    "date": "2026-10-05",
+    "language": "English",
+    "links": [
+      {
+        "label": "Video",
+        "href": "https://www.youtube.com/watch?v=g4oWVRyiTHw"
+      }
+    ],
+    "id": "2026-10-05-why-passing-a-penetration-test-doesnt-mean-youre-secure"
+  },
+  {
     "title": "Illegal States Are My Favorite Security Vulnerabilities",
     "type": "Talk",
     "venue": "OWASP Global AppSec EU 2026",
