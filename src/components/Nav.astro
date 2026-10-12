@@ -146,6 +146,15 @@ const siteName = "@mkoppmann’s mneme";
         <use href="#nav-vine-leaf" transform="translate(510 36) scale(1 -1)"
         ></use>
       </g>
+      <g class="vine-leaf-9">
+        <path d="M578 13h1v7h-1z"></path>
+        <use href="#nav-vine-leaf" x="577" y="4"></use>
+      </g>
+      <g class="vine-leaf-10">
+        <path d="M644 18h1v9h-1z"></path>
+        <use href="#nav-vine-leaf" transform="translate(643 36) scale(1 -1)"
+        ></use>
+      </g>
     </g>
   </svg>
 
@@ -226,6 +235,18 @@ const siteName = "@mkoppmann’s mneme";
 
     @container nav-vine (min-width: 524px) {
       .vine-leaf-8 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 591px) {
+      .vine-leaf-9 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 657px) {
+      .vine-leaf-10 {
         display: inline;
       }
     }
