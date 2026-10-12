@@ -84,37 +84,68 @@ const siteName = "@mkoppmann’s mneme";
   </div>
   <svg
     class="nav-vine"
-    viewBox="0 0 544 40"
-    preserveAspectRatio="none"
+    height="40"
+    shape-rendering="crispEdges"
     aria-hidden="true"
     focusable="false"
   >
     <defs>
-      <g id="nav-vine-leaf">
-        <path d="M0 7h2V5h2V3h2V1h6v2h-2v2H8v2H5v2H2V8H0z"></path>
-      </g>
+      <path
+        id="nav-vine-leaf"
+        fill-rule="evenodd"
+        d="M13 0h1v2h-1v3h-1v1h-1v1H9v1H7v1H5v1H2v1H0V9h1V5h1V4h2V3h2V2h4V1h3zM2 8h1v1H2zM3 7h1v1H3zM4 6h1v1H4zM5 5h1v1H5zM6 4h2v1H6zM8 3h2v1H8zM10 2h1v1h-1z"
+      ></path>
+      <pattern
+        id="nav-vine-pattern"
+        width="544"
+        height="40"
+        patternUnits="userSpaceOnUse"
+        fill="currentColor"
+      >
+        <path
+          class="vine-stem"
+          d="M0 20H24V19H40V18H52V17H98V18H110V19H118V20H124V21H128V22H132V23H160V22H174V21H184V20H188V19H192V18H196V17H230V18H242V19H250V20H256V21H260V22H264V23H292V22H306V21H316V20H320V19H324V18H328V17H362V18H374V19H382V20H388V21H392V22H396V23H424V22H438V21H448V20H452V19H456V18H460V17H494V18H506V19H516V20H544V21H516V20H506V19H494V18H460V19H456V20H452V21H448V22H438V23H424V24H396V23H392V22H388V21H382V20H374V19H362V18H328V19H324V20H320V21H316V22H306V23H292V24H264V23H260V22H256V21H250V20H242V19H230V18H196V19H192V20H188V21H184V22H174V23H160V24H132V23H128V22H124V21H118V20H110V19H98V18H52V19H40V20H24V21H0z"
+        ></path>
+      </pattern>
     </defs>
-    <path
-      class="vine-stem"
-      d="M0 20C39 20 52 17 78 17S116 23 145 23S184 17 213 17S249 24 277 23S316 17 344 17S381 23 409 23S448 17 477 17S517 21 544 20"
-    ></path>
-    <path
-      class="leaf-stems"
-      d="M57 17v-4m75 10v4m65-10v-4m69 10v4m64-10v-4m68 10v4m65-10v-4m48 6v4"
-    ></path>
-    <g class="vine-leaves">
-      <use href="#nav-vine-leaf" x="50" y="4"></use>
-      <use href="#nav-vine-leaf" transform="translate(126 36) scale(1 -1)"
-      ></use>
-      <use href="#nav-vine-leaf" x="190" y="4"></use>
-      <use href="#nav-vine-leaf" transform="translate(260 36) scale(1 -1)"
-      ></use>
-      <use href="#nav-vine-leaf" x="323" y="4"></use>
-      <use href="#nav-vine-leaf" transform="translate(392 36) scale(1 -1)"
-      ></use>
-      <use href="#nav-vine-leaf" x="456" y="4"></use>
-      <use href="#nav-vine-leaf" transform="translate(504 36) scale(1 -1)"
-      ></use>
+    <rect width="100%" height="40" fill="url(#nav-vine-pattern)"></rect>
+    <g class="vine-leaves" fill="currentColor">
+      <g class="vine-leaf-1">
+        <path d="M57 13h1v5h-1z"></path>
+        <use href="#nav-vine-leaf" x="56" y="4"></use>
+      </g>
+      <g class="vine-leaf-2">
+        <path d="M132 23h1v4h-1z"></path>
+        <use href="#nav-vine-leaf" transform="translate(131 36) scale(1 -1)"
+        ></use>
+      </g>
+      <g class="vine-leaf-3">
+        <path d="M197 13h1v5h-1z"></path>
+        <use href="#nav-vine-leaf" x="196" y="4"></use>
+      </g>
+      <g class="vine-leaf-4">
+        <path d="M266 23h1v4h-1z"></path>
+        <use href="#nav-vine-leaf" transform="translate(265 36) scale(1 -1)"
+        ></use>
+      </g>
+      <g class="vine-leaf-5">
+        <path d="M330 13h1v5h-1z"></path>
+        <use href="#nav-vine-leaf" x="329" y="4"></use>
+      </g>
+      <g class="vine-leaf-6">
+        <path d="M398 23h1v4h-1z"></path>
+        <use href="#nav-vine-leaf" transform="translate(397 36) scale(1 -1)"
+        ></use>
+      </g>
+      <g class="vine-leaf-7">
+        <path d="M463 13h1v5h-1z"></path>
+        <use href="#nav-vine-leaf" x="462" y="4"></use>
+      </g>
+      <g class="vine-leaf-8">
+        <path d="M511 19h1v8h-1z"></path>
+        <use href="#nav-vine-leaf" transform="translate(510 36) scale(1 -1)"
+        ></use>
+      </g>
     </g>
   </svg>
 
@@ -128,8 +159,9 @@ const siteName = "@mkoppmann’s mneme";
       column-gap: var(--space-xl);
       row-gap: var(--space-md);
       padding: var(--space-lg) 0 calc(var(--space-lg) + var(--space-2xs));
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 0;
       margin-bottom: calc(var(--space-md) + var(--space-2xs));
+      container: nav-vine / inline-size;
     }
 
     .nav-vine {
@@ -139,23 +171,63 @@ const siteName = "@mkoppmann’s mneme";
       display: block;
       width: 100%;
       height: 40px;
-      overflow: visible;
+      /* Without a viewBox, pattern units stay at 1 CSS pixel at every width. */
+      overflow: hidden;
       color: var(--color-pixel-tree);
       pointer-events: none;
     }
 
-    .vine-stem,
-    .leaf-stems {
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      vector-effect: non-scaling-stroke;
+    /* Hide each leaf and its stalk until the complete 14px leaf fits. */
+    :where(.vine-leaves > g) {
+      display: none;
     }
 
-    .vine-leaves {
-      fill: currentColor;
-      shape-rendering: crispEdges;
+    @container nav-vine (min-width: 70px) {
+      .vine-leaf-1 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 145px) {
+      .vine-leaf-2 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 210px) {
+      .vine-leaf-3 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 279px) {
+      .vine-leaf-4 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 343px) {
+      .vine-leaf-5 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 411px) {
+      .vine-leaf-6 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 476px) {
+      .vine-leaf-7 {
+        display: inline;
+      }
+    }
+
+    @container nav-vine (min-width: 524px) {
+      .vine-leaf-8 {
+        display: inline;
+      }
     }
 
     .nav-brand {
