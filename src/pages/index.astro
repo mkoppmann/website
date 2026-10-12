@@ -202,50 +202,55 @@ const profilePageJsonLd = {
         </div>
       </div>
     </section>
-    <section id="certifications">
-      <h2>Certifications</h2>
-      <ul>
-        <li>
-          Offensive Security Certified Professional (<a
-            href="https://www.offensive-security.com/pwk-oscp/">OSCP</a
-          >)
-        </li>
-        <li>
-          Certified Information Systems Security Professional (<a
-            href="https://www.isc2.org/Certifications/CISSP">CISSP</a
-          >)
-        </li>
-        <li>
-          Certified Secure Software Lifecycle Professional (<a
-            href="https://www.isc2.org/Certifications/CSSLP">CSSLP</a
-          >)
-        </li>
-        <li>
-          GIAC Web Application Penetration Tester (<a
-            href="https://www.giac.org/certifications/web-application-penetration-tester-gwapt/"
-            >GWAPT</a
-          >)
-        </li>
-      </ul>
-    </section>
-    <section id="affiliations">
-      <h2>Affiliations</h2>
-      <ul>
-        <li>
-          Chapter leader of <a href="https://owasp.org/www-chapter-vienna/"
-            >OWASP Vienna</a
-          >
-        </li>
-        <li>
-          Member of <a href="https://owasp.org">OWASP</a>
-        </li>
-        <li>
-          Member of <a href="https://c3w.at">Chaos Computer Club Wien</a>
-        </li>
-        <li>
-          Member of <a href="https://applied-privacy.net">Applied Privacy</a>
-        </li>
-      </ul>
+    <section
+      class="credentials"
+      aria-labelledby="certifications-heading affiliations-heading"
+    >
+      <div id="certifications">
+        <h2 id="certifications-heading">Certifications</h2>
+        <ul>
+          <li>
+            Offensive Security Certified Professional (<a
+              href="https://www.offensive-security.com/pwk-oscp/">OSCP</a
+            >)
+          </li>
+          <li>
+            Certified Information Systems Security Professional (<a
+              href="https://www.isc2.org/Certifications/CISSP">CISSP</a
+            >)
+          </li>
+          <li>
+            Certified Secure Software Lifecycle Professional (<a
+              href="https://www.isc2.org/Certifications/CSSLP">CSSLP</a
+            >)
+          </li>
+          <li>
+            GIAC Web Application Penetration Tester (<a
+              href="https://www.giac.org/certifications/web-application-penetration-tester-gwapt/"
+              >GWAPT</a
+            >)
+          </li>
+        </ul>
+      </div>
+      <div id="affiliations">
+        <h2 id="affiliations-heading">Affiliations</h2>
+        <ul>
+          <li>
+            Chapter leader of <a href="https://owasp.org/www-chapter-vienna/"
+              >OWASP Vienna</a
+            >
+          </li>
+          <li>
+            Member of <a href="https://owasp.org">OWASP</a>
+          </li>
+          <li>
+            Member of <a href="https://c3w.at">Chaos Computer Club Wien</a>
+          </li>
+          <li>
+            Member of <a href="https://applied-privacy.net">Applied Privacy</a>
+          </li>
+        </ul>
+      </div>
     </section>
     <section id="for-verification">
       <h2>For verification</h2>
@@ -518,6 +523,26 @@ const profilePageJsonLd = {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+  }
+
+  .credentials {
+    display: grid;
+    gap: var(--space-sm) var(--space-xl);
+  }
+
+  .credentials > div {
+    min-inline-size: 0;
+  }
+
+  .credentials ul {
+    margin-block-end: 0;
+    padding-inline-start: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .credentials {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   #for-verification {
