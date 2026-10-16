@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 import JsonLd from "../components/JsonLd.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import "../styles/prism-theme.css";
+import "../styles/footnotes.css";
 
 interface Props {
   title: string;
@@ -33,7 +34,11 @@ function formatDate(date: Date): string {
   });
 }
 
-const hasToc = headings.some((h) => h.depth >= 2 && h.depth <= 3);
+// Preview copies may contain headings; only the canonical notes belong in the TOC.
+const postHeadings = headings.filter(
+  (h) => !h.slug.startsWith("footnote-preview-"),
+);
+const hasToc = postHeadings.some((h) => h.depth >= 2 && h.depth <= 3);
 const metaImageUrl = metaImage
   ? new URL(metaImage, Astro.site).href
   : undefined;
@@ -95,7 +100,7 @@ const blogPostingJsonLd = {
       {
         hasToc && (
           <aside class="post-toc" data-pagefind-ignore>
-            <TableOfContents headings={headings} />
+            <TableOfContents headings={postHeadings} />
           </aside>
         )
       }
