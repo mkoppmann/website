@@ -4,7 +4,13 @@ import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
 import { getCollection, render } from "astro:content";
-import { transform, walk } from "ultrahtml";
+import {
+  DOCUMENT_NODE,
+  ELEMENT_NODE,
+  transform,
+  walk,
+  type Node,
+} from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 
 const feedAuthor = "me+www@mkoppmann.at (Michael Koppmann)";
@@ -59,14 +65,24 @@ export async function GET(context: APIContext) {
       })
       .join(", ");
 
-  const sanitizeFeedHtml = async (rawHtml: string) =>
+  const sanitizeFeedHtml = async (rawHtml: string, contentUrl = baseUrl) =>
     transform(rawHtml.replace(/^<!DOCTYPE html>/, ""), [
       async (node) => {
         await walk(node, (node) => {
+          // Readers get the canonical endnotes, without duplicate previews or buttons.
+          if (node.type === DOCUMENT_NODE || node.type === ELEMENT_NODE) {
+            node.children = node.children.filter(
+              (child: Node) =>
+                child.attributes?.["data-footnote-preview"] === undefined &&
+                child.attributes?.["data-footnote-trigger"] === undefined,
+            );
+          }
           if (!node.attributes) return;
 
           if (node.attributes.href) {
-            node.attributes.href = toAbsoluteUrl(node.attributes.href);
+            node.attributes.href = node.attributes.href.startsWith("#")
+              ? `${contentUrl}${node.attributes.href}`
+              : toAbsoluteUrl(node.attributes.href);
           }
 
           if (node.attributes.src) {
@@ -141,7 +157,8 @@ export async function GET(context: APIContext) {
     // Transform the HTML to:
     // 1. Convert relative URLs to absolute URLs
     // 2. Sanitize and remove script/style tags
-    const content = await sanitizeFeedHtml(rawContent);
+    const postUrl = new URL(`/blog/${post.id}/`, baseUrl).href;
+    const content = await sanitizeFeedHtml(rawContent, postUrl);
 
     feedItems.push({
       title: post.data.title,

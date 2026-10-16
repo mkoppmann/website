@@ -1,0 +1,180 @@
+/* Ordinary links are the default, including in browsers without popovers. */
+.post-content [data-footnote-trigger],
+.post-content [data-footnote-preview] {
+  display: none;
+}
+
+.post-content .footnote-reference {
+  --footnote-target-size: 1.5rem;
+  position: relative;
+  inset-block-start: -0.45em;
+  vertical-align: baseline;
+  line-height: 0;
+  scroll-margin-block: var(--space-xl);
+}
+
+.post-content .footnote-reference :is(a, button) {
+  position: relative;
+  display: inline;
+  padding: 0 0.08em;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-link);
+  font: inherit;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Enlarge the hit area without adding gaps or changing the prose's line height. */
+.post-content .footnote-reference :is(a, button)::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: max(100%, var(--footnote-target-size));
+  block-size: max(100%, var(--footnote-target-size));
+  transform: translate(-50%, -50%);
+}
+
+.post-content .footnote-reference [data-footnote-trigger] {
+  display: none;
+}
+
+.post-content .footnote-reference:target,
+.post-content [data-footnotes] li:target {
+  outline: 2px solid var(--color-focus);
+  outline-offset: var(--space-2xs);
+}
+
+/* Reset the site's general section card styles for the endnotes. */
+.post-content [data-footnotes] {
+  margin-block-start: var(--space-2xl);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: 0.9em;
+}
+
+.post-content [data-footnotes] li {
+  padding-inline-start: var(--space-2xs);
+  scroll-margin-block: var(--space-xl);
+}
+
+.post-content [data-footnotes] li p {
+  margin-block: var(--space-xs);
+}
+
+.post-content [data-footnote-backref] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 1.5rem;
+  min-block-size: 1.5rem;
+  text-decoration: none;
+}
+
+@supports selector(:popover-open) {
+  @media screen {
+    .post-content .footnote-reference [data-footnote-ref] {
+      display: none;
+    }
+
+    .post-content .footnote-reference [data-footnote-trigger] {
+      display: inline;
+    }
+
+    .post-content .footnote-reference [data-footnote-trigger]:hover {
+      background: var(--color-surface);
+    }
+
+    .post-content [data-footnote-preview]:popover-open {
+      display: block;
+      box-sizing: border-box;
+      inline-size: min(24rem, calc(100vw - 2rem));
+      max-block-size: calc(100dvh - 2rem);
+      overflow: auto;
+      padding: var(--space-md) var(--space-lg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin: auto;
+      background: var(--color-surface);
+      color: var(--color-text);
+      box-shadow: var(--shadow-md);
+      font-size: 0.9rem;
+      line-height: var(--line-height-body);
+      overflow-wrap: anywhere;
+    }
+
+    .post-content .footnote-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      margin-block-end: var(--space-xs);
+    }
+
+    .post-content .footnote-preview-label {
+      margin: 0;
+      font-weight: 600;
+      color: var(--color-caption);
+    }
+
+    .post-content .footnote-preview-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-inline-size: 2rem;
+      min-block-size: 2rem;
+      padding: 0;
+      border: 0;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--color-text);
+      font: inherit;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    .post-content [data-footnote-preview] > :last-child {
+      margin-block-end: 0;
+    }
+
+    /* The same anchored preview on any screen; center it if unavailable. */
+    @supports (position-area: block-end) {
+      .post-content [data-footnote-preview]:popover-open {
+        position: fixed;
+        inset: auto;
+        margin: var(--space-xs);
+        position-area: block-end;
+        position-try-fallbacks:
+          flip-block,
+          flip-inline,
+          flip-block flip-inline;
+        position-visibility: anchors-visible;
+      }
+    }
+  }
+}
+
+@media (pointer: coarse) {
+  .post-content .footnote-reference {
+    --footnote-target-size: 2.75rem;
+  }
+
+  .post-content [data-footnote-backref],
+  .post-content .footnote-preview-close {
+    min-inline-size: 2.75rem;
+    min-block-size: 2.75rem;
+  }
+}
+
+@media print {
+  .post-content [data-footnote-trigger],
+  .post-content [data-footnote-preview] {
+    display: none !important;
+  }
+}
