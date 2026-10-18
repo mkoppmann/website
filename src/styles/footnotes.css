@@ -4,6 +4,10 @@
   display: none;
 }
 
+.post-content .footnote-anchor {
+  white-space: nowrap;
+}
+
 .post-content .footnote-reference {
   --footnote-target-size: 1.5rem;
   position: relative;
