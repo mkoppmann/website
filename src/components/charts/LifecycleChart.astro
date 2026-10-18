@@ -1,0 +1,132 @@
+---
+import "../../styles/charts.css";
+
+interface Props {
+  caption?: string;
+}
+
+const { caption } = Astro.props;
+
+const devices = [
+  { name: "MacBook Air (15-inch, M5)", production: 62, use: 27, other: 11 },
+  { name: "iPhone 18 Pro (256 GB)", production: 73, use: 21, other: 6 },
+];
+
+const segments = (d: (typeof devices)[number]) => [
+  { key: "production", label: "Production", value: d.production, start: 0 },
+  { key: "use", label: "Use", value: d.use, start: d.production },
+  { key: "other", label: "Other", value: d.other, start: d.production + d.use },
+];
+
+const description = devices
+  .map(
+    (d) =>
+      `${d.name}: production ${d.production}%, customer use ${d.use}%, transport and other ${d.other}%.`,
+  )
+  .join(" ");
+---
+
+<figure class="chart lifecycle-chart">
+  <div
+    role="img"
+    aria-label={`Share of life-cycle greenhouse gas emissions. ${description}`}
+  >
+    <ul class="chart-legend" aria-hidden="true">
+      <li><span class="chart-swatch chart-swatch--accent"></span>Production</li>
+      <li><span class="chart-swatch chart-swatch--mid"></span>Customer use</li>
+      <li>
+        <span class="chart-swatch chart-swatch--faint"></span>Transport and
+        other
+      </li>
+    </ul>
+    <div class="chart-plot" aria-hidden="true">
+      {
+        devices.map((device, i) => (
+          <div>
+            <div class="chart-row-label">{device.name}</div>
+            <svg height="24">
+              <defs>
+                <clipPath id={`lifecycle-clip-${i}`}>
+                  <rect width="100%" height="24" rx="4" />
+                </clipPath>
+              </defs>
+              <g clip-path={`url(#lifecycle-clip-${i})`}>
+                {segments(device).map((s) => (
+                  <rect
+                    class={`seg seg--${s.key}`}
+                    x={`${s.start}%`}
+                    width={`${s.value}%`}
+                    height="24"
+                  >
+                    <title>{`${s.label}: ${s.value}%`}</title>
+                  </rect>
+                ))}
+                {segments(device)
+                  .slice(1)
+                  .map((s) => (
+                    <rect class="gap" x={`${s.start}%`} width="2" height="24" />
+                  ))}
+              </g>
+              <text class="ink-accent" x="8" y="12" dominant-baseline="central">
+                {`Production ${device.production}%`}
+              </text>
+              <text
+                class="ink-mid"
+                x={`${device.production}%`}
+                dx="10"
+                y="12"
+                dominant-baseline="central"
+              >
+                <tspan class="label-long">{`Use ${device.use}%`}</tspan>
+                <tspan class="label-short">{`${device.use}%`}</tspan>
+              </text>
+            </svg>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  {caption && <figcaption set:html={caption} />}
+</figure>
+
+<style>
+  .seg--production {
+    fill: var(--chart-accent);
+  }
+
+  .seg--use {
+    fill: var(--chart-mid);
+  }
+
+  .seg--other {
+    fill: var(--chart-faint);
+  }
+
+  .gap {
+    fill: var(--chart-gap);
+  }
+
+  .chart svg text.ink-accent {
+    fill: var(--chart-accent-ink);
+    font-weight: 600;
+  }
+
+  .chart svg text.ink-mid {
+    fill: var(--chart-mid-ink);
+  }
+
+  /* On very narrow screens, “Use” no longer fits inside the smaller segment. */
+  .label-short {
+    display: none;
+  }
+
+  @media (max-width: 22.5rem) {
+    .label-long {
+      display: none;
+    }
+
+    .label-short {
+      display: inline;
+    }
+  }
+</style>

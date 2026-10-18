@@ -1,0 +1,272 @@
+---
+title: "Why We Need Sustainable Software"
+description: "How software decides how long our devices last, why its hidden costs land on the people using it, and what we can all do about it."
+createdDate: 2026-10-19
+metaImage: "/media/blog/why-we-need-sustainable-software-cover.png"
+metaImageAlt: "The Software Carbon Intensity formula: SCI = ((E × I) + M) / R, energy times carbon intensity plus embodied emissions, per functional unit."
+---
+
+import Figure from "../../components/Figure.astro";
+import LifecycleChart from "../../components/charts/LifecycleChart.astro";
+import WikipediaStartupImage from "../../assets/wikipedia_javascript_startup_manifest_size.png";
+import SciFormulaImage from "../../assets/gsf_software_carbon_intensity.png";
+import HomepageCarbonImage from "../../assets/homepage_website_carbon_2026-10-16.png";
+
+Today, opening your own front door may require several devices to communicate across a global network with servers running multiple operating systems.
+Compared with the simplicity of a mechanical lock, it is fair to ask: did we take a wrong turn somewhere?
+
+Revolv sold a smart home hub that let owners control lights, thermostats, and locks.
+Google’s Nest bought the company in 2014 and stopped selling the hub.
+In early 2016, Nest announced that it would shut down the cloud service the hubs depended on.
+After public criticism, Nest refunded the purchase price, but the refund did not bring the devices back.[^revolv]
+Owners were left with working hardware that had become electronic waste, because its vendor no longer wanted to run the servers behind it.
+
+Sustainable software goes further than just consuming less electricity.
+It stays useful over time, lets people keep using the hardware they already own, and does not waste their resources or time.
+For many personal devices, extending their useful life can matter more than reducing electricity consumption alone.
+
+I discussed the underlying problems of inefficient software in my [TEDx talk on green software](/blog/the-era-of-green-software/).
+Here, I want to build on that argument: why software decides how long our devices last, why efficiency keeps losing out, and how we can make sustainability part of everyday software development.
+
+## The cost of replacing working hardware
+
+Software influences how long a device remains useful.
+A lack of support can make it unusable, as can requirements that grow with every new release.
+Every unnecessary calculation, every redundant data transfer, and every task that takes 1,000 steps instead of 10 consumes additional resources.
+Eventually, people replace devices that still work, because the software no longer runs well on them.
+
+A 2021 review estimated that information and communication technology (ICT) accounted for 2.1% to 3.9% of global greenhouse gas emissions.[^ict-share]
+Electricity consumption during use is only part of that picture.
+For end-user devices, manufacturing weighs at least as heavily.
+Apple attributes 62% of the life-cycle emissions of a 15-inch MacBook Air (M5) to production and only 27% to customer use, assuming four years of use.[^lca]
+For the iPhone 18 Pro, production accounts for almost three quarters.[^lca-iphone]
+
+<LifecycleChart caption="Share of life-cycle greenhouse gas emissions by phase. Data: Apple Product Environmental Reports, MacBook Air (M5), March 2026, and iPhone 18 Pro, September 2026." />
+
+If you replaced your MacBook Air (M5) with a model that uses 10% less electricity, it would take about 90 years before the savings made up for the emissions of producing the new laptop.[^payback]
+A 2012 study for the German Environment Agency reached a similar conclusion: a replacement laptop that uses 10% less electricity takes 33 to 89 years to make up for its production emissions.[^notebooks]
+
+Efficient software is also more inclusive software.
+Students, people on low incomes, and many users in poorer regions rely on older, second-hand, or entry-level devices, often with slow or metered connections.
+When a banking app, a government portal, or a school platform only runs smoothly on recent hardware, they are the first to be left behind.
+Rising prices make this worse: in October 2026, Gartner reported that DRAM costs in the second quarter had reached five times their level a year earlier.
+People now pay more for new PCs, and cheaper models have become harder to find.[^gartner]
+
+## Inefficient software wastes our lives
+
+Even if we set environmental impacts aside for a moment, poor software wastes another valuable and finite resource: human time.
+Every crash, every wait for a progress bar, and every unnecessarily complicated workflow frustrates and demotivates us.
+A few seconds for one person add up to an enormous loss across many people and many working days.
+
+A 2023 study by researchers at Roskilde University and the University of Copenhagen asked 234 participants to note every moment of frustration during an hour of their normal computer use.
+On average, they lost between 11% and 20% of that time to problems with the systems they used.
+The causes included slow or crashing programs and interfaces that were difficult to understand.[^working-time]
+
+In a survey published in early 2020 by the British retailer Currys PC World, office workers reported losing an average of 46 minutes a day, or 24 working days a year, waiting for slow or outdated hardware or software.[^british-office-workers]
+That’s almost five working weeks.
+Imagine getting that time back as a holiday.
+
+The obvious response, and the one a computer retailer would suggest, is to buy faster computers.
+But new hardware brings back the manufacturing emissions discussed above, and faster processors have never kept software fast for long.
+We have to improve the software instead and design it so that people can complete their tasks without unnecessary obstacles.
+
+## Why efficiency gets left behind
+
+Developers can use dependencies and abstractions to make software easier to build and maintain, but unnecessary layers can hide resource costs from them.
+In everyday project work, teams often find it easier to justify adding another function than spending time improving the ones they already have.
+
+Hardware manufacturers compete on battery life and performance per watt, so efficiency directly affects their sales.
+Software vendors have weaker incentives.
+Inefficient server code at least shows up on the vendor’s hosting bill.
+An inefficient app or website, however, runs on the users’ devices.
+They pay for the electricity, the data volume, the waiting time, and eventually the new device.
+The vendor rarely sees any of these costs, so when budgets are allocated, new features usually win.
+The common argument that developer time is more expensive than computing time leaves out the costs that users pay.
+Whether an optimization is worthwhile depends on the full costs and benefits, including how often the software runs.
+
+As hardware gets faster, developers can afford approaches that are quicker to write but use more resources.
+In 1995, Niklaus Wirth summed up the result in his essay *A Plea for Lean Software*, citing Martin Reiser: “Software is getting slower more rapidly than hardware becomes faster.”[^wirth]
+The observation has since become known as *Wirth’s law*.[^andy-and-bill]
+
+## Regulation is catching up
+
+Not everything is left to the market.
+In the EU, lawmakers have started to set rules that protect buyers and hold companies accountable for their impact.
+
+Since June 2025, people buying a smartphone or tablet in the EU can count on operating system updates for at least five years after the manufacturer stops selling the model, provided it offers updates at all.[^ecodesign]
+The Cyber Resilience Act extends this idea to hardware and software products in general.
+Buyers will learn at the time of purchase how long a product receives security updates, and as a rule, that period must be at least five years.[^cra]
+
+The *Corporate Sustainability Reporting Directive* (CSRD) requires large companies to report how their business affects people and the environment, and how sustainability issues affect their business.[^csrd]
+The accompanying reporting standards address resource use and the circular economy, including sustainable product design.[^esrs-e5]
+Green coding is not explicitly required by the directive, but nothing stops us from improving our software too.
+
+## Small savings, large effects
+
+Wikipedia shows what sustainable software development can look like in practice.
+In 2019, its developers reported reducing its compressed JavaScript startup manifest from 36.2 KB to 27.2 KB, saving 4.3 TB of data transfer every day.
+This was no easy change and required a year-long effort.
+The teams worked toward a size budget of 28 KB by removing unused code, combining modules, and reducing the metadata sent to browsers.
+
+<Figure
+  src={WikipediaStartupImage}
+  alt="Wikipedia’s compressed JavaScript startup manifest shrinking from around 36 KB in September 2018 to around 27 KB in September 2019."
+  caption='Wikipedia’s compressed JavaScript startup manifest, September 2018 to September 2019. Timo Tijhof / Wikimedia Foundation, <a href="https://diff.wikimedia.org/2019/09/19/wikipedias-javascript-initialisation-on-a-budget-2/">Wikipedia’s JavaScript initialisation on a budget</a>, CC BY-SA 4.0.'
+/>
+
+The project lead tracked progress and potential regressions in a spreadsheet, then automated the monitoring through a public dashboard.[^wikipedia]
+
+Those 4.3 TB per day are hard to convert into emissions, because much of a network’s energy use is needed regardless of how much data flows through it.
+The clearest benefit goes to people with older phones or slow connections: their browsers have to download and run less JavaScript on every page view.
+
+Most projects do not have Wikipedia’s reach, but the same practices apply: set a resource budget, measure progress, and watch for regressions.
+
+Teams can test on old and low-end devices, not just on the developers’ latest laptops.
+They can set performance budgets for the slowest devices they want to support.
+And they can make minimum operating system and browser versions a deliberate decision.
+Before raising those requirements, it is worth asking how many people the change would leave behind.
+
+## Putting numbers behind sustainability goals
+
+To measure whether a change actually helps, the nonprofit Green Software Foundation developed the *Software Carbon Intensity* (SCI) specification.[^sci]
+It has also been published as ISO/IEC 21031:2024.[^sci-iso]
+SCI expresses emissions per unit of work, such as an API request or a user-hour.
+It combines operational emissions with an allocated share of the emissions embodied in the hardware, then relates them to the chosen functional unit.
+
+<Figure
+  src={SciFormulaImage}
+  alt="SCI = ((E × I) + M) / R. Energy consumption E multiplied by electricity carbon intensity I gives operational emissions. M is the allocated embodied emissions of hardware, and R is the functional unit. The result is emissions per unit of work."
+  caption='Green Software Foundation, <a href="https://learn.greensoftware.foundation/measurement/#the-sci-equation">Green Software Practitioner course — Measurement</a>, CC BY 4.0.'
+/>
+
+Teams can use SCI to compare architectures, hosting regions, or caching strategies.
+These decisions involve tradeoffs, so we need to measure the overall result rather than a single resource.
+A metric alone does not make software sustainable, but it provides a basis for setting reduction targets and tracking progress.
+
+Remember that the SCI covers emissions per unit of work, not overall system emissions.
+Efficiency improvements can backfire if they encourage enough additional use to more than offset the resource savings, causing total resource consumption to rise.[^jevon]
+SCI also does not cover every aspect of sustainability discussed in this post.
+
+The Green Software Foundation brings together research institutions and companies such as Microsoft and Google.
+There is some irony in software giants helping to write the rules for consuming fewer resources.
+As both expand their data centers for AI, Google’s reported carbon footprint in 2025 was 81% higher than in 2019[^google-emissions], while Microsoft’s reported emissions in its 2025 fiscal year were around 60% above its 2020 baseline.[^microsoft-emissions]
+I am glad they are involved.
+I would be happier still to see the results.
+
+## Security and sustainability share root causes
+
+My employer, SBA Research, has also joined the foundation, and I serve as the point of contact for our collaboration.[^gsf-sba]
+Working in information security, I encounter many of the same problems that make sustainable software development difficult: unnecessary complexity, code that is hard to maintain, and a lack of understanding of what a system actually does.
+
+Sometimes, I find exposed services during my penetration tests that the customer has forgotten about but that still consume resources and require security patches.
+During source code reviews, I see tiny applications or features requiring large numbers of dependencies because including them was easier than writing a few lines of custom code.
+Every forgotten service and every unneeded dependency is both an attack surface and a resource cost.
+
+These problems reflect what we accept as good software and what we reward in its development.
+Raising that standard means making security and sustainability part of what we teach, what we measure, and how we judge a project’s success.
+
+## Build less, build it better
+
+One approach to reducing overengineering is *digital sufficiency*.[^sufficiency]
+It asks which digital functions we actually need and how much technology is appropriate to provide them.
+Features that add little value could become optional modules, although every option adds code paths that have to be tested and maintained.
+Often, the better choice is to leave them out altogether.
+
+Tools such as Website Carbon can offer an initial indication of a web page’s footprint.
+On October 16, 2026, the calculator gave my homepage an A+ rating and estimated emissions of less than 0.01 grams of CO₂ per page view.[^website-carbon]
+These figures come from a model, not from measured electricity consumption.
+
+<Figure
+  src={HomepageCarbonImage}
+  alt="Website Carbon Calculator report for mkoppmann.at, showing an A+ carbon rating and a test date of October 16, 2026."
+  caption="Website Carbon Calculator result for mkoppmann.at, October 16, 2026. Wholegrain Digital."
+/>
+
+The *Web Sustainability Guidelines*, developed at the World Wide Web Consortium (W3C), offer practical recommendations for design, development, operations, and product management.[^wsg]
+Besides the familiar advice about removing unused code and optimizing media, they contain some suggestions that go beyond pure efficiency:
+
+- Reduce or switch off resource-heavy features when grid demand or system load is high, explain the change, and let users restore full functionality.
+- Use browser features such as the Page Visibility API to pause media and background work while a tab is hidden.
+- Use semantic, standards-compliant markup and support assistive technologies, so more people can use a site without heavier code.
+- Avoid deceptive patterns and designs that keep people engaged longer than they need, because every unnecessary minute and page view costs energy and attention.
+
+I made many design decisions during my website redesign, guided by one main principle:
+
+> Prefer build-time costs to runtime costs.
+
+I chose a static site generator because I update my personal website only occasionally.
+This way, I avoid using a database and running a web application that requires ongoing security updates.
+HTML is generated during the build, and a web server can efficiently serve compressed files to visitors.
+The build process also creates images in multiple sizes and efficient formats, letting the browser choose an appropriate version for the device.
+For example, one generated variant reduces a 6.7 MB JPEG at 3984×2656 pixels to a 23 KB AVIF at 480×320 pixels.
+Most of that saving comes from the smaller dimensions, but the JPEG at 480×320 pixels would take 42 KB, still almost twice as much.
+I use system fonts and native browser features so visitors download no fonts and less JavaScript.
+The table of contents on this page is a `<details>` element, and footnote previews use the Popover API.
+It also helps that I don’t run any user tracking software, which saves me and my visitors a lot of trouble.
+
+Sustainable software follows many of the same principles as good, fast, usable software.
+Looking at the environmental impact makes the consequences of ignoring these familiar best practices more visible.
+
+## It takes all of us
+
+Each time we developers give up a little performance for convenience or accept a few extra megabytes of memory use without asking whether the tradeoff is worthwhile, the decision may seem harmless on its own.
+Together, many such decisions have made software heavier than it needs to be.
+Their environmental and social costs don’t stay with the companies that make the software.
+They land on the people who use it and on the planet.
+
+Developers can start by measuring the resource consumption of a frequently used task, improving it, and checking that later releases preserve the gains.
+Managers can give that work time and funding and make support for existing hardware part of the product’s requirements.
+Policymakers can enforce support commitments and push for ways to keep devices usable when the services behind them shut down.
+When choosing software or connected devices, we can ask how long they will receive updates and whether they will keep working if the vendor disappears or loses interest.
+
+We need sustainable software because the devices people own, the time they spend, and the planet they live on are too valuable to waste.
+
+[^revolv]: [Closing letter to Nest Labs, Inc. on the Revolv shutdown (FTC File No. 162-3119)](https://www.ftc.gov/system/files/documents/closing_letters/nid/160707nestrevolvletter.pdf), Federal Trade Commission.
+
+[^ict-share]: [The real climate and transformative impact of ICT: A critique of estimates, trends, and regulations](https://doi.org/10.1016/j.patter.2021.100340), Patterns.
+
+[^lca]: [MacBook Air (M5) Product Environmental Report](https://www.apple.com/environment/pdf/products/notebooks/MacBook_Air_M5_PER_Mar2026.pdf), Apple.
+
+[^lca-iphone]: [iPhone 18 Pro and iPhone 18 Pro Max Product Environmental Report](https://www.apple.com/environment/pdf/products/iphone/iPhone_18_Pro_and_iPhone_18_Pro_Max_PER_Sept2026.pdf), Apple.
+
+[^payback]: My calculation from Apple’s figures, assuming the new model causes similar production emissions: production accounts for 62% of 145 kg CO₂e, about 90 kg. Customer use accounts for 27%, about 39 kg over Apple’s assumed four years of use, or 9.8 kg per year. Using 10% less electricity saves about 1 kg per year, so offsetting 90 kg takes about 90 years.
+
+[^notebooks]: [Timely replacement of a notebook under consideration of environmental aspects](https://www.oeko.de/oekodoc/1584/2012-440-en.pdf), German Environment Agency.
+
+[^gartner]: [Gartner Says Worldwide PC Shipments Declined 22.4% in Third Quarter of 2026 As Component Cost Inflation Raised ASPs](https://www.gartner.com/en/newsroom/press-releases/2026-10-12-gartner-says-worldwide-pc-shipments-declined-22-point-4-percent-in-third-quarter-of-2026-as-component-cost-inflation-raised-asps), Gartner.
+
+[^working-time]: [Frustration: Still a Common User Experience](https://doi.org/10.1145/3582432), ACM Transactions on Computer-Human Interaction.
+
+[^british-office-workers]: [Tech Troubles: The true cost of outdated workplace tech](https://web.archive.org/web/20200304075212/https://techtalk.currys.co.uk/computing/workplace-productivity/), Currys PC World (on archive.org).
+
+[^wirth]: [A Plea for Lean Software](https://doi.org/10.1109/2.348001), IEEE Computer.
+
+[^andy-and-bill]: A similar joke is known as [Andy and Bill’s law](https://en.wikipedia.org/wiki/Andy_and_Bill's_law): “What Intel giveth, Microsoft taketh away.” Hardware improvements under Intel’s Andy Grove were swallowed up by the growing resource demands of Microsoft’s software under Bill Gates.
+
+[^ecodesign]: [Commission Regulation (EU) 2023/1670 — ecodesign requirements for smartphones and slate tablets](https://eur-lex.europa.eu/eli/reg/2023/1670/oj), Annex II, EUR-Lex.
+
+[^cra]: [Regulation (EU) 2024/2847 — Cyber Resilience Act](https://eur-lex.europa.eu/eli/reg/2024/2847/oj), Article 13, EUR-Lex.
+
+[^csrd]: [Corporate sustainability reporting](https://finance.ec.europa.eu/financial-markets/company-reporting-and-auditing/company-reporting/corporate-sustainability-reporting_en), European Commission.
+
+[^esrs-e5]: [ESRS E5 — Resource use and circular economy](https://knowledgehub.efrag.org/eng/interactive/esrs-set-1/esrs-e5-resource-use-and-circular-economy/2025-11-10-quick-fix/20/e), EFRAG.
+
+[^wikipedia]: [Wikipedia’s JavaScript initialisation on a budget](https://diff.wikimedia.org/2019/09/19/wikipedias-javascript-initialisation-on-a-budget-2/), Wikimedia.
+
+[^sci]: [Software Carbon Intensity Specification](https://sci.greensoftware.foundation/), Green Software Foundation.
+
+[^sci-iso]: [ISO/IEC 21031:2024 — Software Carbon Intensity (SCI) specification](https://www.iso.org/standard/86612.html), ISO.
+
+[^jevon]: This is also known as [Jevons paradox](https://en.wikipedia.org/wiki/Jevons_paradox), Wikipedia.
+
+[^google-emissions]: [Google 2026 Environmental Report](https://sustainability.google/files/google-2026-environmental-report.pdf), Google.
+
+[^microsoft-emissions]: [2026 Environmental Data Fact Sheet](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/msc/documents/presentations/CSR/2026-Microsoft-Environmental-Data-Fact-Sheet-PDF.pdf), Microsoft.
+
+[^gsf-sba]: [Engineering Secure and Sustainable Software—Meet Michael Koppmann of SBA Research](https://greensoftware.foundation/articles/engineering-secure-and-sustainable-softwaremeet-michael-koppmann-of-sba-research/), Green Software Foundation.
+
+[^sufficiency]: [Digital sufficiency: conceptual considerations for ICTs on a finite planet](https://pmc.ncbi.nlm.nih.gov/articles/PMC10427517/), Annals of Telecommunications.
+
+[^website-carbon]: [Website Carbon Calculator — results for mkoppmann.at](https://www.websitecarbon.com/website/mkoppmann-at/), Wholegrain Digital.
+
+[^wsg]: [Web Sustainability Guidelines](https://www.w3.org/TR/2026/DNOTE-web-sustainability-guidelines-20261016/), W3C.
