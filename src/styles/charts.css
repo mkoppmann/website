@@ -1,0 +1,81 @@
+/* Shared styles for the hand-built charts in blog posts. */
+.chart {
+  /* Emphasis palette: one accent, the rest de-emphasized grays. */
+  --chart-accent: light-dark(#2f8259, #7cc39d);
+  --chart-accent-ink: light-dark(#ffffff, #101b19);
+  --chart-mid: light-dark(#9fa9a3, #5d6f67);
+  --chart-mid-ink: light-dark(#202124, #e7ecf2);
+  --chart-faint: light-dark(#dbe1dd, #2f403a);
+  --chart-gap: var(--color-page-bg);
+
+  margin-inline: auto;
+  margin-block: var(--space-lg);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+.chart-plot {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.chart svg {
+  display: block;
+  inline-size: 100%;
+  overflow: visible;
+}
+
+.chart svg text {
+  fill: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-md);
+  margin: 0 0 var(--space-sm);
+  padding: 0;
+  list-style: none;
+  color: var(--color-text);
+}
+
+.chart-legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin: 0;
+}
+
+.chart-swatch {
+  display: inline-block;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: 2px;
+}
+
+.chart-swatch--accent {
+  background: var(--chart-accent);
+}
+
+.chart-swatch--mid {
+  background: var(--chart-mid);
+}
+
+.chart-swatch--faint {
+  background: var(--chart-faint);
+}
+
+.chart-row-label {
+  margin-block-end: var(--space-2xs);
+  color: var(--color-heading);
+  font-weight: 600;
+}
+
+@media (forced-colors: active) {
+  .chart-swatch,
+  .chart svg rect {
+    forced-color-adjust: none;
+  }
+}
