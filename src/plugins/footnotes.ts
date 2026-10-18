@@ -167,7 +167,7 @@ export default function footnotes(): HastPluginDefinition {
           ),
         );
 
-        return element(
+        const sup = element(
           "sup",
           { id: referenceId, className: ["footnote-reference"], tabIndex: -1 },
           [
@@ -184,6 +184,23 @@ export default function footnotes(): HastPluginDefinition {
             ),
           ],
         );
+
+        // Keep the reference on the same line as the word before it. Browsers
+        // otherwise allow a line break before the button.
+        const parent = ctx.parent(node);
+        const index = ctx.indexOf(node);
+        const previous = parent && index ? parent.children[index - 1] : undefined;
+        const lastWord =
+          previous?.type === "text" ? /\S+$/.exec(previous.value) : null;
+        if (!previous || !lastWord) return sup;
+
+        const rest = previous.value.slice(0, lastWord.index);
+        if (rest) ctx.replaceNode(previous, text(rest));
+        else ctx.removeNode(previous);
+        return element("span", { className: ["footnote-anchor"] }, [
+          text(lastWord[0]),
+          sup,
+        ]);
       },
     },
     after(root, ctx) {
