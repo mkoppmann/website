@@ -24,80 +24,125 @@ const description = devices
       `${d.name}: production ${d.production}%, customer use ${d.use}%, transport and other ${d.other}%.`,
   )
   .join(" ");
+
+// Feed readers strip SVG styling and stylesheets, so they get a plain table.
+const isFeed = Astro.locals.feed;
 ---
 
-<figure class="chart lifecycle-chart">
-  <div
-    role="img"
-    aria-label={`Share of life-cycle greenhouse gas emissions. ${description}`}
-  >
-    <ul class="chart-legend" aria-hidden="true">
-      <li><span class="chart-swatch chart-swatch--accent"></span>Production</li>
-      <li><span class="chart-swatch chart-swatch--mid"></span>Customer use</li>
-      <li>
-        <span class="chart-swatch chart-swatch--faint"></span>Transport and
-        other
-      </li>
-    </ul>
-    <div class="chart-plot" aria-hidden="true">
-      {
-        devices.map((device, i) => (
-          <div>
-            <div class="chart-row-label">{device.name}</div>
-            <svg height="24">
-              <defs>
-                <clipPath id={`lifecycle-clip-${i}`}>
-                  <rect width="100%" height="24" rx="4" />
-                </clipPath>
-              </defs>
-              <g clip-path={`url(#lifecycle-clip-${i})`}>
-                {segments(device).map((s) => (
-                  <rect
-                    class={`seg seg--${s.key}`}
-                    x={`${s.start}%`}
-                    width={`${s.value}%`}
-                    height="24"
-                  >
-                    <title>{`${s.label}: ${s.value}%`}</title>
-                  </rect>
-                ))}
-                {segments(device)
-                  .slice(1)
-                  .map((s) => (
-                    <rect class="gap" x={`${s.start}%`} width="2" height="24" />
+{
+  isFeed ? (
+    <figure>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Device</th>
+            <th scope="col">Production</th>
+            <th scope="col">Customer use</th>
+            <th scope="col">Transport and other</th>
+          </tr>
+        </thead>
+        <tbody>
+          {devices.map((d) => (
+            <tr>
+              <th scope="row">{d.name}</th>
+              <td>{`${d.production}%`}</td>
+              <td>{`${d.use}%`}</td>
+              <td>{`${d.other}%`}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {caption && <figcaption set:html={caption} />}
+    </figure>
+  ) : (
+    <figure class="chart lifecycle-chart">
+      <div
+        role="img"
+        aria-label={`Share of life-cycle greenhouse gas emissions. ${description}`}
+      >
+        <ul class="chart-legend" aria-hidden="true">
+          <li>
+            <span class="chart-swatch chart-swatch--accent" />
+            Production
+          </li>
+          <li>
+            <span class="chart-swatch chart-swatch--mid" />
+            Customer use
+          </li>
+          <li>
+            <span class="chart-swatch chart-swatch--faint" />
+            Transport and other
+          </li>
+        </ul>
+        <div class="chart-plot" aria-hidden="true">
+          {devices.map((device, i) => (
+            <div>
+              <div class="chart-row-label">{device.name}</div>
+              <svg height="24">
+                <defs>
+                  <clipPath id={`lifecycle-clip-${i}`}>
+                    <rect width="100%" height="24" rx="4" />
+                  </clipPath>
+                </defs>
+                <g clip-path={`url(#lifecycle-clip-${i})`}>
+                  {segments(device).map((s) => (
+                    <rect
+                      class={`seg seg--${s.key}`}
+                      x={`${s.start}%`}
+                      width={`${s.value}%`}
+                      height="24"
+                    >
+                      <title>{`${s.label}: ${s.value}%`}</title>
+                    </rect>
                   ))}
-              </g>
-              <text class="ink-accent" x="8" y="12" dominant-baseline="central">
-                {`Production ${device.production}%`}
-              </text>
-              {/* Separate elements instead of tspans: Safari does not apply the
+                  {segments(device)
+                    .slice(1)
+                    .map((s) => (
+                      <rect
+                        class="gap"
+                        x={`${s.start}%`}
+                        width="2"
+                        height="24"
+                      />
+                    ))}
+                </g>
+                <text
+                  class="ink-accent"
+                  x="8"
+                  y="12"
+                  dominant-baseline="central"
+                >
+                  {`Production ${device.production}%`}
+                </text>
+                {/* Separate elements instead of tspans: Safari does not apply the
                   parent’s dominant-baseline to tspans. */}
-              <text
-                class="ink-mid label-long"
-                x={`${device.production}%`}
-                dx="10"
-                y="12"
-                dominant-baseline="central"
-              >
-                {`Use ${device.use}%`}
-              </text>
-              <text
-                class="ink-mid label-short"
-                x={`${device.production}%`}
-                dx="10"
-                y="12"
-                dominant-baseline="central"
-              >
-                {`${device.use}%`}
-              </text>
-            </svg>
-          </div>
-        ))
-      }
-    </div>
-  </div>
-  {caption && <figcaption set:html={caption} />}
-</figure>
+                <text
+                  class="ink-mid label-long"
+                  x={`${device.production}%`}
+                  dx="10"
+                  y="12"
+                  dominant-baseline="central"
+                >
+                  {`Use ${device.use}%`}
+                </text>
+                <text
+                  class="ink-mid label-short"
+                  x={`${device.production}%`}
+                  dx="10"
+                  y="12"
+                  dominant-baseline="central"
+                >
+                  {`${device.use}%`}
+                </text>
+              </svg>
+            </div>
+          ))}
+        </div>
+      </div>
+      {caption && <figcaption set:html={caption} />}
+    </figure>
+  )
+}
 
 <style>
   .seg--production {

@@ -7,6 +7,7 @@ import { getCollection, render } from "astro:content";
 import {
   DOCUMENT_NODE,
   ELEMENT_NODE,
+  TEXT_NODE,
   transform,
   walk,
   type Node,
@@ -75,6 +76,15 @@ export async function GET(context: APIContext) {
               (child: Node) =>
                 child.attributes?.["data-footnote-preview"] === undefined &&
                 child.attributes?.["data-footnote-trigger"] === undefined,
+            );
+          }
+          // Some readers decode entities twice, turning an escaped `<details>`
+          // in inline code into a real element that hides the rest of the post.
+          // A word joiner after `<` keeps it from ever parsing as a tag.
+          if (node.type === TEXT_NODE) {
+            node.value = node.value.replace(
+              /&lt;(?=[a-z\/!?])/gi,
+              "&lt;\u2060",
             );
           }
           if (!node.attributes) return;
@@ -152,7 +162,9 @@ export async function GET(context: APIContext) {
     const { Content } = await render(post);
 
     // Use the container to render the component to an HTML string
-    const rawContent = await container.renderToString(Content);
+    const rawContent = await container.renderToString(Content, {
+      locals: { feed: true },
+    });
 
     // Transform the HTML to:
     // 1. Convert relative URLs to absolute URLs
