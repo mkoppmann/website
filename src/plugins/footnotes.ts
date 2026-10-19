@@ -33,6 +33,33 @@ function copy<T extends HastNode>(node: T): T {
   } as T;
 }
 
+// Inline formatting that can be split in two without changing its meaning.
+const splittable = new Set(["b", "cite", "code", "em", "i", "mark", "strong"]);
+
+// Split the trailing word off a node, e.g. `<em>Wirth’s law</em>` into
+// `<em>Wirth’s </em>` and `<em>law</em>`. Returns nothing if the node ends
+// with whitespace or cannot be split.
+function splitLastWord(
+  node: HastNode,
+): { rest?: ElementContent; word: ElementContent } | undefined {
+  if (node.type === "text") {
+    const match = /\S+$/.exec(node.value);
+    if (!match) return;
+    const rest = node.value.slice(0, match.index);
+    return { rest: rest ? text(rest) : undefined, word: text(match[0]) };
+  }
+  if (node.type !== "element" || !splittable.has(node.tagName)) return;
+  const last = node.children.at(-1);
+  const split = last && splitLastWord(last);
+  if (!split) return;
+  const rest = node.children.slice(0, -1).map(copy);
+  if (split.rest) rest.push(split.rest);
+  return {
+    rest: rest.length ? { ...copy(node), children: rest } : undefined,
+    word: { ...copy(node), children: [split.word] },
+  };
+}
+
 function previewContent(children: ElementContent[], prefix: string) {
   const result = children
     .filter(
@@ -186,19 +213,27 @@ export default function footnotes(): HastPluginDefinition {
         );
 
         // Keep the reference on the same line as the word before it. Browsers
-        // otherwise allow a line break before the button.
+        // otherwise allow a line break before the button. The word can span
+        // several nodes, as in `*Wirth’s law*.`, and all of it belongs in the
+        // anchor, since lines can break on either side of an inline block.
         const parent = ctx.parent(node);
         const index = ctx.indexOf(node);
-        const previous = parent && index ? parent.children[index - 1] : undefined;
-        const lastWord =
-          previous?.type === "text" ? /\S+$/.exec(previous.value) : null;
-        if (!previous || !lastWord) return sup;
+        const word: ElementContent[] = [];
+        for (let i = index ?? 0; parent && i > 0; i--) {
+          const previous = parent.children[i - 1];
+          const split = splitLastWord(previous);
+          if (!split) break;
+          word.unshift(split.word);
+          if (split.rest) {
+            ctx.replaceNode(previous, split.rest);
+            break;
+          }
+          ctx.removeNode(previous);
+        }
+        if (!word.length) return sup;
 
-        const rest = previous.value.slice(0, lastWord.index);
-        if (rest) ctx.replaceNode(previous, text(rest));
-        else ctx.removeNode(previous);
         return element("span", { className: ["footnote-anchor"] }, [
-          text(lastWord[0]),
+          ...word,
           sup,
         ]);
       },

@@ -4,7 +4,10 @@
   display: none;
 }
 
+/* An inline block, because Safari’s `text-wrap: pretty` breaks lines too early
+   around a nowrap span that contains the footnote button. */
 .post-content .footnote-anchor {
+  display: inline-block;
   white-space: nowrap;
 }
 
