@@ -70,15 +70,25 @@ const description = devices
               <text class="ink-accent" x="8" y="12" dominant-baseline="central">
                 {`Production ${device.production}%`}
               </text>
+              {/* Separate elements instead of tspans: Safari does not apply the
+                  parent’s dominant-baseline to tspans. */}
               <text
-                class="ink-mid"
+                class="ink-mid label-long"
                 x={`${device.production}%`}
                 dx="10"
                 y="12"
                 dominant-baseline="central"
               >
-                <tspan class="label-long">{`Use ${device.use}%`}</tspan>
-                <tspan class="label-short">{`${device.use}%`}</tspan>
+                {`Use ${device.use}%`}
+              </text>
+              <text
+                class="ink-mid label-short"
+                x={`${device.production}%`}
+                dx="10"
+                y="12"
+                dominant-baseline="central"
+              >
+                {`${device.use}%`}
               </text>
             </svg>
           </div>
