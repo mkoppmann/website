@@ -2,8 +2,20 @@
   {
     "title": "Ethical Hacking im Parlament",
     "description": "How can Austria better protect people who find and responsibly report security vulnerabilities? I joined representatives from politics, public administration, and civil society to discuss legal protection for ethical hacking at the 77th Netzpolitischer Abend, organized by epicenter.works.",
+    "images": [
+      {
+        "src": "../assets/ethical-hacking-im-parlament-panel.jpg",
+        "alt": "Michael Koppmann during the panel discussion on ethical hacking at the Austrian Parliament.",
+        "copyright": "© Lisa Koppmann"
+      },
+      {
+        "src": "../assets/ethical-hacking-im-parlament-portrait.jpg",
+        "alt": "Michael Koppmann standing between marble columns inside the Austrian Parliament.",
+        "copyright": "© Lisa Koppmann"
+      }
+    ],
     "type": "Panel discussion",
-    "venue": "77. Netzpolitischer Abend · Austrian Parliament, Vienna",
+    "venue": "Netzpolitischer Abend",
     "date": "2026-10-22",
     "language": "German",
     "links": [

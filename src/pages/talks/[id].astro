@@ -16,7 +16,7 @@ const { talk } = Astro.props;
 const {
   title,
   description: entryDescription,
-  image,
+  images,
   type,
   venue,
   date,
@@ -71,7 +71,7 @@ const eventJsonLd = {
       kicker="Talk"
       headingId="talk-overview-heading"
       description={entryDescription}
-      image={image}
+      images={images}
       type={type}
       venue={venue}
       date={date}

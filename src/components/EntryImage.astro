@@ -22,7 +22,7 @@ const feedFormat = ["png", "svg"].includes(image.src.format) ? "png" : "jpeg";
         width={width}
         format={feedFormat}
         loading="eager"
-        style="display: block; max-width: 100%; height: auto;"
+        style="display: block; max-width: 100%; max-height: 640px; width: auto; height: auto; margin-inline: auto;"
       />
     ) : (
       <Picture
@@ -51,6 +51,14 @@ const feedFormat = ["png", "svg"].includes(image.src.format) ? "png" : "jpeg";
 <style>
   figure {
     margin-block: var(--space-lg);
+  }
+
+  figure :global(img) {
+    inline-size: auto;
+    max-inline-size: 100%;
+    block-size: auto;
+    max-block-size: 40rem;
+    margin-inline: auto;
   }
 
   figcaption {

@@ -16,7 +16,7 @@ const { publication } = Astro.props;
 const {
   title,
   description: entryDescription,
-  image,
+  images,
   type,
   venue,
   date,
@@ -72,7 +72,7 @@ const creativeWorkJsonLd = {
       kicker="Publication"
       headingId="publication-overview-heading"
       description={entryDescription}
-      image={image}
+      images={images}
       type={type}
       venue={venue}
       date={date}

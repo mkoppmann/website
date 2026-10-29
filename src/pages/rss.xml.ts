@@ -117,12 +117,16 @@ export async function GET(context: APIContext) {
     const descriptionHtml = entry.data.description
       ? `<p>${escapeHtml(entry.data.description)}</p>`
       : "";
-    const imageHtml = entry.data.image
-      ? await container.renderToString(EntryImage, {
-          props: { image: entry.data.image },
-          locals: { feed: true },
-        })
-      : "";
+    const imagesHtml = (
+      await Promise.all(
+        (entry.data.images ?? []).map((image) =>
+          container.renderToString(EntryImage, {
+            props: { image },
+            locals: { feed: true },
+          }),
+        ),
+      )
+    ).join("");
     const linksHtml = entry.data.links
       .map(
         (link) =>
@@ -134,7 +138,6 @@ export async function GET(context: APIContext) {
       <article>
         <h1>${escapeHtml(entry.data.title)}</h1>
         ${descriptionHtml}
-        ${imageHtml}
         <p>Kind: ${escapeHtml(kind)}</p>
         <p>Type: ${escapeHtml(entry.data.type)}</p>
         <p>Venue: ${escapeHtml(entry.data.venue)}</p>
@@ -142,6 +145,7 @@ export async function GET(context: APIContext) {
         <p>Language: ${escapeHtml(entry.data.language)}</p>
         <h2>Resources</h2>
         <ul>${linksHtml}</ul>
+        ${imagesHtml ? `<h2>Photos</h2>${imagesHtml}` : ""}
       </article>
     `;
 

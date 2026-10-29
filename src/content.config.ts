@@ -35,14 +35,16 @@ const entrySchema = ({ image }: SchemaContext) =>
     id: z.string(),
     title: z.string(),
     description: z.string().trim().min(1).optional(),
-    image: z
-      .object({
-        // Image paths are relative to the collection's JSON file.
-        src: image(),
-        alt: z.string().trim().min(1),
-        caption: z.string().trim().min(1).optional(),
-        copyright: z.string().trim().min(1).optional(),
-      })
+    images: z
+      .array(
+        z.object({
+          // Image paths are relative to the collection's JSON file.
+          src: image(),
+          alt: z.string().trim().min(1),
+          caption: z.string().trim().min(1).optional(),
+          copyright: z.string().trim().min(1).optional(),
+        }),
+      )
       .optional(),
     type: z.string(),
     venue: z.string(),

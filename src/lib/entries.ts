@@ -1,8 +1,8 @@
 import type { CollectionEntry } from "astro:content";
 
 export type EntryImage = NonNullable<
-  CollectionEntry<"talks" | "publications">["data"]["image"]
->;
+  CollectionEntry<"talks" | "publications">["data"]["images"]
+>[number];
 
 const sentences = new Intl.Segmenter("en", { granularity: "sentence" });
 

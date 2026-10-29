@@ -11,7 +11,7 @@ export interface Props {
   kicker: string;
   headingId: string;
   description?: string;
-  image?: EntryImageData;
+  images?: EntryImageData[];
   type: string;
   venue: string;
   date: string;
@@ -26,7 +26,7 @@ const {
   kicker,
   headingId,
   description,
-  image,
+  images,
   type,
   venue,
   date,
@@ -56,8 +56,6 @@ function formatHost(value: string): string {
   <p class="entry-summary">
     {description ?? <slot name="summary" />}
   </p>
-
-  {image && <EntryImage image={image} />}
 
   <dl class="detail-grid">
     <div class="detail-row">
@@ -100,6 +98,15 @@ function formatHost(value: string): string {
             </li>
           ))}
         </ul>
+      </div>
+    )
+  }
+
+  {
+    images && images.length > 0 && (
+      <div class="photos-block">
+        <h3>Photos</h3>
+        {images.map((image) => <EntryImage image={image} />)}
       </div>
     )
   }
@@ -166,7 +173,8 @@ function formatHost(value: string): string {
     font-size: 1rem;
   }
 
-  .resources-block {
+  .resources-block,
+  .photos-block {
     margin-top: var(--space-xl);
   }
 
