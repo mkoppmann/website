@@ -1,4 +1,7 @@
 ---
+import EntryImage from "./EntryImage.astro";
+import type { EntryImage as EntryImageData } from "../lib/entries";
+
 interface EntryLink {
   label: string;
   href: string;
@@ -8,6 +11,7 @@ export interface Props {
   kicker: string;
   headingId: string;
   description?: string;
+  image?: EntryImageData;
   type: string;
   venue: string;
   date: string;
@@ -22,6 +26,7 @@ const {
   kicker,
   headingId,
   description,
+  image,
   type,
   venue,
   date,
@@ -51,6 +56,8 @@ function formatHost(value: string): string {
   <p class="entry-summary">
     {description ?? <slot name="summary" />}
   </p>
+
+  {image && <EntryImage image={image} />}
 
   <dl class="detail-grid">
     <div class="detail-row">

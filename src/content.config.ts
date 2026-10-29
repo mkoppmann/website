@@ -1,6 +1,6 @@
 import { rssSchema } from "@astrojs/rss";
 import { z } from "astro/zod";
-import { defineCollection } from "astro:content";
+import { defineCollection, type SchemaContext } from "astro:content";
 import { file, glob } from "astro/loaders";
 
 const blog = defineCollection({
@@ -30,16 +30,26 @@ const entryLinkSchema = z.object({
   href: z.string(),
 });
 
-const entrySchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string().trim().min(1).optional(),
-  type: z.string(),
-  venue: z.string(),
-  date: z.string(),
-  language: z.string(),
-  links: z.array(entryLinkSchema),
-});
+const entrySchema = ({ image }: SchemaContext) =>
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    description: z.string().trim().min(1).optional(),
+    image: z
+      .object({
+        // Image paths are relative to the collection's JSON file.
+        src: image(),
+        alt: z.string().trim().min(1),
+        caption: z.string().trim().min(1).optional(),
+        copyright: z.string().trim().min(1).optional(),
+      })
+      .optional(),
+    type: z.string(),
+    venue: z.string(),
+    date: z.string(),
+    language: z.string(),
+    links: z.array(entryLinkSchema),
+  });
 
 const talks = defineCollection({
   loader: file("./src/content/talks.json"),

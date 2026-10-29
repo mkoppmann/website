@@ -4,6 +4,8 @@ import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
 import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import EntryImage from "../components/EntryImage.astro";
 import {
   DOCUMENT_NODE,
   ELEMENT_NODE,
@@ -27,19 +29,7 @@ const toTimestamp = (pubDate: RSSFeedItem["pubDate"]): number => {
   return (pubDate instanceof Date ? pubDate : new Date(pubDate)).valueOf();
 };
 
-type JsonEntry = {
-  data: {
-    title: string;
-    type: string;
-    venue: string;
-    date: string;
-    language: string;
-    links: Array<{
-      label: string;
-      href: string;
-    }>;
-  };
-};
+type JsonEntry = Pick<CollectionEntry<"talks" | "publications">, "data">;
 
 export async function GET(context: APIContext) {
   // Get the base URL for converting relative links
@@ -117,12 +107,22 @@ export async function GET(context: APIContext) {
       .replaceAll("'", "&#39;");
 
   const toEntryDescription = (entry: JsonEntry): string =>
+    entry.data.description ??
     `${entry.data.type} at ${entry.data.venue} (${entry.data.language}, ${entry.data.date})`;
 
   const renderEntryContent = async (
     kind: "Talk" | "Publication",
     entry: JsonEntry,
   ): Promise<string> => {
+    const descriptionHtml = entry.data.description
+      ? `<p>${escapeHtml(entry.data.description)}</p>`
+      : "";
+    const imageHtml = entry.data.image
+      ? await container.renderToString(EntryImage, {
+          props: { image: entry.data.image },
+          locals: { feed: true },
+        })
+      : "";
     const linksHtml = entry.data.links
       .map(
         (link) =>
@@ -133,6 +133,8 @@ export async function GET(context: APIContext) {
     const html = `
       <article>
         <h1>${escapeHtml(entry.data.title)}</h1>
+        ${descriptionHtml}
+        ${imageHtml}
         <p>Kind: ${escapeHtml(kind)}</p>
         <p>Type: ${escapeHtml(entry.data.type)}</p>
         <p>Venue: ${escapeHtml(entry.data.venue)}</p>

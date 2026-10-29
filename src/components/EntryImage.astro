@@ -1,0 +1,59 @@
+---
+import { Image, Picture } from "astro:assets";
+import type { EntryImage } from "../lib/entries";
+
+interface Props {
+  image: EntryImage;
+}
+
+const { image } = Astro.props;
+const feed = Astro.locals.feed === true;
+const width = Math.min(1200, image.src.width);
+const widths = [480, 720, 960].filter((size) => size < width).concat(width);
+const feedFormat = ["png", "svg"].includes(image.src.format) ? "png" : "jpeg";
+---
+
+<figure style={feed ? "margin: 1.5em 0;" : undefined}>
+  {
+    feed ? (
+      <Image
+        src={image.src}
+        alt={image.alt}
+        width={width}
+        format={feedFormat}
+        loading="eager"
+        style="display: block; max-width: 100%; height: auto;"
+      />
+    ) : (
+      <Picture
+        src={image.src}
+        alt={image.alt}
+        formats={["avif", "webp"]}
+        widths={widths}
+        width={width}
+        sizes="(min-width: 58rem) 38rem, (min-width: 40rem) calc(100vw - 6rem), calc(100vw - 2rem)"
+      />
+    )
+  }
+  {
+    (image.caption || image.copyright) && (
+      <figcaption
+        style={feed ? "margin-top: 0.5em; font-size: 0.875em;" : undefined}
+      >
+        {image.caption && <span>{image.caption}</span>}
+        {image.caption && image.copyright && <br />}
+        {image.copyright && <span>{image.copyright}</span>}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  figure {
+    margin-block: var(--space-lg);
+  }
+
+  figcaption {
+    overflow-wrap: anywhere;
+  }
+</style>

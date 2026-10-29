@@ -1,4 +1,6 @@
 ---
+import { descriptionPreview } from "../lib/entries";
+
 interface EntryLink {
   label: string;
   href: string;
@@ -42,7 +44,9 @@ function formatDate(value: string): string {
             </p>
           </div>
           {item.description && (
-            <p class="entry-description">{item.description}</p>
+            <p class="entry-description">
+              {descriptionPreview(item.description)}
+            </p>
           )}
           <div class="entry-support">
             <div class="entry-meta">
