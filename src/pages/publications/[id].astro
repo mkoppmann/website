@@ -13,9 +13,18 @@ export async function getStaticPaths() {
 }
 
 const { publication } = Astro.props;
-const { title, type, venue, date, language, links } = publication.data;
+const {
+  title,
+  description: entryDescription,
+  type,
+  venue,
+  date,
+  language,
+  links,
+} = publication.data;
 
-const description = `${type}: “${title}” published in ${venue}.`;
+const description =
+  entryDescription ?? `${type}: “${title}” published in ${venue}.`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 function formatDate(value: string): string {
@@ -61,6 +70,7 @@ const creativeWorkJsonLd = {
     <EntryDetail
       kicker="Publication"
       headingId="publication-overview-heading"
+      description={entryDescription}
       type={type}
       venue={venue}
       date={date}

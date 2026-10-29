@@ -7,6 +7,7 @@ interface EntryLink {
 export interface Props {
   kicker: string;
   headingId: string;
+  description?: string;
   type: string;
   venue: string;
   date: string;
@@ -20,6 +21,7 @@ export interface Props {
 const {
   kicker,
   headingId,
+  description,
   type,
   venue,
   date,
@@ -47,7 +49,7 @@ function formatHost(value: string): string {
   <p class="entry-kicker">{kicker}</p>
   <h2 id={headingId}>Overview</h2>
   <p class="entry-summary">
-    <slot name="summary" />
+    {description ?? <slot name="summary" />}
   </p>
 
   <dl class="detail-grid">

@@ -13,9 +13,17 @@ export async function getStaticPaths() {
 }
 
 const { talk } = Astro.props;
-const { title, type, venue, date, language, links } = talk.data;
+const {
+  title,
+  description: entryDescription,
+  type,
+  venue,
+  date,
+  language,
+  links,
+} = talk.data;
 
-const description = `${type}: “${title}” at ${venue}.`;
+const description = entryDescription ?? `${type}: “${title}” at ${venue}.`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 function formatDate(value: string): string {
@@ -61,6 +69,7 @@ const eventJsonLd = {
     <EntryDetail
       kicker="Talk"
       headingId="talk-overview-heading"
+      description={entryDescription}
       type={type}
       venue={venue}
       date={date}

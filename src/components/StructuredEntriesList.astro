@@ -6,6 +6,7 @@ interface EntryLink {
 
 export interface StructuredEntry {
   title: string;
+  description?: string;
   href?: string;
   type: string;
   venue: string;
@@ -40,6 +41,9 @@ function formatDate(value: string): string {
               <em>{item.venue}</em>
             </p>
           </div>
+          {item.description && (
+            <p class="entry-description">{item.description}</p>
+          )}
           <div class="entry-support">
             <div class="entry-meta">
               <time class="entry-chip" datetime={item.date}>
@@ -120,6 +124,13 @@ function formatDate(value: string): string {
   .entry-venue {
     margin: var(--space-2xs) 0 0;
     font-size: 0.9rem;
+  }
+
+  .entry-description {
+    margin: var(--space-xs) 0 0;
+    max-inline-size: 65ch;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .entry-meta {
@@ -213,11 +224,18 @@ function formatDate(value: string): string {
 
     .entry-support {
       display: grid;
+      grid-column: 2;
+      grid-row: 1;
       justify-items: end;
       align-content: start;
       gap: var(--space-2xs);
       margin-top: 0;
       text-align: end;
+    }
+
+    .entry-description {
+      grid-column: 1 / -1;
+      grid-row: 2;
     }
 
     .entry-meta {

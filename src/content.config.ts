@@ -33,6 +33,7 @@ const entryLinkSchema = z.object({
 const entrySchema = z.object({
   id: z.string(),
   title: z.string(),
+  description: z.string().trim().min(1).optional(),
   type: z.string(),
   venue: z.string(),
   date: z.string(),
