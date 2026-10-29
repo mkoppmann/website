@@ -1,5 +1,27 @@
 [
   {
+    "title": "Ethical Hacking im Parlament",
+    "type": "Panel discussion",
+    "venue": "77. Netzpolitischer Abend · Austrian Parliament, Vienna",
+    "date": "2026-10-22",
+    "language": "German",
+    "links": [
+      {
+        "label": "Program page",
+        "href": "https://epicenter.works/content/ethical-hacking-im-parlament-78-netzpolitischer-abend-am-22102026"
+      },
+      {
+        "label": "Radio edit",
+        "href": "https://cba.media/799276"
+      },
+      {
+        "label": "Uncut audio",
+        "href": "https://cba.media/799225"
+      }
+    ],
+    "id": "2026-10-22-ethical-hacking-im-parlament"
+  },
+  {
     "title": "Why Passing a Penetration Test Doesn’t Mean You’re Secure",
     "type": "Podcast",
     "venue": "Cyber Answered",
