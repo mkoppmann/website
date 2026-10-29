@@ -27,6 +27,10 @@
       {
         "label": "Slides",
         "href": "/media/talks/2026-06-25_Michael-Koppmann_Illegal-States-Are-My-Favorite-Security-Vulnerabilities.pdf"
+      },
+      {
+        "label": "Video",
+        "href": "https://www.youtube.com/watch?v=gVzE3mvTME8"
       }
     ],
     "id": "2026-06-25-illegal-states-are-my-favorite-security-vulnerabilities"
