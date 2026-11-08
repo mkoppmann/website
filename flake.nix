@@ -3,10 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    bun2nix = {
-      url = "github:nix-community/bun2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Its own nixpkgs, so its tools come prebuilt from the nix-community cache.
+    bun2nix.url = "github:nix-community/bun2nix";
   };
 
   outputs =
