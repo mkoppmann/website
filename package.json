@@ -10,7 +10,8 @@
     "dev:search": "astro build && pagefind --site dist --output-path public/pagefind",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "postinstall": "bun2nix -o bun.nix"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "0.4.4",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
     "@types/sanitize-html": "^2.16.1",
+    "bun2nix": "^2.1.2",
     "pagefind": "^1.4.0",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1"
