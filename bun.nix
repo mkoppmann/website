@@ -309,30 +309,6 @@
     url = "https://registry.npmjs.org/@oxc-project/types/-/types-0.154.0.tgz";
     hash = "sha512-KYOUGQFlLWR+s4QMV2Q9ko38TZm7EdO87Qm7rvZLqk/webse/cDjtyxKhg/47l0byCbs/k46LT8qc4PKjAikzA==";
   };
-  "@pagefind/darwin-arm64@1.4.0" = fetchurl {
-    url = "https://registry.npmjs.org/@pagefind/darwin-arm64/-/darwin-arm64-1.4.0.tgz";
-    hash = "sha512-2vMqkbv3lbx1Awea90gTaBsvpzgRs7MuSgKDxW0m9oV1GPZCZbZBJg/qL83GIUEN2BFlY46dtUZi54pwH+/pTQ==";
-  };
-  "@pagefind/darwin-x64@1.4.0" = fetchurl {
-    url = "https://registry.npmjs.org/@pagefind/darwin-x64/-/darwin-x64-1.4.0.tgz";
-    hash = "sha512-e7JPIS6L9/cJfow+/IAqknsGqEPjJnVXGjpGm25bnq+NPdoD3c/7fAwr1OXkG4Ocjx6ZGSCijXEV4ryMcH2E3A==";
-  };
-  "@pagefind/freebsd-x64@1.4.0" = fetchurl {
-    url = "https://registry.npmjs.org/@pagefind/freebsd-x64/-/freebsd-x64-1.4.0.tgz";
-    hash = "sha512-WcJVypXSZ+9HpiqZjFXMUobfFfZZ6NzIYtkhQ9eOhZrQpeY5uQFqNWLCk7w9RkMUwBv1HAMDW3YJQl/8OqsV0Q==";
-  };
-  "@pagefind/linux-arm64@1.4.0" = fetchurl {
-    url = "https://registry.npmjs.org/@pagefind/linux-arm64/-/linux-arm64-1.4.0.tgz";
-    hash = "sha512-PIt8dkqt4W06KGmQjONw7EZbhDF+uXI7i0XtRLN1vjCUxM9vGPdtJc2mUyVPevjomrGz5M86M8bqTr6cgDp1Uw==";
-  };
-  "@pagefind/linux-x64@1.4.0" = fetchurl {
-    url = "https://registry.npmjs.org/@pagefind/linux-x64/-/linux-x64-1.4.0.tgz";
-    hash = "sha512-z4oddcWwQ0UHrTHR8psLnVlz6USGJ/eOlDPTDYZ4cI8TK8PgwRUPQZp9D2iJPNIPcS6Qx/E4TebjuGJOyK8Mmg==";
-  };
-  "@pagefind/windows-x64@1.4.0" = fetchurl {
-    url = "https://registry.npmjs.org/@pagefind/windows-x64/-/windows-x64-1.4.0.tgz";
-    hash = "sha512-NkT+YAdgS2FPCn8mIA9bQhiBs+xmniMGq1LFPDhcFn0+2yIUEiIG06t7bsZlhdjknEQRTSdT7YitP6fC5qwP0g==";
-  };
   "@rolldown/binding-android-arm-eabi@1.2.14" = fetchurl {
     url = "https://registry.npmjs.org/@rolldown/binding-android-arm-eabi/-/binding-android-arm-eabi-1.2.14.tgz";
     hash = "sha512-aWR+XKH9+rW7m5fWq/5360J3mHycrx/o6xZM2DQFdJnTMdyP7/WzxPjhtLbVWdKo2y612/4U1bWqb3HQhiF7vg==";
@@ -948,10 +924,6 @@
   "package-manager-detector@1.9.0" = fetchurl {
     url = "https://registry.npmjs.org/package-manager-detector/-/package-manager-detector-1.9.0.tgz";
     hash = "sha512-zAMfbta9nPA8AKkA4WdmNAT8R8s6Dk0/xwPsqNnRidMFcLo1YkLuPDTgs2f64XdzS8vbLNnoJ+uUIkgbz7oRHA==";
-  };
-  "pagefind@1.4.0" = fetchurl {
-    url = "https://registry.npmjs.org/pagefind/-/pagefind-1.4.0.tgz";
-    hash = "sha512-z2kY1mQlL4J8q5EIsQkLzQjilovKzfNVhX8De6oyE6uHpfFtyBaqUpcl/XzJC/4fjD8vBDyh1zolimIcVrCn9g==";
   };
   "parse-srcset@1.0.2" = fetchurl {
     url = "https://registry.npmjs.org/parse-srcset/-/parse-srcset-1.0.2.tgz";

@@ -28,3 +28,6 @@ pnpm-debug.log*
 # nix
 result
 result-*
+
+# direnv
+.direnv/

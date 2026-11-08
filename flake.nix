@@ -75,11 +75,11 @@
       );
 
       devShells = forAllSystems (
-        pkgs: b2n: {
+        pkgs: _: {
           default = pkgs.mkShell {
             packages = [
               pkgs.bun
-              b2n
+              pkgs.pagefind
             ];
           };
         }
